@@ -2,7 +2,7 @@ Describes setup of the project stack.
 
 Prereqs: npm (install node.js with your ntive package manager and den do npm init)
 
-## (1) A plain react project. 
+## (0) A plain react project with 'hidden' configs for weback, bable ...etc. 
 
 ```
 sudo npm install -g -y create-react-app
@@ -15,21 +15,17 @@ To create a deployment bundle
 ```
 npm run build
 ```
-## (1.1) extra react stuff
+## (0.1) extra react stuff
 
 Buttons and other gui commponents 
 ```
 npm install sementic-ui-react
 ```
 
-## (2) Add MST and dependencies
+## (1) Eject webpack and other configs
 
 ```
-npm install ajv
-npm install mobx
-npm install mobx-react
-npm install mobx-state-tree
+npm run eject
 
 ```
-
 
