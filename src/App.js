@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ConsumerComponent from './components/consumerComponent';
+import InvokerComponent from './components/invokerComponent';
 
 class App extends Component {
   render() {
@@ -34,6 +35,7 @@ class SomeComponent extends Component{
         This is just the output of some random component writing {this.state.value} from the state <br/>
         and {this.props.string} from the props!
 
+        <InvokerComponent/>
         <ConsumerComponent/>
       </div>
     );

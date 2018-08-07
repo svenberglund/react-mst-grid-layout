@@ -29,3 +29,10 @@ npm run eject
 
 ```
 
+## (2) Add MST 
+
+```
+npm install mobx
+npm install mobx-react
+npm install mobx-state-tree
+```
