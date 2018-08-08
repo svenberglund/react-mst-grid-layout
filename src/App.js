@@ -29,7 +29,7 @@ class SomeComponent extends Component{
     }
   }
 
-    render() {
+  render() {
     return (
       <div>
         This is just the output of some random component writing {this.state.value} from the state <br/>

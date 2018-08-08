@@ -5,7 +5,7 @@ import { types } from "mobx-state-tree";
 // make the state a state tree model instead of an observable!
 // Good practice: Give it a name in the model constructor for debugging purpose
 // .views and .actions can be chained to the model
-const AsyncTask = types.model("AsyncTask", {
+export const AsyncTask = types.model("AsyncTask", {
     name: types.string,
     depth: types.number,
     width: types.number,
@@ -39,9 +39,9 @@ const AsyncTask = types.model("AsyncTask", {
 });
 
 
-// instantiate - we now have a state tree:
+
+// instantiate a state tree
 export const asyncTask = AsyncTask.create(
-    // this is a snapshot that we pass when creating a living tree:
     {
     name: "foobar",
     width: 10,
