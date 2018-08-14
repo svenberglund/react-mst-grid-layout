@@ -4,6 +4,8 @@ import { observer } from "mobx-react";
 import { asyncTask } from "../models/asyncTask";
 import { asyncTaskSet } from "../models/asyncTaskSet";
 
+
+
 @observer 
 class ConsumerComponent extends React.Component {
     

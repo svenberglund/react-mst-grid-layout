@@ -19,20 +19,26 @@ npm run build
 
 Buttons and other gui commponents 
 ```
-npm install sementic-ui-react
+npm install semantic-ui-react --save
+npm install semantic-us-css --save
 ```
 
-## (1) Eject webpack and other configs
+## (1) Add react-app-rewire to gain control of babel (alternative is to eject)
+By doing this we can add support for decorators and other js additions.
+
+https://github.com/timarney/react-app-rewired
+https://www.leighhalliday.com/mobx-create-react-app-without-ejecting
 
 ```
-npm run eject
+npm install react-app-rewired --save-dev
 
 ```
 
 ## (2) Add MST 
 
 ```
-npm install mobx
-npm install mobx-react
-npm install mobx-state-tree
+npm install mobx --save
+npm install mobx-react --save
+npm install mobx-state-tree --save
+npm install react-app-rewire-mobx --save
 ```
