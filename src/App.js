@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import ConsumerComponent from './components/consumerComponent';
 import InvokerComponent from './components/invokerComponent';
+import GridLayout from './components/gridComponent';
 
 class App extends Component {
   render() {
@@ -37,6 +38,7 @@ class SomeComponent extends Component{
 
         <InvokerComponent/>
         <ConsumerComponent/>
+        <GridLayout/>
       </div>
     );
     }

@@ -3,8 +3,7 @@ import { Button } from "semantic-ui-react";
 import { observer } from "mobx-react";
 import { asyncTask } from "../models/asyncTask";
 import { asyncTaskSet } from "../models/asyncTaskSet";
-
-
+//import ShowCaseLayout from './showcase';
 
 @observer 
 class ConsumerComponent extends React.Component {

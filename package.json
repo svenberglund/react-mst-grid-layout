@@ -10,6 +10,7 @@
     "react": "^16.4.2",
     "react-app-rewire-mobx": "^1.0.8",
     "react-dom": "^16.4.2",
+    "react-grid-layout": "^0.16.6",
     "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.82.2"
   },
