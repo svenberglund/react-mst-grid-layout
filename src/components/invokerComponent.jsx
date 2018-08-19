@@ -25,6 +25,9 @@ import { asyncTaskSet } from "../models/asyncTaskSet";
         asyncTaskSet.addAsyncTask(rString,20,29);
     };
 
+    onChangeClick = (event) => {
+        asyncTaskSet.changeAsyncTask(0);
+    }
 
     render() {
 
@@ -44,6 +47,13 @@ import { asyncTaskSet } from "../models/asyncTaskSet";
                     size="tiny"
                     onClick={this.onAddClick}>
                     Add task!
+                </Button>
+                <Button
+                    icon
+                    compact
+                    size="tiny"
+                    onClick={this.onChangeClick}>
+                    Change task!
                 </Button>
             </React.Fragment>
         )

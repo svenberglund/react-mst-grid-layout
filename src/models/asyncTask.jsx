@@ -12,6 +12,7 @@ export const AsyncTask = types.model("AsyncTask", {
     show: true,
     started: false,
     finished: false,
+    gridblock:  types.map(types.union(types.string, types.number, types.boolean ,types.undefined))
 })
 .views(self => ({
     get description() {

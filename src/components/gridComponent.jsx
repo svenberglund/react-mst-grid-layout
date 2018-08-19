@@ -3,6 +3,9 @@ import _ from "lodash";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import 'react-grid-layout/css/styles.css' 
 import 'react-resizable/css/styles.css' 
+import { observer } from "mobx-react";
+import { asyncTaskSet } from "../models/asyncTaskSet";
+import { toJS } from 'mobx';
 
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
@@ -11,31 +14,41 @@ var style = {
   backgroundColor: 'red'
 }
 
+// A simple layout example
+/*var layout = [
+  { i: 'a', x: 0, y: 0, w: 1, h: 2 },
+  { i: 'b', x: 1, y: 5, w: 3, h: 2 },
+  { i: 'c', x: 7, y: 0, w: 1, h: 2 }
+];*/
+
+//var layouts = { lg: layout };
+
+@observer
 class GridLayout extends React.Component {
   static defaultProps = {
     className: "layout",
     rowHeight: 30,
     onLayoutChange: function() {},
     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
-    initialLayout: generateLayout()
   };
 
   state = {
     currentBreakpoint: "lg",
     compactType: "vertical",
     mounted: false,
-    layouts: { lg: this.props.initialLayout }
   };
 
-  
   componentDidMount() {
     this.setState({ mounted: true });
   }
 
   generateDOM() {
-    return _.map(this.state.layouts.lg, function(l, i) {
+    return _.map(asyncTaskSet.tasks.map(at => toJS(at).gridblock), function(l,i){
       return (
-        <div key={i} style={style} className={l.static ? "static" : ""}>
+        <div key={i} style={style} className="">
+
+          {/*  // old implementation - if we want to change the element depending on some prop e.g. static
+          <div key={i} style={style} className={l.static ? "static" : ""}>
           {l.static ? (
             <span
               className="text"
@@ -46,6 +59,9 @@ class GridLayout extends React.Component {
           ) : (
             <span className="text">{i}</span>
           )}
+          */}
+
+          <span className="text">{l.i}</span>
         </div>
       );
     });
@@ -67,13 +83,20 @@ class GridLayout extends React.Component {
   };
 
   onLayoutChange = (layout, layouts) => {
+    // We need to updte the MST object here explicitly
+    // TODO: this can be optimized, we should not need to loop through all blocks
+    // Why cant we use the 'changed' property, it seems to never be true...?
+    for(var i=0; i< layout.length; i++ ){
+      //console.log(`parameter: ${JSON.stringify(layout[i])}`);
+      asyncTaskSet.updateGridblock(layout[i]);
+    }
     this.props.onLayoutChange(layout, layouts);
   };
 
   onNewLayout = () => {
-    this.setState({
-      layouts: { lg: generateLayout() }
-    });
+   //this.setState({ // old implementation - change diectly in MST instead
+   //   layouts: { lg: generateLayout() }
+   // });
   };
 
   render() {
@@ -93,9 +116,10 @@ class GridLayout extends React.Component {
         <button onClick={this.onCompactTypeChange}>
           Change Compaction Type
         </button>
+        <div>Counter: {asyncTaskSet.tasks.length}</div>
         <ResponsiveReactGridLayout className="layout"
           {...this.props}
-          layouts={this.state.layouts}
+          layouts={{ lg: asyncTaskSet.tasks.map(at => toJS(at).gridblock) }}
           onBreakpointChange={this.onBreakpointChange}
           onLayoutChange={this.onLayoutChange}
           // WidthProvider option
@@ -113,10 +137,9 @@ class GridLayout extends React.Component {
   }
 }
 
-//module.exports = ShowcaseLayout;
-
+/* // old implementation
 function generateLayout() {
-  return _.map(_.range(0, 25), function(item, i) {
+  return _.map(_.range(0, 10), function(item, i) {
     var y = Math.ceil(Math.random() * 4) + 1;
     return {
       x: (_.random(0, 5) * 2) % 12,
@@ -124,14 +147,13 @@ function generateLayout() {
       w: 2,
       h: y,
       i: i.toString(),
+      t: "foozzzbar",
       static: Math.random() < 0.05
     };
   });
-}
-
-/*
-if (require.main === module) {
-  require("../test-hook.jsx")(module.exports);
+  //return layout;
+  return { lg: asyncTaskSet.tasks.map(at => toJS(at).gridblock) };
 }
 */
+
 export default GridLayout;
