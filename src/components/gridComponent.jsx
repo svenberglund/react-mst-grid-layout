@@ -43,9 +43,9 @@ class GridLayout extends React.Component {
   }
 
   generateDOM() {
-    return _.map(asyncTaskSet.tasks.map(at => toJS(at).gridblock), function(l,i){
+    return _.map(asyncTaskSet.tasks, function(l,i){
       return (
-        <div key={i} style={style} className="">
+        <div key={i} style={{backgroundColor : (l.color)}} className="">
 
           {/*  // old implementation - if we want to change the element depending on some prop e.g. static
           <div key={i} style={style} className={l.static ? "static" : ""}>
@@ -61,7 +61,7 @@ class GridLayout extends React.Component {
           )}
           */}
 
-          <span className="text">{l.i}</span>
+          <span className="text">{l.name}</span>
         </div>
       );
     });

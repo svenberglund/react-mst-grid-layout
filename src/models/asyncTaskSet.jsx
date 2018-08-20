@@ -15,26 +15,19 @@ const AsyncTaskSet = types.model("AsyncTaskSet", {
     }
 }))
 .actions(self => {
-    function addAsyncTask(nameValue, depthValue, widthValue){
+    function addAsyncTask(nameValue,xValue, yValue, index){
         let newTask = AsyncTask.create({
             name: nameValue,
-            width: widthValue,
-            depth: depthValue,
-            gridblock: { i: '2', x: 7, y: 0, w: 1, h: 2 }
+            gridblock: { i: index, x: xValue, y: yValue, w: 1, h: 2 }
         });
         return self.tasks.push(newTask);
     }
     function removeAsyncTask(index){
         return self.tasks.remove(index);
-    }function changeAsyncTask(index){
-
-        let x_ = Math.ceil(Math.random() * 4) + 1;
-        let y_ = Math.ceil(Math.random() * 4) + 1;
-
-        //console.log(`(x:${x_}, y:${y_})`);
-
-        self.tasks[index].name = "New task name";
-        self.tasks[index].gridblock = { i: '3', x: x_, y: y_, w: 1, h: 2 }
+    }function changeAsyncTask(index, color, name){
+        self.tasks[index].name = name;
+        self.tasks[index].color = color;
+    
     }function updateGridblock(gb){
         self.tasks.forEach(function (task_){        
             if (task_.gridblock.get('i') === gb['i']) {
@@ -50,14 +43,12 @@ const AsyncTaskSet = types.model("AsyncTaskSet", {
 export const asyncTaskSet = AsyncTaskSet.create(
     {
         tasks: [AsyncTask.create({
-            name: "yououou",
-            width: 22,
-            depth: 33,
+            name: "The first element",
+            color: 'red',
             gridblock: { i: '0', x: 0, y: 0, w: 1, h: 2 }
         }),AsyncTask.create({
-            name: "zzzuouou",
-            width: 62,
-            depth: 63,
+            name: "the second element",
+            color: 'red',
             gridblock: { i: '1', x: 1, y: 5, w: 3, h: 2 }
         })
         ]

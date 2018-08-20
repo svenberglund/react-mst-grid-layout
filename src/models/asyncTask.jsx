@@ -7,8 +7,7 @@ import { types } from "mobx-state-tree";
 // .views and .actions can be chained to the model
 export const AsyncTask = types.model("AsyncTask", {
     name: types.string,
-    depth: types.number,
-    width: types.number,
+    color: 'red',
     show: true,
     started: false,
     finished: false,
@@ -24,10 +23,8 @@ export const AsyncTask = types.model("AsyncTask", {
     }
 }))
 .actions(self => {
-    function setValues(nameValue, depthValue, widthValue) {
+    function setValues(nameValue) {
         self.name = nameValue;
-        self.depth = depthValue;
-        self.width = widthValue;
     }
     function start() {
        self.started = true;
@@ -45,6 +42,4 @@ export const AsyncTask = types.model("AsyncTask", {
 export const asyncTask = AsyncTask.create(
     {
     name: "foobar",
-    width: 10,
-    depth: 10
 });

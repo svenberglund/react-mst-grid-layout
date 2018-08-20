@@ -3,7 +3,7 @@ import { Button } from "semantic-ui-react";
 import { asyncTask } from "../models/asyncTask"
 import { observer } from "mobx-react";
 import { asyncTaskSet } from "../models/asyncTaskSet";
-
+import {randomString, randomInt} from "../common/utils";
 
 
 
@@ -16,17 +16,12 @@ import { asyncTaskSet } from "../models/asyncTaskSet";
 
     onAddClick = (event) => {
         /* Adding a randomply named task */
-        function randomString(length, chars) {
-            var result = '';
-            for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-            return result;
-        }
-        var rString = randomString(12, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-        asyncTaskSet.addAsyncTask(rString,20,29);
+        let index = (asyncTaskSet.count).toString();
+        asyncTaskSet.addAsyncTask( `${index} - ${randomString(5)}`,randomInt(0,6),randomInt(0,6), index );
     };
 
     onChangeClick = (event) => {
-        asyncTaskSet.changeAsyncTask(0);
+        asyncTaskSet.changeAsyncTask(randomInt(0,asyncTaskSet.count-1), 'blue', randomString(8));
     }
 
     render() {
