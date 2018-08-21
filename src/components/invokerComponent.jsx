@@ -11,7 +11,7 @@ import {randomString, randomInt} from "../common/utils";
 
 
     onStartClick = (event) => {
-        asyncTask.running ? asyncTask.finish() : asyncTask.start();
+        asyncTaskSet.tasks[0].running ? asyncTaskSet.tasks[0].finish() : asyncTaskSet.tasks[0].start();
     };
 
     onAddClick = (event) => {
@@ -34,7 +34,7 @@ import {randomString, randomInt} from "../common/utils";
                     compact
                     size="tiny"
                     onClick={this.onStartClick}>
-                    {asyncTask.running ? "Stop" : "Start" } 
+                    {asyncTaskSet.tasks[0].running ? "Stop" : "Start" } 
                 </Button>
                 <Button
                     icon

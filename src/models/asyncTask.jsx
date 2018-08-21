@@ -1,6 +1,5 @@
 import { types } from "mobx-state-tree";
 
-
 // https://github.com/mobxjs/mobx-state-tree
 // make the state a state tree model instead of an observable!
 // Good practice: Give it a name in the model constructor for debugging purpose
@@ -21,28 +20,31 @@ export const AsyncTask = types.model("AsyncTask", {
     },
     get running(){
         return self.started && !self.finished;
+    },
+    get id(){
+        return self.gridblock.get('i');
     }
 }))
 .actions(self => {
-    function setValues(nameValue) {
+    function setName(nameValue) {
         self.name = nameValue;
+    }function setState(stateValue) {
+        self.taskState = stateValue;
     }
     function start() {
        self.started = true;
        self.finished=false;
 
-        /* 
-        Call a asyncronous task and wait for a promise - call this task in some class that can be 
-        made into a interface or superclass 
-        */
+       // call a method to register this listening processs at asyncsubscriber
+       // something like asyncSubscriber.register(id);
+
 
     }
     function finish() {
         self.finished = true;
     }
-    return { setValues, start, finish };
+    return { setName, setState, start, finish };
 });
-
 
 
 // instantiate a state tree

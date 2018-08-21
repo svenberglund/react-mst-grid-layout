@@ -1,5 +1,6 @@
 import { types } from "mobx-state-tree";
-import { AsyncTask } from "./asyncTask"
+import { AsyncTask } from "./asyncTask";
+
 
 
 const AsyncTaskSet = types.model("AsyncTaskSet", {

@@ -20,6 +20,7 @@ TODO:
 (1) - implement functionality that - when a task starts - calls a function and receives a promise,
 the promise will alter the taskState ...
 https://blog.hellojs.org/much-pub-sub-very-code-such-cool-439791522d21
+https://blog.vanila.io/handling-concurrency-with-async-await-in-javascript-8ec2e185f9b4
 (2) - Implment inheritance - both at the asynchronous task that delivers the promise and at the gui 
 component in the grid view. 
 (3) - Do a overhaul and cleanup of the code
