@@ -6,6 +6,7 @@ import { types } from "mobx-state-tree";
 // Good practice: Give it a name in the model constructor for debugging purpose
 // .views and .actions can be chained to the model
 export const AsyncTask = types.model("AsyncTask", {
+    taskState: types.integer, // will probably be a map, something like gridblock, in a more dynamic context: 
     name: types.string,
     color: 'red',
     show: true,
@@ -29,6 +30,12 @@ export const AsyncTask = types.model("AsyncTask", {
     function start() {
        self.started = true;
        self.finished=false;
+
+        /* 
+        Call a asyncronous task and wait for a promise - call this task in some class that can be 
+        made into a interface or superclass 
+        */
+
     }
     function finish() {
         self.finished = true;
@@ -42,4 +49,5 @@ export const AsyncTask = types.model("AsyncTask", {
 export const asyncTask = AsyncTask.create(
     {
     name: "foobar",
+    taskState: 0,
 });

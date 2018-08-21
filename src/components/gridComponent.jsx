@@ -14,6 +14,24 @@ var style = {
   backgroundColor: 'red'
 }
 
+
+/*
+TODO:
+(1) - implement functionality that - when a task starts - calls a function and receives a promise,
+the promise will alter the taskState ...
+https://blog.hellojs.org/much-pub-sub-very-code-such-cool-439791522d21
+(2) - Implment inheritance - both at the asynchronous task that delivers the promise and at the gui 
+component in the grid view. 
+(3) - Do a overhaul and cleanup of the code
+(4) - Make some funnier implementation, than just writing out the state.
+(5) - Pack into a moudle? https://medium.freecodecamp.org/anatomy-of-js-module-systems-and-building-libraries-fadcd8dbd0e
+
+
+*/
+
+
+
+
 // A simple layout example
 /*var layout = [
   { i: 'a', x: 0, y: 0, w: 1, h: 2 },
@@ -45,23 +63,16 @@ class GridLayout extends React.Component {
   generateDOM() {
     return _.map(asyncTaskSet.tasks, function(l,i){
       return (
+
+        /* 
+          Here is where we will need to use a component and feed it with properties
+          (probably name, index, taskState)
+          This shall be a component that can be subclassed ...
+        */
+
         <div key={i} style={{backgroundColor : (l.color)}} className="">
-
-          {/*  // old implementation - if we want to change the element depending on some prop e.g. static
-          <div key={i} style={style} className={l.static ? "static" : ""}>
-          {l.static ? (
-            <span
-              className="text"
-              title="This item is static and cannot be removed or resized."
-            >
-              Static - {i}
-            </span>
-          ) : (
-            <span className="text">{i}</span>
-          )}
-          */}
-
-          <span className="text">{l.name}</span>
+          <span className="text">{l.name} - State: {l.taskState}</span><br/>
+            {l.running ? (<span className="text"> Running  </span>) : (<span className="text"> Idle </span>) }
         </div>
       );
     });
