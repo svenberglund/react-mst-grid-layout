@@ -3,15 +3,34 @@ import { Button } from "semantic-ui-react";
 import { asyncTask } from "../models/asyncTask"
 import { observer } from "mobx-react";
 import { asyncTaskSet } from "../models/asyncTaskSet";
-import {randomString, randomInt} from "../common/utils";
-
+import { randomString, randomInt } from "../common/utils";
+import { subscribeToChannel, unSubscribe } from "../models/asyncSubscriber";
 
 
 @observer class InvokerComponent extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+          subscriptions: new Map(),
+        }
+      }
+
+    
+    addSubscription(index){
+        this.state.subscriptions.set(index, subscribeToChannel(0));
+    }
+
+    removeSubscription(index){
+        unSubscribe(this.state.subscriptions.get(index));
+        this.state.subscriptions.delete(index);
+    }
 
     onStartClick = (event) => {
+        //  changing the state - its not really necessary to keep the 'running' prop in the state, only for ui, 
         asyncTaskSet.tasks[0].running ? asyncTaskSet.tasks[0].finish() : asyncTaskSet.tasks[0].start();
+         // invoking the subscriber..
+        asyncTaskSet.tasks[0].running ? this.addSubscription(0) : this.removeSubscription(0);
     };
 
     onAddClick = (event) => {
