@@ -18,7 +18,8 @@ import { subscribeToChannel, unSubscribe } from "../models/asyncSubscriber";
 
     
     addSubscription(index){
-        this.state.subscriptions.set(index, subscribeToChannel(0));
+        //console.log(`request for subscription with index ${index}`);
+        this.state.subscriptions.set(index, subscribeToChannel(index));
     }
 
     removeSubscription(index){
@@ -27,10 +28,18 @@ import { subscribeToChannel, unSubscribe } from "../models/asyncSubscriber";
     }
 
     onStartClick = (event) => {
+        let index = 0;
+
+        asyncTaskSet.tasks.forEach(element => {
+            //  changing the state - its not really necessary to keep the 'running' prop in the state, only for ui, 
+            element.running ? element.finish() : element.start();
+            // invoking the subscriber..
+            element.running ? this.addSubscription(element.gridblock.get('i')) : this.removeSubscription(element.gridblock.get('i'));
+        });
         //  changing the state - its not really necessary to keep the 'running' prop in the state, only for ui, 
-        asyncTaskSet.tasks[0].running ? asyncTaskSet.tasks[0].finish() : asyncTaskSet.tasks[0].start();
+        // asyncTaskSet.tasks[index].running ? asyncTaskSet.tasks[index].finish() : asyncTaskSet.tasks[index].start();
          // invoking the subscriber..
-        asyncTaskSet.tasks[0].running ? this.addSubscription(0) : this.removeSubscription(0);
+        //asyncTaskSet.tasks[index].running ? this.addSubscription(index) : this.removeSubscription(index);
     };
 
     onAddClick = (event) => {
