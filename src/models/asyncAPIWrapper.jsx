@@ -45,7 +45,7 @@ class AsyncAPIWrapper {
                 };
 
                 channelState.set(channel_, newState);
-                pubsub.publish(`asyncTask/${channel_}/state`, [channelState.get(channel_)]);
+                pubsub.publish(`asyncTask/${channel_}/state`, [{int : channelState.get(channel_)}]);
 
                 // change direction?
                 if (randomInt(0, 15) === 1) {

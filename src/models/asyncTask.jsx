@@ -5,7 +5,8 @@ import { types } from "mobx-state-tree";
 // Good practice: Give it a name in the model constructor for debugging purpose
 // .views and .actions can be chained to the model
 export const AsyncTask = types.model("AsyncTask", {
-    taskState: types.integer, // will probably be a map, something like gridblock, in a more dynamic context: 
+    
+    taskState: types.map(types.union(types.string, types.number, types.integer, types.boolean)),
     name: types.string,
     //color: 'red',
     show: true,
@@ -53,5 +54,5 @@ export const AsyncTask = types.model("AsyncTask", {
 export const asyncTask = AsyncTask.create(
     {
     name: "foobar",
-    taskState: 0,
+    taskState: {int: 0},
 });

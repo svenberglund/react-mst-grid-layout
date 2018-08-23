@@ -18,8 +18,8 @@ import { subscribeToChannel, unSubscribe } from "../models/asyncSubscriber";
 
     
     addSubscription(index){
-        //console.log(`request for subscription with index ${index}`);
-        this.state.subscriptions.set(index, subscribeToChannel(index));
+        // we only publish on 4 channels thus we reduce the component index mod 4 to get channel index
+        this.state.subscriptions.set(index, subscribeToChannel(index, (index % 4)));
     }
 
     removeSubscription(index){
@@ -36,10 +36,6 @@ import { subscribeToChannel, unSubscribe } from "../models/asyncSubscriber";
             // invoking the subscriber..
             element.running ? this.addSubscription(element.gridblock.get('i')) : this.removeSubscription(element.gridblock.get('i'));
         });
-        //  changing the state - its not really necessary to keep the 'running' prop in the state, only for ui, 
-        // asyncTaskSet.tasks[index].running ? asyncTaskSet.tasks[index].finish() : asyncTaskSet.tasks[index].start();
-         // invoking the subscriber..
-        //asyncTaskSet.tasks[index].running ? this.addSubscription(index) : this.removeSubscription(index);
     };
 
     onAddClick = (event) => {

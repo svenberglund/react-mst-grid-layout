@@ -17,10 +17,7 @@ var style = {
 
 /*
 TODO:
-(1) - implement functionality that - when a task starts - calls a function and receives a promise,
-the promise will alter the taskState ...
-https://blog.hellojs.org/much-pub-sub-very-code-such-cool-439791522d21
-https://blog.vanila.io/handling-concurrency-with-async-await-in-javascript-8ec2e185f9b4
+(1) - implement functionality that - when a task starts - calls a function and subscirbes to events that will alter the taskState, https://sahadar.github.io/pubsub/ - done!
 (2) - Implment inheritance - both at the asynchronous task that delivers the promise and at the gui 
 component in the grid view. 
 (3) - Do a overhaul and cleanup of the code
@@ -67,12 +64,12 @@ class GridLayout extends React.Component {
 
         /* 
           Here is where we will need to use a component and feed it with properties
-          (probably name, index, taskState)
+          (probably name, the layot index (gridview.get('i')), taskState)
           This shall be a component that can be subclassed ...
         */
 
-        <div key={i} style={{ backgroundColor : integerToHeatMap(l.taskState)}} className="">
-          <span className="text">{l.name} - State: {l.taskState}, Color: {integerToHeatMap(l.taskState)}</span><br/>
+        <div key={i} style={{ backgroundColor : integerToHeatMap(l.taskState.get('int'))}} className="">
+          <span className="text">{l.name} - State: {l.taskState.get('int')}, Color: {integerToHeatMap(l.taskState.get('int'))}</span><br/>
             {l.running ? (<span className="text"> Running  </span>) : (<span className="text"> Idle </span>) }
         </div>
       );

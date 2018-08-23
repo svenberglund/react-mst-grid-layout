@@ -19,7 +19,7 @@ const AsyncTaskSet = types.model("AsyncTaskSet", {
     function addAsyncTask(nameValue,xValue, yValue, index){
         let newTask = AsyncTask.create({
             name: nameValue,
-            taskState: 0,
+            taskState: {int: 0},
             gridblock: { i: index, x: xValue, y: yValue, w: 1, h: 2 }
         });
         return self.tasks.push(newTask);
@@ -46,12 +46,12 @@ export const asyncTaskSet = AsyncTaskSet.create(
     {
         tasks: [AsyncTask.create({
             name: "The first element",
-            taskState: 0,
+            taskState: {int: 0},
             color: 'red',
             gridblock: { i: '0', x: 0, y: 0, w: 1, h: 2 }
         }),AsyncTask.create({
             name: "the second element",
-            taskState: 0,
+            taskState: {int: 0},
             color: 'red',
             gridblock: { i: '1', x: 1, y: 5, w: 3, h: 2 }
         })
