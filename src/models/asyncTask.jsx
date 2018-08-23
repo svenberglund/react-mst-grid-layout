@@ -6,13 +6,12 @@ import { types } from "mobx-state-tree";
 // .views and .actions can be chained to the model
 export const AsyncTask = types.model("AsyncTask", {
     
-    taskState: types.map(types.union(types.string, types.number, types.integer, types.boolean)),
+    subscriptionData: types.map(types.union(types.string, types.number, types.integer, types.boolean)),
     name: types.string,
-    //color: 'red',
     show: true,
     started: false,
     finished: false,
-    gridblock:  types.map(types.union(types.string, types.number, types.boolean ,types.undefined))
+    layoutBlock:  types.map(types.union(types.string, types.number, types.boolean ,types.undefined))
 })
 .views(self => ({
     get description() {
@@ -23,14 +22,14 @@ export const AsyncTask = types.model("AsyncTask", {
         return self.started && !self.finished;
     },
     get id(){
-        return self.gridblock.get('i');
+        return self.layoutBlock.get('i');
     }
 }))
 .actions(self => {
     function setName(nameValue) {
         self.name = nameValue;
     }function setState(stateValue) {
-        self.taskState = stateValue;
+        self.subscriptionData = stateValue;
     }
     //function setColor(colorValue) {
     //    self.color = colorValue;
@@ -54,5 +53,5 @@ export const AsyncTask = types.model("AsyncTask", {
 export const asyncTask = AsyncTask.create(
     {
     name: "foobar",
-    taskState: {int: 0},
+    subscriptionData: {int: 0},
 });

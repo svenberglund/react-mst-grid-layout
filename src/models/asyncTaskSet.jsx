@@ -19,8 +19,8 @@ const AsyncTaskSet = types.model("AsyncTaskSet", {
     function addAsyncTask(nameValue,xValue, yValue, index){
         let newTask = AsyncTask.create({
             name: nameValue,
-            taskState: {int: 0},
-            gridblock: { i: index, x: xValue, y: yValue, w: 1, h: 2 }
+            subscriptionData: {int: 0},
+            layoutBlock: { i: index, x: xValue, y: yValue, w: 1, h: 2 }
         });
         return self.tasks.push(newTask);
     }
@@ -30,14 +30,14 @@ const AsyncTaskSet = types.model("AsyncTaskSet", {
         self.tasks[index].name = name;
         self.tasks[index].color = color;
     
-    }function updateGridblock(gb){
+    }function updatelayoutBlock(gb){
         self.tasks.forEach(function (task_){        
-            if (task_.gridblock.get('i') === gb['i']) {
-                task_.gridblock = gb; 
+            if (task_.layoutBlock.get('i') === gb['i']) {
+                task_.layoutBlock = gb; 
             }
         });
     }
-    return {addAsyncTask, removeAsyncTask, changeAsyncTask, updateGridblock}
+    return {addAsyncTask, removeAsyncTask, changeAsyncTask, updatelayoutBlock}
 });
 
 
@@ -46,14 +46,14 @@ export const asyncTaskSet = AsyncTaskSet.create(
     {
         tasks: [AsyncTask.create({
             name: "The first element",
-            taskState: {int: 0},
+            subscriptionData: {int: 0},
             color: 'red',
-            gridblock: { i: '0', x: 0, y: 0, w: 1, h: 2 }
+            layoutBlock: { i: '0', x: 0, y: 0, w: 1, h: 2 }
         }),AsyncTask.create({
             name: "the second element",
-            taskState: {int: 0},
+            subscriptionData: {int: 0},
             color: 'red',
-            gridblock: { i: '1', x: 1, y: 5, w: 3, h: 2 }
+            layoutBlock: { i: '1', x: 1, y: 5, w: 3, h: 2 }
         })
         ]
     }

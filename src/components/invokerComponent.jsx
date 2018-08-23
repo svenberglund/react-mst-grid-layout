@@ -34,7 +34,7 @@ import { subscribeToChannel, unSubscribe } from "../models/asyncSubscriber";
             //  changing the state - its not really necessary to keep the 'running' prop in the state, only for ui, 
             element.running ? element.finish() : element.start();
             // invoking the subscriber..
-            element.running ? this.addSubscription(element.gridblock.get('i')) : this.removeSubscription(element.gridblock.get('i'));
+            element.running ? this.addSubscription(element.layoutBlock.get('i')) : this.removeSubscription(element.layoutBlock.get('i'));
         });
     };
 
