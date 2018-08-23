@@ -6,7 +6,7 @@ import 'react-resizable/css/styles.css'
 import { observer } from "mobx-react";
 import { asyncTaskSet } from "../models/asyncTaskSet";
 import { toJS } from 'mobx';
-
+import {integerToHeatMap} from '../common/utils';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -71,8 +71,8 @@ class GridLayout extends React.Component {
           This shall be a component that can be subclassed ...
         */
 
-        <div key={i} style={{backgroundColor : (l.color)}} className="">
-          <span className="text">{l.name} - State: {l.taskState}</span><br/>
+        <div key={i} style={{ backgroundColor : integerToHeatMap(l.taskState)}} className="">
+          <span className="text">{l.name} - State: {l.taskState}, Color: {integerToHeatMap(l.taskState)}</span><br/>
             {l.running ? (<span className="text"> Running  </span>) : (<span className="text"> Idle </span>) }
         </div>
       );

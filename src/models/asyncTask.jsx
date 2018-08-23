@@ -7,7 +7,7 @@ import { types } from "mobx-state-tree";
 export const AsyncTask = types.model("AsyncTask", {
     taskState: types.integer, // will probably be a map, something like gridblock, in a more dynamic context: 
     name: types.string,
-    color: 'red',
+    //color: 'red',
     show: true,
     started: false,
     finished: false,
@@ -31,19 +31,21 @@ export const AsyncTask = types.model("AsyncTask", {
     }function setState(stateValue) {
         self.taskState = stateValue;
     }
+    //function setColor(colorValue) {
+    //    self.color = colorValue;
+    //}
     function start() {
        self.started = true;
        self.finished=false;
 
        // call a method to register this listening processs at asyncsubscriber
        // something like asyncSubscriber.register(id);
-
-
     }
     function finish() {
         self.finished = true;
     }
-    return { setName, setState, start, finish };
+    return { setName, setState, //setColor, 
+        start, finish };
 });
 
 

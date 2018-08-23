@@ -31,7 +31,7 @@ class AsyncAPIWrapper{
         let timerId = setTimeout(function request() {
 
             channels.forEach(function (channel_) {
-                let offset = randomInt(0,10);
+                let offset = randomInt(0,20);
                 let oldState = channelState.get(channel_);
                 let oldDirection = channelDirection.get(channel_);
 

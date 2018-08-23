@@ -40,7 +40,7 @@ import { subscribeToChannel, unSubscribe } from "../models/asyncSubscriber";
     };
 
     onChangeClick = (event) => {
-        asyncTaskSet.changeAsyncTask(randomInt(0,asyncTaskSet.count-1), 'blue', randomString(8));
+        asyncTaskSet.changeAsyncTask(randomInt(0,asyncTaskSet.count-1), 'rgb(1, 140, 89)', randomString(8));
     }
 
     render() {
