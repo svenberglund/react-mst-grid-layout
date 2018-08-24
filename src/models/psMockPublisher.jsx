@@ -1,10 +1,9 @@
-import { asyncTaskSet } from "../models/asyncTaskSet";
 import { randomInt } from "../common/utils";
 
 var pubsub = require('pubsub.js');
 
 // https://sahadar.github.io/pubsub/
-class AsyncAPIWrapper {
+class MockPublisher {
 
     constructor() {
         this.publishing = false;
@@ -45,7 +44,7 @@ class AsyncAPIWrapper {
                 };
 
                 channelState.set(channel_, newState);
-                pubsub.publish(`asyncTask/${channel_}/state`, [{int : channelState.get(channel_)}]);
+                pubsub.publish(`subscriberGrid/${channel_}/state`, [{int : channelState.get(channel_)}]);
 
                 // change direction?
                 if (randomInt(0, 15) === 1) {
@@ -74,7 +73,7 @@ var SingletonPubliser = (function () {
     function createInstance() {
 
 
-        var object = new AsyncAPIWrapper();
+        var object = new MockPublisher();
         return object;
     }
     return {

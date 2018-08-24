@@ -1,13 +1,12 @@
-import {asyncTaskSet} from "./asyncTaskSet";
-import {integerToHeatMap} from '../common/utils';
+import {subscriberGrid} from "./subscriberGrid";
 var pubsub = require('pubsub.js');
 
 // https://sahadar.github.io/pubsub/
 
 export function subscribeToChannel(componentIndex, channelIndex){
     console.log(`Letting componetnt ${componentIndex} subscribe to ${channelIndex}`);
-    return pubsub.subscribe(`asyncTask/${channelIndex}/state`, function(data) {
-        asyncTaskSet.tasks[componentIndex].setState(data);
+    return pubsub.subscribe(`subscriberGrid/${channelIndex}/state`, function(data) {
+        subscriberGrid.tasks[componentIndex].setState(data);
     });
 }
 

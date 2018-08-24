@@ -4,14 +4,14 @@ import { types } from "mobx-state-tree";
 // make the state a state tree model instead of an observable!
 // Good practice: Give it a name in the model constructor for debugging purpose
 // .views and .actions can be chained to the model
-export const AsyncTask = types.model("AsyncTask", {
+export const SubscriberGridBlock = types.model("SubscriberGridBlock", {
     
-    subscriptionData: types.map(types.union(types.string, types.number, types.integer, types.boolean)),
+    subscriptionMap: types.map(types.union(types.string, types.number, types.integer, types.boolean)),
     name: types.string,
     show: true,
     started: false,
     finished: false,
-    layoutBlock:  types.map(types.union(types.string, types.number, types.boolean ,types.undefined))
+    layoutMap:  types.map(types.union(types.string, types.number, types.boolean ,types.undefined))
 })
 .views(self => ({
     get description() {
@@ -22,14 +22,14 @@ export const AsyncTask = types.model("AsyncTask", {
         return self.started && !self.finished;
     },
     get id(){
-        return self.layoutBlock.get('i');
+        return self.layoutMap.get('i');
     }
 }))
 .actions(self => {
     function setName(nameValue) {
         self.name = nameValue;
     }function setState(stateValue) {
-        self.subscriptionData = stateValue;
+        self.subscriptionMap = stateValue;
     }
     //function setColor(colorValue) {
     //    self.color = colorValue;
@@ -50,8 +50,8 @@ export const AsyncTask = types.model("AsyncTask", {
 
 
 // instantiate a state tree
-export const asyncTask = AsyncTask.create(
+export const subscriberGridBlock = SubscriberGridBlock.create(
     {
     name: "foobar",
-    subscriptionData: {int: 0},
+    subscriptionMap: {int: 0},
 });

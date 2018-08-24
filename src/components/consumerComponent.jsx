@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
 import { observer } from "mobx-react";
-import { asyncTask } from "../models/asyncTask";
-import { asyncTaskSet } from "../models/asyncTaskSet";
+import { subscriberGridBlock } from "../models/subscriberGridBlock";
+import { subscriberGrid } from "../models/subscriberGrid";
 //import ShowCaseLayout from './showcase';
 
 @observer 
@@ -17,7 +17,7 @@ class ConsumerComponent extends React.Component {
         return (
             <React.Fragment>
                 <div>This is the ConsumerComponent</div>
-                <div>We display some props from the state tree asyncTask: {asyncTask.description} </div>
+                <div>We display some props from the state tree SubscriberGridBlock: {subscriberGridBlock.description} </div>
 
                 <Button
                     icon
@@ -26,10 +26,10 @@ class ConsumerComponent extends React.Component {
                     onClick={this.onButtonClick}>
                      Click here!
                 </Button>
-                <div>Lets also display some props from the state tree syncTaskSet: {asyncTaskSet.count} </div>
+                <div>Lets also display some props from the state tree syncTaskSet: {subscriberGrid.count} </div>
                 <div>                
                     <ul>
-                        {asyncTaskSet.tasks.map(function (task, index) {
+                        {subscriberGrid.tasks.map(function (task, index) {
                             return <li key={index}>{task.name}</li>;
                         })
                         }

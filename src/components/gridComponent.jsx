@@ -4,7 +4,7 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import 'react-grid-layout/css/styles.css' 
 import 'react-resizable/css/styles.css' 
 import { observer } from "mobx-react";
-import { asyncTaskSet } from "../models/asyncTaskSet";
+import { subscriberGrid } from "../models/subscriberGrid";
 import { toJS } from 'mobx';
 import {integerToHeatMap} from '../common/utils';
 
@@ -17,7 +17,7 @@ var style = {
 
 /*
 TODO:
-(1) - implement functionality that - when a task starts - calls a function and subscirbes to events that will alter the subscriptionData, https://sahadar.github.io/pubsub/ - done!
+(1) - implement functionality that - when a task starts - calls a function and subscirbes to events that will alter the subscriptionMap, https://sahadar.github.io/pubsub/ - done!
 (2) - Implment inheritance - both at the asynchronous task that delivers the promise and at the gui 
 component in the grid view. 
 (3) - Do a overhaul and cleanup of the code
@@ -59,17 +59,17 @@ class GridLayout extends React.Component {
   }
 
   generateDOM() {
-    return _.map(asyncTaskSet.tasks, function(l,i){
+    return _.map(subscriberGrid.tasks, function(l,i){
       return (
 
         /* 
           Here is where we will need to use a component and feed it with properties
-          (probably name, the layot index (gridview.get('i')), subscriptionData)
+          (probably name, the layot index (gridview.get('i')), subscriptionMap)
           This shall be a component that can be subclassed ...
         */
 
-        <div key={i} style={{ backgroundColor : integerToHeatMap(l.subscriptionData.get('int'))}} className="">
-          <span className="text">{l.name} - State: {l.subscriptionData.get('int')}, Color: {integerToHeatMap(l.subscriptionData.get('int'))}</span><br/>
+        <div key={i} style={{ backgroundColor : integerToHeatMap(l.subscriptionMap.get('int'))}} className="">
+          <span className="text">{l.name} - Color: {integerToHeatMap(l.subscriptionMap.get('int'))}</span><br/>
             {l.running ? (<span className="text"> Running  </span>) : (<span className="text"> Idle </span>) }
         </div>
       );
@@ -97,7 +97,7 @@ class GridLayout extends React.Component {
     // Why cant we use the 'changed' property, it seems to never be true...?
     for(var i=0; i< layout.length; i++ ){
       //console.log(`parameter: ${JSON.stringify(layout[i])}`);
-      asyncTaskSet.updatelayoutBlock(layout[i]);
+      subscriberGrid.updatelayoutMap(layout[i]);
     }
     this.props.onLayoutChange(layout, layouts);
   };
@@ -125,10 +125,10 @@ class GridLayout extends React.Component {
         <button onClick={this.onCompactTypeChange}>
           Change Compaction Type
         </button>
-        <div>Counter: {asyncTaskSet.tasks.length}</div>
+        <div>Counter: {subscriberGrid.tasks.length}</div>
         <ResponsiveReactGridLayout className="layout"
           {...this.props}
-          layouts={{ lg: asyncTaskSet.tasks.map(at => toJS(at).layoutBlock) }}
+          layouts={{ lg: subscriberGrid.tasks.map(at => toJS(at).layoutMap) }}
           onBreakpointChange={this.onBreakpointChange}
           onLayoutChange={this.onLayoutChange}
           // WidthProvider option
@@ -161,7 +161,7 @@ function generateLayout() {
     };
   });
   //return layout;
-  return { lg: asyncTaskSet.tasks.map(at => toJS(at).layoutBlock) };
+  return { lg: SubscriberGrid.tasks.map(at => toJS(at).layoutMap) };
 }
 */
 

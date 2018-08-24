@@ -1,10 +1,9 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
-import { asyncTask } from "../models/asyncTask"
 import { observer } from "mobx-react";
-import { asyncTaskSet } from "../models/asyncTaskSet";
+import { subscriberGrid } from "../models/subscriberGrid";
 import { randomString, randomInt } from "../common/utils";
-import { subscribeToChannel, unSubscribe } from "../models/asyncSubscriber";
+import { subscribeToChannel, unSubscribe } from "../models/psSubscriber";
 
 
 @observer class InvokerComponent extends React.Component {
@@ -28,24 +27,22 @@ import { subscribeToChannel, unSubscribe } from "../models/asyncSubscriber";
     }
 
     onStartClick = (event) => {
-        let index = 0;
-
-        asyncTaskSet.tasks.forEach(element => {
+        subscriberGrid.tasks.forEach(element => {
             //  changing the state - its not really necessary to keep the 'running' prop in the state, only for ui, 
             element.running ? element.finish() : element.start();
             // invoking the subscriber..
-            element.running ? this.addSubscription(element.layoutBlock.get('i')) : this.removeSubscription(element.layoutBlock.get('i'));
+            element.running ? this.addSubscription(element.layoutMap.get('i')) : this.removeSubscription(element.layoutMap.get('i'));
         });
     };
 
     onAddClick = (event) => {
         /* Adding a randomply named task */
-        let index = (asyncTaskSet.count).toString();
-        asyncTaskSet.addAsyncTask( `${index} - ${randomString(5)}`,randomInt(0,6),randomInt(0,6), index );
+        let index = (subscriberGrid.count).toString();
+        subscriberGrid.addSubscriberGridBlock( `${index} - ${randomString(5)}`,randomInt(0,6),randomInt(0,6), index );
     };
 
     onChangeClick = (event) => {
-        asyncTaskSet.changeAsyncTask(randomInt(0,asyncTaskSet.count-1), 'rgb(1, 140, 89)', randomString(8));
+        subscriberGrid.changeSubscriberGridBlock(randomInt(0,subscriberGrid.count-1), 'rgb(1, 140, 89)', randomString(8));
     }
 
     render() {
@@ -58,7 +55,7 @@ import { subscribeToChannel, unSubscribe } from "../models/asyncSubscriber";
                     compact
                     size="tiny"
                     onClick={this.onStartClick}>
-                    {asyncTaskSet.tasks[0].running ? "Stop" : "Start" } 
+                    {subscriberGrid.tasks[0].running ? "Stop" : "Start" } 
                 </Button>
                 <Button
                     icon
