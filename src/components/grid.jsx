@@ -10,9 +10,6 @@ import {integerToHeatMap} from '../common/utils';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-var style = {
-  backgroundColor: 'red'
-}
 
 
 /*
@@ -67,11 +64,13 @@ class GridLayout extends React.Component {
           (probably name, the layot index (gridview.get('i')), subscriptionMap)
           This shall be a component that can be subclassed ...
         */
-
         <div key={i} style={{ backgroundColor : integerToHeatMap(l.subscriptionMap.get('int'))}} className="">
           <span className="text">{l.name} - Color: {integerToHeatMap(l.subscriptionMap.get('int'))}</span><br/>
             {l.running ? (<span className="text"> Running  </span>) : (<span className="text"> Idle </span>) }
         </div>
+
+
+
       );
     });
   }
