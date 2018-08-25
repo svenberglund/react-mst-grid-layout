@@ -6,7 +6,7 @@ import 'react-resizable/css/styles.css'
 import { observer } from "mobx-react";
 import { subscriberGrid } from "../models/subscriberGrid";
 import { toJS } from 'mobx';
-import {integerToHeatMap} from '../common/utils';
+import GridItem from './gridItem';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -55,20 +55,15 @@ class GridLayout extends React.Component {
     this.setState({ mounted: true });
   }
 
-  generateDOM() {
-    return _.map(subscriberGrid.tasks, function(l,i){
+  generateDOM(elements) {
+
+    /* Returns a map of the items to be rendered and a function to be applied */
+    return _.map(elements, function(l,i){
       return (
 
-        /* 
-          Here is where we will need to use a component and feed it with properties
-          (probably name, the layot index (gridview.get('i')), subscriptionMap)
-          This shall be a component that can be subclassed ...
-        */
-        <div key={i} style={{ backgroundColor : integerToHeatMap(l.subscriptionMap.get('int'))}} className="">
-          <span className="text">{l.name} - Color: {integerToHeatMap(l.subscriptionMap.get('int'))}</span><br/>
-            {l.running ? (<span className="text"> Running  </span>) : (<span className="text"> Idle </span>) }
-        </div>
-
+        <div key={i}>
+          <GridItem  subscriptionMap={l.subscriptionMap} index={i} running={l.running} name={l.name} />
+       </div>
 
 
       );
@@ -138,30 +133,11 @@ class GridLayout extends React.Component {
           compactType={this.state.compactType}
           preventCollision={!this.state.compactType}
         >
-          {this.generateDOM()}
+          {GridItem.generateDOM(subscriberGrid.tasks)}
         </ResponsiveReactGridLayout>
       </div>
     );
   }
 }
-
-/* // old implementation
-function generateLayout() {
-  return _.map(_.range(0, 10), function(item, i) {
-    var y = Math.ceil(Math.random() * 4) + 1;
-    return {
-      x: (_.random(0, 5) * 2) % 12,
-      y: Math.floor(i / 6) * y,
-      w: 2,
-      h: y,
-      i: i.toString(),
-      t: "foozzzbar",
-      static: Math.random() < 0.05
-    };
-  });
-  //return layout;
-  return { lg: SubscriberGrid.tasks.map(at => toJS(at).layoutMap) };
-}
-*/
 
 export default GridLayout;

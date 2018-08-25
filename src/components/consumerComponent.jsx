@@ -3,7 +3,7 @@ import { Button } from "semantic-ui-react";
 import { observer } from "mobx-react";
 import { subscriberGridBlock } from "../models/subscriberGridBlock";
 import { subscriberGrid } from "../models/subscriberGrid";
-//import ShowCaseLayout from './showcase';
+
 
 @observer 
 class ConsumerComponent extends React.Component {

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "ajv": "^6.0.0",
+    "babel-plugin-styled-components": "^1.5.1",
     "mobx": "^4.3.1",
     "mobx-react": "^5.2.5",
     "mobx-state-tree": "^3.1.1",
@@ -13,7 +14,8 @@
     "react-dom": "^16.4.2",
     "react-grid-layout": "^0.16.6",
     "semantic-ui-css": "^2.3.3",
-    "semantic-ui-react": "^0.82.2"
+    "semantic-ui-react": "^0.82.2",
+    "styled-components": "^3.4.5"
   },
   "devDependencies": {
     "mobx": "4.x",
