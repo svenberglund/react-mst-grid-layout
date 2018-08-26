@@ -16,7 +16,6 @@ const Text = styled.p`
 
 // Create a Wrapper component that'll render a <section> tag with some styles
 const Wrapper = styled.div`
-  padding: 0.5em;
   background: ${props => props.bgColor};
 `;
 
