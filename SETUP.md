@@ -42,3 +42,6 @@ npm install mobx-react --save
 npm install mobx-state-tree --save
 npm install react-app-rewire-mobx --save
 ```
+
+## (3) Support for web workers via react-app-rewire
+npm install react-app-rewired worker-loader --save-dev

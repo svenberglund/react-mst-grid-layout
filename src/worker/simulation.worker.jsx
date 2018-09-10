@@ -1,17 +1,15 @@
 import { randomInt } from "../common/utils";
 
-var pubsub = require('pubsub.js');
 
-// https://sahadar.github.io/pubsub/
 class MockPublisher {
 
     constructor() {
         this.publishing = false;
         this.channels = null;
-        this.channelState = new Map(); // continue here - make the state continuos!
+        this.channelState = new Map();
         this.channelDirection = new Map();
+        this.message=new Map();
     }
-
 
     startPublishing(channels) {
 
@@ -19,6 +17,7 @@ class MockPublisher {
         this.channels = channels;
         let channelState = new Map();
         let channelDirection = new Map();
+        let message = new Map();
 
         channels.forEach(function (channel_) {
             let inputState = randomInt(0, 1000);
@@ -26,7 +25,7 @@ class MockPublisher {
             channelDirection.set(channel_, inputState > 500 ? false : true);
         });
 
-        let delay = 250;
+        let delay = 150;
         let timerId = setTimeout(function request() {
 
             channels.forEach(function (channel_) {
@@ -44,22 +43,23 @@ class MockPublisher {
                 };
 
                 channelState.set(channel_, newState);
-                pubsub.publish(`subscriberGrid/${channel_}/state`, [{int : channelState.get(channel_)}]);
+
+                message={channel:`subscriberGrid/${channel_}/state`, msg:[{int : channelState.get(channel_)}]};
+                postMessage(message); // posting message from worker to frontend
 
                 // change direction?
                 if (randomInt(0, 15) === 1) {
-                    channelDirection.set(channel_, !channelDirection.get(channel_));;
+                    channelDirection.set(channel_, !channelDirection.get(channel_));
                 }
-                // change the delay?
+                // change the delay to produce some irregularity?
                 let delayDeterminator = randomInt(0, 5);
                 if (delayDeterminator === 1) {
-                    delay = 600;
+                    delay = 300;
                 } else {
-                    delay = 250;
+                    delay = 150;
                 }
 
             });
-
 
             timerId = setTimeout(request, delay);
         }, delay)
@@ -87,8 +87,7 @@ var SingletonPubliser = (function () {
 })();
 
 
-
-let apiWrapper = SingletonPubliser.getInstance();
-
+let mockPublisher = SingletonPubliser.getInstance();
 // this invokation can be done from gui instead - we only publish to 4 channels
-apiWrapper.startPublishing([0, 1, 2, 3]);
+mockPublisher.startPublishing([0, 1, 2, 3]);
+
