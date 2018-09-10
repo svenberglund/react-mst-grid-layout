@@ -1,4 +1,4 @@
-import { randomInt } from "../common/utils";
+import { randomInt, integerToHeatMap } from "../common/utils";
 
 
 class MockPublisher {
@@ -44,7 +44,8 @@ class MockPublisher {
 
                 channelState.set(channel_, newState);
 
-                message={channel:`subscriberGrid/${channel_}/state`, msg:[{int : channelState.get(channel_)}]};
+                message={channel:`subscriberGrid/${channel_}/state`, msg:[{int : newState, 
+                rgb : integerToHeatMap(newState)}]};
                 postMessage(message); // posting message from worker to frontend
 
                 // change direction?

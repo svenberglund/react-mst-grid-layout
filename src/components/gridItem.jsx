@@ -1,5 +1,4 @@
 import React from "react";
-import {integerToHeatMap} from '../common/utils';
 import styled from 'styled-components';
 import _ from "lodash";
 
@@ -28,9 +27,9 @@ static  generateDOM(elements) {
     /* Returns a map of the items to be rendered and a function to be applied */
     return _.map(elements, function(l,i){
       return (
-              <Wrapper key={i} bgColor={integerToHeatMap(l.subscriptionMap.get('int'))}>
+              <Wrapper key={i} bgColor={l.subscriptionMap.get('rgb')}>
                 <Text>
-                    <span className="text"> {l.name} - Color: {integerToHeatMap(l.subscriptionMap.get('int'))}</span><br/>
+                    <span className="text"> {l.name} - Color: {l.subscriptionMap.get('rgb')}</span><br/>
                     { l.running ? (<span className="text"> Running  </span>) : (<span className="text"> Idle </span>) }
                 </Text>
               </Wrapper>
