@@ -5,6 +5,8 @@
   "dependencies": {
     "ajv": "^6.0.0",
     "babel-plugin-styled-components": "^1.5.1",
+    "echarts": "^4.0.0",
+    "echarts-for-react": "^2.0.15-beta.0",
     "mobx": "^4.3.1",
     "mobx-react": "^5.2.5",
     "mobx-state-tree": "^3.1.1",
@@ -15,7 +17,8 @@
     "react-grid-layout": "^0.16.6",
     "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.82.2",
-    "styled-components": "^3.4.5"
+    "styled-components": "^3.4.5",
+    "zrender": "^4.0.5"
   },
   "devDependencies": {
     "mobx": "4.x",

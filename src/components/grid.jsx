@@ -1,6 +1,6 @@
-import React from "../../../../.cache/typescript/2.9/node_modules/@types/react";
-import _ from "../../../../.cache/typescript/2.9/node_modules/@types/lodash";
-import { Responsive, WidthProvider } from "../../../../.cache/typescript/2.9/node_modules/@types/react-grid-layout";
+import React from "react";
+import _ from "lodash";
+import { Responsive, WidthProvider } from "react-grid-layout";
 import 'react-grid-layout/css/styles.css' 
 import 'react-resizable/css/styles.css' 
 import { observer } from "mobx-react";

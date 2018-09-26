@@ -1,32 +1,56 @@
 import GridElementSuper from "./gridElementSuper"
 import React from "react";
-import styled from 'styled-components';
+import ReactEcharts from 'echarts-for-react';
+import echarts from 'echarts';
 
-
-
-// TODO: reimplement this :
-
-const Text = styled.p`
-font-size: 0.8em;
-text-align: center;
-color: palevioletred;
-`;
-
-
-const Wrapper = styled.div`
-background: ${props => props.bgColor};
-`;
  
+echarts.registerTheme('my_theme', {
+    backgroundColor: '#f4cccc'
+  });
+
+
 // implement it with e-charts https://ecomfe.github.io/echarts-examples/public/editor.html?c=gauge
 
 export default class GridElementGauge extends GridElementSuper{
+
+
+    static getOption(l){
+
+        return {
+            tooltip : {
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            toolbox: {
+                feature: {
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            series: [
+                {
+                    name: 'gauge chart',
+                    type: 'gauge',
+                    detail: {formatter:'{value}%'},
+                    data: [{value: Math.round(l.subscriptionMap.get('int')/10), name: 'gauge chart'}]
+                } // TODO: optimize, calculate the [0:100] value directly in simulation 'backend' instead
+            ]
+        };
+    }
+
+
+
   
-  static renderElement(i, l){
-    return <Wrapper key={i} bgColor={l.subscriptionMap.get('rgb')}>
-    <Text>
-      <span className="text"> {l.name} - GAUGE CLASS!!! Color: {l.subscriptionMap.get('rgb')}</span><br />
-      {l.running ? (<span className="text"> Running  </span>) : (<span className="text"> Idle </span>)}
-    </Text>
-  </Wrapper>;
+    static renderElement(i, l){
+
+    return <div key={i}> <ReactEcharts 
+    option={GridElementGauge.getOption(l)}
+    notMerge={true}
+    lazyUpdate={true}
+    //showLoading={true}
+    theme={"theme_name"}
+    //onChartReady={this.onChartReadyCallback}
+    //onEvents={EventsDict}
+    //opts={} 
+    /></div>;
   }
 }
