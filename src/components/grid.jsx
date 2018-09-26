@@ -1,6 +1,6 @@
-import React from "react";
-import _ from "lodash";
-import { Responsive, WidthProvider } from "react-grid-layout";
+import React from "../../../../.cache/typescript/2.9/node_modules/@types/react";
+import _ from "../../../../.cache/typescript/2.9/node_modules/@types/lodash";
+import { Responsive, WidthProvider } from "../../../../.cache/typescript/2.9/node_modules/@types/react-grid-layout";
 import 'react-grid-layout/css/styles.css' 
 import 'react-resizable/css/styles.css' 
 import { observer } from "mobx-react";
@@ -9,23 +9,6 @@ import { toJS } from 'mobx';
 import GridItem from './gridItem';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
-
-
-
-/*
-TODO:
-(1) - implement functionality that - when a task starts - calls a function and subscirbes to events that will alter the subscriptionMap, https://sahadar.github.io/pubsub/ - done!
-(2) - Implment inheritance - both at the asynchronous task that delivers the promise and at the gui 
-component in the grid view. 
-(3) - Do a overhaul and cleanup of the code
-(4) - Make some funnier implementation, than just writing out the state.
-(5) - Pack into a moudle? https://medium.freecodecamp.org/anatomy-of-js-module-systems-and-building-libraries-fadcd8dbd0e
-
-
-*/
-
-
-
 
 // A simple layout example
 /*var layout = [
@@ -56,7 +39,6 @@ class GridLayout extends React.Component {
   }
 
   generateDOM(elements) {
-
     /* Returns a map of the items to be rendered and a function to be applied */
     return _.map(elements, function(l,i){
       return (
@@ -64,8 +46,6 @@ class GridLayout extends React.Component {
         <div key={i}>
           <GridItem  subscriptionMap={l.subscriptionMap} index={i} running={l.running} name={l.name} />
        </div>
-
-
       );
     });
   }
