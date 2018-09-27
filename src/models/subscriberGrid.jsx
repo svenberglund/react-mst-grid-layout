@@ -19,7 +19,12 @@ const SubscriberGrid = types.model("SubscriberGrid", {
     function addSubscriberGridBlock(nameValue,xValue, yValue, index){
         let newTask = SubscriberGridBlock.create({
             name: nameValue,
-            subscriptionMap: {int: 0, rgb:'rgb(0,255,0)'},
+            subscriptionMap: {
+                int: 0, 
+                rgb:'rgb(0,255,0)', 
+                percent: 50,
+                series: '[0,0,0,0,0,0,0,0,0,0]'
+            },
             layoutMap: { i: index, x: xValue, y: yValue, w: 3, h: 8 }
         });
         return self.tasks.push(newTask);

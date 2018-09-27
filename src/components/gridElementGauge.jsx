@@ -28,10 +28,10 @@ export default class GridElementGauge extends GridElementSuper{
             },
             series: [
                 {
-                    name: 'gauge chart',
+                    name: '业务指标',
                     type: 'gauge',
                     detail: {formatter:'{value}%'},
-                    data: [{value: Math.round(l.subscriptionMap.get('int')/10), name: 'gauge chart'}]
+                    data: [{value: l.subscriptionMap.get('percent'), name:  '完成率'}]
                 } // TODO: optimize, calculate the [0:100] value directly in simulation 'backend' instead
             ]
         };

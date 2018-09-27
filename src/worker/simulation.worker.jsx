@@ -16,12 +16,14 @@ class MockPublisher {
         this.publishing = true;
         this.channels = channels;
         let channelState = new Map();
+        let channelStateSeries = new Map();
         let channelDirection = new Map();
         let message = new Map();
 
         channels.forEach(function (channel_) {
             let inputState = randomInt(0, 1000);
             channelState.set(channel_, inputState);
+            channelStateSeries.set(channel_, JSON.stringify([0,0,0,0,0,0,0,0,0,inputState])); // same as the channelState but will be a series with history
             channelDirection.set(channel_, inputState > 500 ? false : true);
         });
 
@@ -43,9 +45,19 @@ class MockPublisher {
                 };
 
                 channelState.set(channel_, newState);
+                // now set the series aswell - we need to check if we should push some element..
+                let series = JSON.parse(channelStateSeries.get(channel_));
+                series.shift();
+                series.push(newState);
+                let seriesString = JSON.stringify(series);
+                channelStateSeries.set(channel_, seriesString);
 
-                message={channel:`subscriberGrid/${channel_}/state`, msg:[{int : newState, 
-                rgb : integerToHeatMap(newState)}]};
+                message={channel:`subscriberGrid/${channel_}/state`, msg:[{
+                    int : newState, 
+                    rgb : integerToHeatMap(newState), 
+                    percent : Math.round(newState/10),
+                    series : seriesString
+                }]};
                 postMessage(message); // posting message from worker to frontend
 
                 // change direction?

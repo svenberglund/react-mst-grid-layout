@@ -3,7 +3,7 @@ import React from "react";
 import styled from 'styled-components';
 
 // https://www.styled-components.com/docs/basics    
-// Create a Title component that'll render an <h1> tag with some styles
+// Text component
 const Text = styled.p`
 font-size: 0.8em;
 text-align: center;
@@ -15,8 +15,22 @@ const Wrapper = styled.div`
 background: ${props => props.bgColor};
 `;
 
-// TODO: make this "inheritable"... 
-// subclass it with e-charts https://ecomfe.github.io/echarts-examples/public/editor.html?c=gauge
+/*
+Look into this:
+
+Over 200 classes were generated for component gridElementColor__Wrapper. 
+Consider using the attrs method, together with a style object for frequently changed styles.
+Example:
+  const Component = styled.div.attrs({
+    style: ({ background }) => ({
+      background,
+    }),
+  })`width: 100%;`
+
+  <Component />
+*/
+
+
 
 export default class GridElementColor extends GridElementSuper{
   
