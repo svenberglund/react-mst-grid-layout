@@ -53,5 +53,5 @@ export const SubscriberGridBlock = types.model("SubscriberGridBlock", {
 export const subscriberGridBlock = SubscriberGridBlock.create(
     {
     name: "foobar",
-    subscriptionMap: {int: 0, rgb:'rgb(0,255,0)'},
+    subscriptionMap: {int: 0, rgb:'rgb(0,255,0)', percent: 50, series: '[0,0,0,0,0,0,0,0,0,0]'},
 });
