@@ -5,7 +5,8 @@ import echarts from 'echarts';
 
  
 echarts.registerTheme('my_theme', {
-    backgroundColor: '#f4cccc'
+    backgroundColor: 'gray',//'#f4cccc',
+    borderRadius: '8px'
   });
 
 export default class GridElementChart extends GridElementSuper{
@@ -14,7 +15,6 @@ export default class GridElementChart extends GridElementSuper{
     static getOption(l){
 
         return {
-
 
             xAxis: {
                 type: 'category', // '业务指标''完成率'
@@ -32,7 +32,7 @@ export default class GridElementChart extends GridElementSuper{
 
     static renderElement(i, l){
 
-    return <div key={i}> <ReactEcharts 
+    return <div key={i} style={{backgroundColor : l.subscriptionMap.get('rgb'), borderRadius : '8px'}}> <ReactEcharts 
     option={GridElementChart.getOption(l)}
     notMerge={true}
     lazyUpdate={true}

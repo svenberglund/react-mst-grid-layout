@@ -100,7 +100,7 @@ class GridLayout extends React.Component {
           Change Compaction Type
         </button>
         <div>Counter: {subscriberGrid.tasks.length}</div>
-        <ResponsiveReactGridLayout className="layout"
+        <ResponsiveReactGridLayout className="layout" style={{backgroundColor : 'WhiteSmoke'}}
           {...this.props}
           layouts={{ lg: subscriberGrid.tasks.map(at => toJS(at).layoutMap) }}
           onBreakpointChange={this.onBreakpointChange}

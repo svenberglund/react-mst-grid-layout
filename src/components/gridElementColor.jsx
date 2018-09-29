@@ -13,6 +13,9 @@ color: palevioletred;
 // Create a Wrapper component as a div
 const Wrapper = styled.div`
 background: ${props => props.bgColor};
+border-radius: 8px;
+border-color: 'red';
+border: 2px;
 `;
 
 /*

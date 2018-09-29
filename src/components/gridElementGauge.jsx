@@ -5,9 +5,9 @@ import echarts from 'echarts';
 
  
 echarts.registerTheme('my_theme', {
-    backgroundColor: '#f4cccc'
+    backgroundColor: 'gray', //'#f4cccc',
+    color: 'red'
   });
-
 
 // implement it with e-charts https://ecomfe.github.io/echarts-examples/public/editor.html?c=gauge
 
@@ -32,17 +32,16 @@ export default class GridElementGauge extends GridElementSuper{
                     type: 'gauge',
                     detail: {formatter:'{value}%'},
                     data: [{value: l.subscriptionMap.get('percent'), name:  '完成率'}]
-                } // TODO: optimize, calculate the [0:100] value directly in simulation 'backend' instead
+                }
             ]
         };
     }
-
-
-
   
     static renderElement(i, l){
 
-    return <div key={i}> <ReactEcharts 
+    return <div key={i} style={{backgroundColor : 'CornflowerBlue', borderRadius : '8px'}}> 
+
+    <ReactEcharts 
     option={GridElementGauge.getOption(l)}
     notMerge={true}
     lazyUpdate={true}
@@ -51,6 +50,7 @@ export default class GridElementGauge extends GridElementSuper{
     //onChartReady={this.onChartReadyCallback}
     //onEvents={EventsDict}
     //opts={} 
-    /></div>;
+    />
+    </div>;
   }
 }
