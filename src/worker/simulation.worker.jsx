@@ -44,17 +44,20 @@ class MockPublisher {
                     newState = 1000 - offset;
                 };
 
-                channelState.set(channel_, newState);
-                // now set the series aswell - we need to check if we should push some element..
-                let series = JSON.parse(channelStateSeries.get(channel_));
+
+                // now set the series aswell - channelState aswell ass the series need to be saved to the next iteration
+                channelState.set(channel_, newState);let series = JSON.parse(channelStateSeries.get(channel_));
                 series.shift();
                 series.push(newState);
                 let seriesString = JSON.stringify(series);
                 channelStateSeries.set(channel_, seriesString);
 
+
+                //let rgbMap = JSON.stringify(integerToHeatMap(newState));
+                // `rgb(${ouput.get(rgbH)},${output.get(rgbL)},0)`
                 message={channel:`subscriberGrid/${channel_}/state`, msg:[{
                     int : newState, 
-                    rgb : integerToHeatMap(newState), 
+                    rgb :  JSON.stringify(integerToHeatMap(newState)),  //`rgb(${rgbMap['rgbH']},0,${rgbMap['rgbL']})`,
                     percent : Math.round(newState/10),
                     series : seriesString
                 }]};

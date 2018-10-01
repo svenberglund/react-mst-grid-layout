@@ -21,7 +21,7 @@ const SubscriberGrid = types.model("SubscriberGrid", {
             name: nameValue,
             subscriptionMap: {
                 int: 0, 
-                rgb:'rgb(0,255,0)', 
+                rgb:'{"rgbH": 200,"rgbL":50}', 
                 percent: 50,
                 series: '[0,0,0,0,0,0,0,0,0,0]'
             },
@@ -51,9 +51,9 @@ export const subscriberGrid = SubscriberGrid.create(
     {
         tasks: [SubscriberGridBlock.create({
             name: "The first element",
-            subscriptionMap: {int: 0, rgb:'rgb(0,255,0)', percent: 50, series: '[0,0,0,0,0,0,0,0,0,0]'},
+            subscriptionMap: {int: 0, rgb:'{"rgbH": 50,"rgbL":200}', percent: 50, series: '[0,0,0,0,0,0,0,0,0,0]'},
             color: 'red',
-            layoutMap: { i: '0', x: 0, y: 0, w: 1, h: 2 }
+            layoutMap: { i: '0', x: 0, y: 0, w: 3, h: 4 }
         })]
     }
 )

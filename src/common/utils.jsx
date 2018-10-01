@@ -17,17 +17,16 @@ export function integerToHeatMap(zeroToThousand){
     let minVal = 0;
     let maxVal = 1000;
     let midVal = 500;
-    let intR = 0;
-    let intG = null;
-    let intB = null;
+    let intH = null;
+    let intL = null;
 
     if (zeroToThousand >= midVal){
-        intB = 255;
-        intG = Math.round(255 * ((maxVal - zeroToThousand) / (maxVal - midVal)));
+        intH = 255;
+        intL = Math.round(255 * ((maxVal - zeroToThousand) / (maxVal - midVal)));
    }
    else{
-       intG = 255;
-       intB = Math.round(255 * ((zeroToThousand - minVal) / (midVal - minVal)));
+       intL = 255;
+       intH = Math.round(255 * ((zeroToThousand - minVal) / (midVal - minVal)));
    }
 
     /*
@@ -51,6 +50,11 @@ export function integerToHeatMap(zeroToThousand){
     
     */
 
-
-    return `rgb(${intR},${intG},${intB})`;
+    /* 
+    rgbL is a value that is active in low ranges ot the underlying variable.
+    rgbH is active in higher ranges. 
+    e.g. to construct a heat map from this output do something like this `rgb(${ouput.get(rgbH)},${output.get(rgbL)},0)`
+    */
+    return {'rgbL' : intL, 'rgbH' : intH};
+    //return `rgb(${intR},${intG},${intB})`;
 }

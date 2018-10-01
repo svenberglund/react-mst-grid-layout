@@ -31,8 +31,16 @@ export default class GridElementChart extends GridElementSuper{
     }
 
     static renderElement(i, l){
-
-    return <div key={i} style={{backgroundColor : l.subscriptionMap.get('rgb'), borderRadius : '8px'}}> <ReactEcharts 
+    let rgbMap = JSON.parse(l.subscriptionMap.get('rgb'));
+    
+    return <div key={i} style={{backgroundColor :`rgb(${rgbMap['rgbH']},75,${rgbMap['rgbL']})`, 
+    borderRadius : '8px',
+    borderWidth : '3px',
+    borderColor : 'LightGray',
+    borderStyle : 'solid'
+    }}> 
+    
+    <ReactEcharts 
     option={GridElementChart.getOption(l)}
     notMerge={true}
     lazyUpdate={true}

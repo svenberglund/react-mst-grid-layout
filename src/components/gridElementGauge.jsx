@@ -39,7 +39,11 @@ export default class GridElementGauge extends GridElementSuper{
   
     static renderElement(i, l){
 
-    return <div key={i} style={{backgroundColor : 'CornflowerBlue', borderRadius : '8px'}}> 
+    return <div key={i} style={{backgroundColor : 'WhiteSmoke', borderRadius : '8px',
+    borderWidth : '3px',
+    borderColor : 'LightGray',
+    borderStyle : 'solid'
+    }}> 
 
     <ReactEcharts 
     option={GridElementGauge.getOption(l)}
