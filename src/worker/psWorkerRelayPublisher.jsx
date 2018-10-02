@@ -1,4 +1,4 @@
-import simulWorker from '../worker/simulation.worker';
+import simulWorker from './simulation.worker';
 
 
 var pubsub = require('pubsub.js');

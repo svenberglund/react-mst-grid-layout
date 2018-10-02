@@ -6,7 +6,7 @@ var pubsub = require('pubsub.js');
 
 /*
 Lets a component subscribe to a channel, 
-This is the 'second step' in the message bus relaying woker messages to the MST object 
+This can be thought of as the message bus relaying (e.g. woker) messages to the MST objects governing the grid
 */
 export function subscribeToChannel(componentIndex, channelIndex){
     return pubsub.subscribe(`subscriberGrid/${channelIndex}/state`, function(data) {

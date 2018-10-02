@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
 import { observer } from "mobx-react";
-import { subscriberGrid } from "../models/subscriberGrid";
+import { subscriberGrid } from "../framework/models/subscriberGrid";
 
 
 @observer 

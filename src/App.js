@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import ConsumerComponent from './components/consumerComponent';
 import InvokerComponent from './components/invokerComponent';
-import GridLayout from './components/grid';
+import GridLayout from './framework/components/grid';
 
 class App extends Component {
   render() {

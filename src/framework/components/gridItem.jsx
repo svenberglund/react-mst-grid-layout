@@ -1,8 +1,8 @@
 
 import _ from "lodash";
-import GridElementColor from "./gridElementColor"
-import GridElementGauge from "./gridElementGauge"
-import GridElementChart from "./gridElementChart"
+import GridElementColor from "../../components/gridElementColor"
+import GridElementGauge from "../../components/gridElementGauge"
+import GridElementChart from "../../components/gridElementChart"
 
 // TODO: how do we inject the grid element classes here without this file knowing about them... 
 

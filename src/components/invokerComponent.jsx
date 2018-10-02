@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
 import { observer } from "mobx-react";
-import { subscriberGrid } from "../models/subscriberGrid";
+import { subscriberGrid } from "../framework/models/subscriberGrid";
 import { randomString, randomInt } from "../common/utils";
-import { subscribeToChannel, unSubscribe } from "../message-relay/psSubscriber";
+import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSubscriber";
 
 
 @observer class InvokerComponent extends React.Component {
