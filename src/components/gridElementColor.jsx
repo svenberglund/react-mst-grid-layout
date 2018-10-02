@@ -1,4 +1,4 @@
-import GridElementSuper from "./gridElementSuper"
+import GridElementSuper from "../framework/elements/gridElementSuper"
 import React from "react";
 import styled from 'styled-components';
 
