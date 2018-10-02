@@ -7,7 +7,7 @@ import { types } from "mobx-state-tree";
 The 'block' model, representing a single component in the grid.
 It holds the subscription info (subscriptionMap) as well as layout info (layoutMap)
 */
-export const SubscriberGridBlock = types.model("SubscriberGridBlock", {
+export const SubscriberGridItem = types.model("SubscriberGridItem", {
     
     subscriptionMap: types.map(types.union(types.string, types.number, types.integer, types.boolean)),
     name: types.string,

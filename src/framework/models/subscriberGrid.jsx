@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree";
-import { SubscriberGridBlock } from "./subscriberGridBlock";
+import { SubscriberGridItem } from "./subscriberGridItem";
 
 
 /* 
@@ -9,7 +9,7 @@ One instance of this model is normally instantiated in a view.
 */
 const SubscriberGrid = types.model("SubscriberGrid", {
     show: true,
-    tasks: types.array(SubscriberGridBlock),
+    tasks: types.array(SubscriberGridItem),
     layout: true // MST has only three types of nodes; model, array, and map
 })
 .views(self => ({
@@ -20,7 +20,7 @@ const SubscriberGrid = types.model("SubscriberGrid", {
     }
 }))
 .actions(self => {
-    function addSubscriberGridBlock(nameValue,xValue, yValue, index){
+    function addSubscriberGridItem(nameValue,xValue, yValue, index){
 
         let blockWidth = 3;
         let blockHeight = 4;
@@ -38,7 +38,7 @@ const SubscriberGrid = types.model("SubscriberGrid", {
         }
 
         // TODO: better hand the subscriptionMap as a parameter from the enclosing function..
-        let newTask = SubscriberGridBlock.create({
+        let newTask = SubscriberGridItem.create({
             name: nameValue,
             subscriptionMap: {
                 int: 0, 
@@ -50,9 +50,9 @@ const SubscriberGrid = types.model("SubscriberGrid", {
         });
         return self.tasks.push(newTask);
     }
-    function removeSubscriberGridBlock(index){
+    function removeSubscriberGridItem(index){
         return self.tasks.remove(index);
-    }function changeSubscriberGridBlock(index, color, name){
+    }function changeSubscriberGridItem(index, color, name){
         self.tasks[index].name = name;
         self.tasks[index].color = color;
     }function updatelayoutMap(gb){
@@ -62,7 +62,7 @@ const SubscriberGrid = types.model("SubscriberGrid", {
             }
         });
     }
-    return {addSubscriberGridBlock, removeSubscriberGridBlock, changeSubscriberGridBlock, updatelayoutMap}
+    return {addSubscriberGridItem, removeSubscriberGridItem, changeSubscriberGridItem, updatelayoutMap}
 });
 
 
