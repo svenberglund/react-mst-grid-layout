@@ -1,9 +1,12 @@
 import { types } from "mobx-state-tree";
 
 // https://github.com/mobxjs/mobx-state-tree
-// make the state a state tree model instead of an observable!
-// Good practice: Give it a name in the model constructor for debugging purpose
-// .views and .actions can be chained to the model
+// Good practice: We're giving it a name in the model constructor for debugging purpose
+
+/*
+The 'block' model, representing a single component in the grid.
+It holds the subscription info (subscriptionMap) as well as layout info (layoutMap)
+*/
 export const SubscriberGridBlock = types.model("SubscriberGridBlock", {
     
     subscriptionMap: types.map(types.union(types.string, types.number, types.integer, types.boolean)),
@@ -31,15 +34,10 @@ export const SubscriberGridBlock = types.model("SubscriberGridBlock", {
     }function setState(stateValue) {
         self.subscriptionMap = stateValue;
     }
-    //function setColor(colorValue) {
-    //    self.color = colorValue;
-    //}
     function start() {
        self.started = true;
        self.finished=false;
-
-       // call a method to register this listening processs at asyncsubscriber
-       // something like asyncSubscriber.register(id);
+       // TODO: could we replace the start flag with acutally starting to listen to a channel?
     }
     function finish() {
         self.finished = true;
@@ -48,10 +46,11 @@ export const SubscriberGridBlock = types.model("SubscriberGridBlock", {
         start, finish };
 });
 
-
+/*
 // instantiate a state tree
 export const subscriberGridBlock = SubscriberGridBlock.create(
     {
     name: "foobar",
     subscriptionMap: {int: 0, rgb:'rgb(0,255,0)', percent: 50, series: '[0,0,0,0,0,0,0,0,0,0]'},
 });
+*/

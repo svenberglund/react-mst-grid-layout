@@ -2,7 +2,11 @@ import { types } from "mobx-state-tree";
 import { SubscriberGridBlock } from "./subscriberGridBlock";
 
 
-
+/* 
+The MST model that keeps the state for the entire grid.
+Holds the gridBlocks in a array.
+One instance of this model is normally instantiated in a view.
+*/
 const SubscriberGrid = types.model("SubscriberGrid", {
     show: true,
     tasks: types.array(SubscriberGridBlock),
@@ -33,6 +37,7 @@ const SubscriberGrid = types.model("SubscriberGrid", {
             blockWidth = 4;
         }
 
+        // TODO: better hand the subscriptionMap as a parameter from the enclosing function..
         let newTask = SubscriberGridBlock.create({
             name: nameValue,
             subscriptionMap: {
@@ -61,7 +66,10 @@ const SubscriberGrid = types.model("SubscriberGrid", {
 });
 
 
-/* Instantiate a state tree, somethin to start with */
+/* 
+Instantiate a state tree.
+TODO: Should we do this somewhere else in the application?  
+*/
 export const subscriberGrid = SubscriberGrid.create(
     {
         tasks: []

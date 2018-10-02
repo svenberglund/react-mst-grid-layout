@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
 import { observer } from "mobx-react";
-import { subscriberGridBlock } from "../models/subscriberGridBlock";
 import { subscriberGrid } from "../models/subscriberGrid";
 
 
@@ -17,8 +16,7 @@ class ConsumerComponent extends React.Component {
         return (
             <React.Fragment>
                 <div>This is the ConsumerComponent</div>
-                <div>We display some props from the state tree SubscriberGridBlock: {subscriberGridBlock.description} </div>
-
+                
                 <Button
                     icon
                     compact
