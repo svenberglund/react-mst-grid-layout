@@ -15,7 +15,7 @@ static  generateDOM(elements) {
       //  TODO: These values of elmClass should some how be injected or configured, not hard coded in this file
       var elmClass = GridElementColor;
       // Simple test to see if dynamic class seletion works here:
-      if (i%3===2) elmClass = GridElementGauge;
+      if (i%3===0) elmClass = GridElementGauge;
       else if (i%3===1) elmClass = GridElementChart;
 
       // console.log(l.subscriptionMap.get('series'));

@@ -17,6 +17,22 @@ const SubscriberGrid = types.model("SubscriberGrid", {
 }))
 .actions(self => {
     function addSubscriberGridBlock(nameValue,xValue, yValue, index){
+
+        let blockWidth = 3;
+        let blockHeight = 4;
+
+        console.log(`Numerical index: ${index}`);
+        if  (index%3===0){ 
+            // we are dealing with a gauge ...
+            console.log("gauge!");    
+            blockHeight = 7;
+        }
+        if  (index%3===1){
+            console.log("graph!!");   
+            blockHeight = 8;
+            blockWidth = 4;
+        }
+
         let newTask = SubscriberGridBlock.create({
             name: nameValue,
             subscriptionMap: {
@@ -25,7 +41,7 @@ const SubscriberGrid = types.model("SubscriberGrid", {
                 percent: 50,
                 series: '[0,0,0,0,0,0,0,0,0,0]'
             },
-            layoutMap: { i: index, x: xValue, y: yValue, w: 3, h: 8 }
+            layoutMap: { i: index, x: xValue, y: yValue, w: blockWidth, h: blockHeight }   // adapt witht and height!
         });
         return self.tasks.push(newTask);
     }
@@ -34,7 +50,6 @@ const SubscriberGrid = types.model("SubscriberGrid", {
     }function changeSubscriberGridBlock(index, color, name){
         self.tasks[index].name = name;
         self.tasks[index].color = color;
-    
     }function updatelayoutMap(gb){
         self.tasks.forEach(function (task_){        
             if (task_.layoutMap.get('i') === gb['i']) {
@@ -49,11 +64,6 @@ const SubscriberGrid = types.model("SubscriberGrid", {
 /* Instantiate a state tree, somethin to start with */
 export const subscriberGrid = SubscriberGrid.create(
     {
-        tasks: [SubscriberGridBlock.create({
-            name: "The first element",
-            subscriptionMap: {int: 0, rgb:'{"rgbH": 50,"rgbL":200}', percent: 50, series: '[0,0,0,0,0,0,0,0,0,0]'},
-            color: 'red',
-            layoutMap: { i: '0', x: 0, y: 0, w: 3, h: 4 }
-        })]
+        tasks: []
     }
 )

@@ -8,13 +8,13 @@ import { subscribeToChannel, unSubscribe } from "../models/psSubscriber";
 
 @observer class InvokerComponent extends React.Component {
 
+
     constructor(props) {
         super(props);
         this.state = {
           subscriptions: new Map(),
         }
       }
-
     
     addSubscription(index){
         // we only publish on 4 channels thus we reduce the component index mod 4 to get channel index
@@ -55,7 +55,7 @@ import { subscribeToChannel, unSubscribe } from "../models/psSubscriber";
                     compact
                     size="tiny"
                     onClick={this.onStartClick}>
-                    {subscriberGrid.tasks[0].running ? "Stop" : "Start" } 
+                    Start / Stop 
                 </Button>
                 <Button
                     icon
@@ -74,8 +74,6 @@ import { subscribeToChannel, unSubscribe } from "../models/psSubscriber";
             </React.Fragment>
         )
     }
-
-
 }
 
 export default InvokerComponent;
