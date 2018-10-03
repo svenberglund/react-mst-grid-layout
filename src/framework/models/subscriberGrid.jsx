@@ -2,6 +2,7 @@ import { types } from "mobx-state-tree";
 import { SubscriberGridItem } from "./subscriberGridItem";
 
 
+
 /* 
 The MST model that keeps the state for the entire grid.
 Holds the gridBlocks in a array.
@@ -20,26 +21,17 @@ const SubscriberGrid = types.model("SubscriberGrid", {
     }
 }))
 .actions(self => {
-    function addSubscriberGridItem(nameValue,xValue, yValue, index){
+    function addSubscriberGridItem(nameValue,xValue, yValue, index, elmRenderClass, width, height){
 
-        let blockWidth = 3;
-        let blockHeight = 4;
+        let blockWidth = width;
+        let blockHeight = height;
 
-        console.log(`Numerical index: ${index}`);
-        if  (index%3===0){ 
-            // we are dealing with a gauge ...
-            console.log("gauge!");    
-            blockHeight = 7;
-        }
-        if  (index%3===1){
-            console.log("graph!!");   
-            blockHeight = 8;
-            blockWidth = 4;
-        }
-
-        // TODO: better hand the subscriptionMap as a parameter from the enclosing function..
+        // TODO: better hand the iniital value of subscriptionMap as a parameter from the enclosing function..
+        // Some how we need to be able to attach a elementClass when we do this...
+        // Start by tryin to inject a renderElement function here...
         let newTask = SubscriberGridItem.create({
             name: nameValue,
+            elementRenderClass: elmRenderClass,
             subscriptionMap: {
                 int: 0, 
                 rgb:'{"rgbH": 200,"rgbL":50}', 

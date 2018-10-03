@@ -11,6 +11,7 @@ export const SubscriberGridItem = types.model("SubscriberGridItem", {
     
     subscriptionMap: types.map(types.union(types.string, types.number, types.integer, types.boolean)),
     name: types.string,
+    elementRenderClass: types.string, // a class that is registered for rendering element
     show: true,
     started: false,
     finished: false,

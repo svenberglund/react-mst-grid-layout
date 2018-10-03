@@ -38,7 +38,7 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
     onAddClick = (event) => {
         /* Adding a randomply named task */
         let index = (subscriberGrid.count).toString();
-        subscriberGrid.addSubscriberGridItem( `${index} - ${randomString(5)}`,randomInt(0,6),randomInt(0,6), index );
+        subscriberGrid.addSubscriberGridItem( `${index} - ${randomString(5)}`,randomInt(0,6),randomInt(0,6), index, "colorRender", 3,4 );
     };
 
     onChangeClick = (event) => {
