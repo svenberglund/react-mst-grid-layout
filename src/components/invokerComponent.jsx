@@ -49,7 +49,6 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
 
         return (
             <React.Fragment>
-                <div>This is the invokerComponent!</div>
                 <Button
                     icon
                     compact

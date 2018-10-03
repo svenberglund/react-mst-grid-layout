@@ -1,28 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ConsumerComponent from './components/consumerComponent';
 import InvokerComponent from './components/invokerComponent';
-import GridLayout from './framework/components/grid';
+import SubscriberGridLayout from './framework/components/grid';
+import './worker/psWorkerRelayPublisher';
+import './framework/message-relay/psSubscriber';
+import GridElementColor from './components/gridElementColor';
+import GridElementGauge from './components/gridElementGauge';
+import GridElementChart from './components/gridElementChart';
+import echarts from 'echarts';
+
+
+GridElementColor.register("colorRender", GridElementColor);
+GridElementGauge.register("gaugeRender", GridElementGauge);
+GridElementChart.register("chartRender", GridElementChart);
+
+// TODO: migrate echart styling to here (for gauge and chart), perhaps move to App.js
+echarts.registerTheme('gauge_theme', {
+    //backgroundColor: 'gray', //'#f4cccc',
+    //color: 'red'
+});
+
+
+
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+        <p>
+         This is a <code>SubscriberGrid.js</code> demo!
         </p>
-        <SomeComponent string='something else'/>
+        <InvokerComponent/>
+        </header>
+        <MainComponent string='something else'/>
       </div>
     );
   }
 }
 
-class SomeComponent extends Component{
+class MainComponent extends Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -36,9 +54,9 @@ class SomeComponent extends Component{
         This is just the output of some random component writing {this.state.value} from the state <br/>
         and {this.props.string} from the props!
 
-        <InvokerComponent/>
+
         <ConsumerComponent/>
-        <GridLayout/>
+        <SubscriberGridLayout/>
       </div>
     );
     }

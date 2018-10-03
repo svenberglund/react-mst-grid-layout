@@ -20,7 +20,7 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 //var layouts = { lg: layout };
 
 @observer
-class GridLayout extends React.Component {
+class SubscriberGridLayout extends React.Component {
   static defaultProps = {
     className: "layout",
     rowHeight: 30,
@@ -116,10 +116,10 @@ class GridLayout extends React.Component {
         >
           {GridItem.generateDOM(subscriberGrid.tasks)}
         </ResponsiveReactGridLayout>
-        
+
       </div>
     );
   }
 }
 
-export default GridLayout;
+export default SubscriberGridLayout;
