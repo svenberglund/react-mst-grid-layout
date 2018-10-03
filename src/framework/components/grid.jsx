@@ -41,7 +41,7 @@ class SubscriberGridLayout extends React.Component {
       mounted: true
     });
 
-    // defaulting some values
+    // defaulting some values. TODO: look into using defaultProps instead!
     if (!["vertical", "horizontal", null].includes(this.state.compactType)) {
       this.setState({
         compactType: null

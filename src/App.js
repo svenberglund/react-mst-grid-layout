@@ -15,7 +15,7 @@ GridElementColor.register("colorRender", GridElementColor);
 GridElementGauge.register("gaugeRender", GridElementGauge);
 GridElementChart.register("chartRender", GridElementChart);
 
-// TODO: migrate echart styling to here (for gauge and chart), perhaps move to App.js
+// TODO: migrate echart styling to here (for gauge and chart)...
 echarts.registerTheme('gauge_theme', {
     //backgroundColor: 'gray', //'#f4cccc',
     //color: 'red'
@@ -34,20 +34,13 @@ class App extends Component {
         </p>
         <InvokerComponent/>
         </header>
-        <MainComponent string='something else'/>
+        <MainComponent/>
       </div>
     );
   }
 }
 
 class MainComponent extends Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 'something',
-    }
-  }
-
   render() {
     return (
       <div>
