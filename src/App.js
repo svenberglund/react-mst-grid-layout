@@ -51,12 +51,13 @@ class MainComponent extends Component{
   render() {
     return (
       <div>
-        This is just the output of some random component writing {this.state.value} from the state <br/>
-        and {this.props.string} from the props!
-
-
         <ConsumerComponent/>
-        <SubscriberGridLayout/>
+        <SubscriberGridLayout 
+          compactType="vertical" // default : none
+          breakpoint="lg" // default : 'lg' = 12 columns
+          rowHeight = {30} // default : 30
+          gridStyle={{backgroundColor : 'LightSteelBlue'}}
+          />
       </div>
     );
     }
