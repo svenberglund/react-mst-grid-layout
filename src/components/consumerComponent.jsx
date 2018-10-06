@@ -28,7 +28,7 @@ class ConsumerComponent extends React.Component {
                 <div>                
                     <ul>
                         {subscriberGrid.tasks.map(function (task, index) {
-                            return <li key={index}>{task.name}</li>;
+                            return <li key={index}>{task.name} : {JSON.stringify(task.layoutMap)}</li>;
                         })
                         }
                     </ul>

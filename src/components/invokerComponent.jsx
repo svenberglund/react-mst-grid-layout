@@ -15,7 +15,9 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
           subscriptions: new Map(),
         }
       }
-    
+
+
+
     addSubscription(index){
         // we only publish on 4 channels thus we reduce the component index mod 4 to get channel index
         this.state.subscriptions.set(index, subscribeToChannel(index, (index % 4)));
@@ -36,9 +38,26 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
     };
 
     onAddClick = (event) => {
-        /* Adding a randomply named task */
+        /* Adding a randomply styled task */
+
         let index = (subscriberGrid.count).toString();
-        subscriberGrid.addSubscriberGridItem( `${index} - ${randomString(5)}`,randomInt(0,6),randomInt(0,6), index, "colorRender", 3,4 );
+
+        let renderClass = "colorRender";
+        let renderWidth = 4; 
+        let renderHeight = 3; 
+        switch (randomInt(0,2)){
+            case 1: 
+            renderClass = "gaugeRender";
+            renderWidth = 3;
+            renderHeight = 7;
+            break;
+            case 2:
+            renderClass = "chartRender";
+            renderWidth = 4;
+            renderHeight = 8;
+        }
+
+        subscriberGrid.addSubscriberGridItem( `${index} - ${randomString(6)}`,randomInt(5,15),randomInt(5,10), index, renderClass, renderWidth, renderHeight );
     };
 
     onChangeClick = (event) => {

@@ -9,7 +9,7 @@ import GridElementColor from './components/gridElementColor';
 import GridElementGauge from './components/gridElementGauge';
 import GridElementChart from './components/gridElementChart';
 import echarts from 'echarts';
-
+import {subscriberGrid} from './framework/models/subscriberGrid';
 
 GridElementColor.register("colorRender", GridElementColor);
 GridElementGauge.register("gaugeRender", GridElementGauge);
@@ -41,6 +41,17 @@ class App extends Component {
 }
 
 class MainComponent extends Component{
+
+
+  componentWillMount(){
+  
+    subscriberGrid.addSubscriberGridItem( `first`,0,0, '0', "colorRender", 4,3 );
+    subscriberGrid.addSubscriberGridItem( `second`,4,0, '1', "chartRender", 3,9 );
+    subscriberGrid.addSubscriberGridItem( `third`,0,3, '2', "gaugeRender", 2,6 );
+    subscriberGrid.addSubscriberGridItem( `fourth`,2,3, '3', "gaugeRender", 2,6 );
+  }
+
+
   render() {
     return (
       <div>
