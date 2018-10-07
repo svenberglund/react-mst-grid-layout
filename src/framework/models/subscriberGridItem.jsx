@@ -25,7 +25,7 @@ export const SubscriberGridItem = types.model("SubscriberGridItem", {
     get running(){
         return self.started && !self.finished;
     },
-    get id(){
+    get layoutIndex(){
         return self.layoutMap.get('i');
     }
 }))

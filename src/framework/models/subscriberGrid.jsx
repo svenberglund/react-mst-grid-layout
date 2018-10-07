@@ -26,7 +26,7 @@ const SubscriberGrid = types.model("SubscriberGrid", {
         // TODO: 
 
         //  (1) We need to hand value of subscriptionMap as a parameter from the enclosing function..  -done
-        //  (2) Check how the subscriptions are added - are we content with this solution?
+        //  (2) Check how the subscriptions are added - are we content with this solution? - done
         //  (3) Improve how the servce is started and stopped
         //  (4) Write some test and clean up all code
         //  (5) Improve invoker gui and enclosing app gui (dont forget app name and stuff)

@@ -1,7 +1,5 @@
 import simulWorker from './simulation.worker';
-
-
-var pubsub = require('pubsub.js');
+import {publish} from '../framework/message-relay/publish'
 
 /* 
 The publisher is a onmessage action on a web worker, 
@@ -10,13 +8,10 @@ This is the first step in the 'message bus' towards the MST objects.
 The second step is the subscriptions initiated by the psSubscriber methods.
 */
 if (typeof(w) === "undefined") {
-   console.log("Instantiating the worker...");
+    console.log("Instantiating the worker...");
     let  w = new simulWorker(); //  new Worker("../worker/simulation.worker.jsx"); 
     
     w.onmessage = function(event){ 
-        
-        // TODO 1: Ecapsulate the use of pubsub in framework 
-        // TODO 2: look into if we could relay the messages directly to the MST instead of using the pubsub framework
-        pubsub.publish(`subscriberGrid/${event.data['channel']}/state`, [event.data['msg']]);
+        publish(event.data['channel'], event.data['msg']);
     };
 }

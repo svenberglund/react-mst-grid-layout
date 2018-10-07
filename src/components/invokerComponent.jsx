@@ -11,8 +11,8 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
 
     /*
     To handle subscriptions: 
-    subscribeToChannel() is part of the framework just like unsubscribe()
-    What is needed here on the implementing side is the map to keep track of the subscriptions (if we wan to be able to unsubscribe).
+    subscribeToChannel() is part of the framework just like unsubscribe(), these are the only methods needed.
+    What has to be implemented here on the implementing side is the map to keep track of the subscriptions (if we wan to be able to unsubscribe).
     */
     constructor(props) {
         super(props);
@@ -34,7 +34,7 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
 
     onStartClick = (event) => {
         subscriberGrid.tasks.forEach(element => {
-            this.state.running ? this.removeSubscription(element.id) : this.addSubscription(element.id);
+            this.state.running ? this.removeSubscription(element.layoutIndex) : this.addSubscription(element.layoutIndex);
         });
         this.setState(
             {running : !this.state.running}
@@ -72,6 +72,9 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
         let layoutMap = { i: index, x: randomInt(5,15), y: randomInt(5,10), w: renderWidth, h: renderHeight};
 
         subscriberGrid.addSubscriberGridItem( `${index} - ${randomString(6)}`, renderClass, layoutMap, subscriptionMap);
+        // check if subscription shall be added
+        if (this.state.running) this.addSubscription(index);
+
     };
 
     onChangeClick = (event) => {
