@@ -52,15 +52,14 @@ class MockPublisher {
                 let seriesString = JSON.stringify(series);
                 channelStateSeries.set(channel_, seriesString);
 
-
-                //let rgbMap = JSON.stringify(integerToHeatMap(newState));
-                // `rgb(${ouput.get(rgbH)},${output.get(rgbL)},0)`
-                message={channel:`subscriberGrid/${channel_}/state`, msg:[{
+                // preparing the message mapped to channel index to send to 'frontend' (UI thread)
+                message={channel: channel_ , msg:{
                     int : newState, 
-                    rgb :  JSON.stringify(integerToHeatMap(newState)),  //`rgb(${rgbMap['rgbH']},0,${rgbMap['rgbL']})`,
+                    rgb :  JSON.stringify(integerToHeatMap(newState)), 
                     percent : Math.round(newState/10),
                     series : seriesString
-                }]};
+                }};
+            
                 postMessage(message); // posting message from worker to frontend
 
                 // change direction?

@@ -14,7 +14,9 @@ if (typeof(w) === "undefined") {
     let  w = new simulWorker(); //  new Worker("../worker/simulation.worker.jsx"); 
     
     w.onmessage = function(event){ 
-        // TODO: look into if we could relay the messages directly to the MST instead of using the pubsub framework
-        pubsub.publish(event.data['channel'], event.data['msg']);
+        
+        // TODO 1: Ecapsulate the use of pubsub in framework 
+        // TODO 2: look into if we could relay the messages directly to the MST instead of using the pubsub framework
+        pubsub.publish(`subscriberGrid/${event.data['channel']}/state`, [event.data['msg']]);
     };
 }

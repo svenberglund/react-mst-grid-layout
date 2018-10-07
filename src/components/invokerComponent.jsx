@@ -9,14 +9,18 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
 @observer class InvokerComponent extends React.Component {
 
 
+    /*
+    To handle subscriptions: 
+    subscribeToChannel() is part of the framework just like unsubscribe()
+    What is needed here on the implementing side is the map to keep track of the subscriptions (if we wan to be able to unsubscribe).
+    */
     constructor(props) {
         super(props);
         this.state = {
           subscriptions: new Map(),
+          running : false,
         }
-      }
-
-
+    }
 
     addSubscription(index){
         // we only publish on 4 channels thus we reduce the component index mod 4 to get channel index
@@ -30,11 +34,11 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
 
     onStartClick = (event) => {
         subscriberGrid.tasks.forEach(element => {
-            //  changing the state - its not really necessary to keep the 'running' prop in the state, only for ui, 
-            element.running ? element.finish() : element.start();
-            // invoking the subscriber..
-            element.running ? this.addSubscription(element.layoutMap.get('i')) : this.removeSubscription(element.layoutMap.get('i'));
+            this.state.running ? this.removeSubscription(element.id) : this.addSubscription(element.id);
         });
+        this.setState(
+            {running : !this.state.running}
+        )
     };
 
     onAddClick = (event) => {

@@ -47,7 +47,7 @@ class SubscriberGridLayout extends React.Component {
         compactType: null
       });
     }
-    console.log(JSON.stringify(Object.keys(this.props.cols)));
+
     if (!Object.keys(this.props.cols).includes(this.state.currentBreakpoint)) {
       this.setState({
         currentBreakpoint: "lg"
@@ -78,7 +78,6 @@ class SubscriberGridLayout extends React.Component {
     // TODO: this can be optimized, we should not need to loop through all items
     // Why cant we use the 'changed' property, it seems to never be true...?
     for (var i = 0; i < layout.length; i++) {
-      //console.log(`parameter: ${JSON.stringify(layout[i])}`);
       subscriberGrid.updatelayoutMap(layout[i]);
     }
     this.props.onLayoutChange(layout, layouts);
