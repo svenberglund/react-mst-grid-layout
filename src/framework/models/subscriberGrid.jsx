@@ -21,24 +21,23 @@ const SubscriberGrid = types.model("SubscriberGrid", {
     }
 }))
 .actions(self => {
-    function addSubscriberGridItem(nameValue,xValue, yValue, index, elmRenderClass, width, height){
+    function addSubscriberGridItem(nameValue, elmRenderClass, layoutMap, subscriptionMap){
 
-        let blockWidth = width;
-        let blockHeight = height;
+        // TODO: 
 
-        // TODO: better hand the iniital value of subscriptionMap as a parameter from the enclosing function..
-        // Some how we need to be able to attach a elementClass when we do this...
-        // Start by tryin to inject a renderElement function here...
+        //  (1) We need to hand value of subscriptionMap as a parameter from the enclosing function..  -done
+        //  (2) Check how the subscriptions are added - are we content with this solution?
+        //  (3) Improve how the servce is started and stopped
+        //  (4) Write some test and clean up all code
+        //  (5) Improve invoker gui and enclosing app gui (dont forget app name and stuff)
+        //  (6) Migrate to github and publish demo..
+        //  (7) write backlog: stuff like 'support several grids', 'get rid of flicker at startup', 'enable to set elements static'.... package into a module
+
         let newTask = SubscriberGridItem.create({
             name: nameValue,
             elementRenderClass: elmRenderClass,
-            subscriptionMap: {
-                int: 0, 
-                rgb:'{"rgbH": 200,"rgbL":50}', 
-                percent: 50,
-                series: '[0,0,0,0,0,0,0,0,0,0]'
-            },
-            layoutMap: { i: index, x: xValue, y: yValue, w: blockWidth, h: blockHeight }   // adapt witht and height!
+            subscriptionMap: subscriptionMap,
+            layoutMap: layoutMap 
         });
         return self.tasks.push(newTask);
     }

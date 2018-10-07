@@ -42,13 +42,22 @@ class App extends Component {
 
 class MainComponent extends Component{
 
-
   componentWillMount(){
   
-    subscriberGrid.addSubscriberGridItem( `first`,0,0, '0', "colorRender", 4,3 );
-    subscriberGrid.addSubscriberGridItem( `second`,4,0, '1', "chartRender", 3,9 );
-    subscriberGrid.addSubscriberGridItem( `third`,0,3, '2', "gaugeRender", 2,6 );
-    subscriberGrid.addSubscriberGridItem( `fourth`,2,3, '3', "gaugeRender", 2,6 );
+    let subscriptionMap = { // Initial values of the subscription map. All renderClasses uses the same format. 
+      int: 0, 
+      rgb:'{"rgbH": 20,"rgbL":200}', 
+      percent: 50,
+      series: '[0,0,0,0,0,0,0,0,0,0]'
+    };
+    let layoutMap = { i: '0', x: 0, y: 0, w: 4, h: 3};
+    subscriberGrid.addSubscriberGridItem( `first`, "colorRender", layoutMap, subscriptionMap);
+    layoutMap = { i: '1', x: 4, y: 0, w: 3, h: 9};
+    subscriberGrid.addSubscriberGridItem( `second`, "chartRender", layoutMap, subscriptionMap );
+    layoutMap = { i: '2', x: 0, y: 3, w: 2, h: 6};
+    subscriberGrid.addSubscriberGridItem( `third`, "gaugeRender", layoutMap, subscriptionMap );
+    layoutMap = { i: '3', x: 7, y: 0, w: 3, h: 7};
+    subscriberGrid.addSubscriberGridItem( `fourth`, "gaugeRender", layoutMap, subscriptionMap );
   }
 
 

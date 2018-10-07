@@ -55,9 +55,19 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
             renderClass = "chartRender";
             renderWidth = 4;
             renderHeight = 8;
+            break;
+            default:
         }
 
-        subscriberGrid.addSubscriberGridItem( `${index} - ${randomString(6)}`,randomInt(5,15),randomInt(5,10), index, renderClass, renderWidth, renderHeight );
+        let subscriptionMap = {
+            int: 0, 
+            rgb:'{"rgbH": 20,"rgbL":120}', 
+            percent: 50,
+            series: '[0,0,0,0,0,0,0,0,0,0]'
+        };
+        let layoutMap = { i: index, x: randomInt(5,15), y: randomInt(5,10), w: renderWidth, h: renderHeight};
+
+        subscriberGrid.addSubscriberGridItem( `${index} - ${randomString(6)}`, renderClass, layoutMap, subscriptionMap);
     };
 
     onChangeClick = (event) => {
