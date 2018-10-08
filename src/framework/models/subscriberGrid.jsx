@@ -1,6 +1,6 @@
 import { types } from "mobx-state-tree";
 import { SubscriberGridItem } from "./subscriberGridItem";
-
+import _ from "lodash";
 
 
 /* 
@@ -25,13 +25,13 @@ const SubscriberGrid = types.model("SubscriberGrid", {
 
         // TODO: 
 
-        //  (1) We need to hand value of subscriptionMap as a parameter from the enclosing function..  -done
-        //  (2) Check how the subscriptions are added - are we content with this solution? - done
-        //  (3) Improve how the servce is started and stopped
+        //  (1) We need to hand value of subscriptionMap as a parameter from the enclosing function..  -done!
+        //  (2) Check how the subscriptions are added - are we content with this solution? - done!
+        //  (3) Improve how the servce is started and stopped (or at least change speed)
         //  (4) Write some test and clean up all code
         //  (5) Improve invoker gui and enclosing app gui (dont forget app name and stuff)
         //  (6) Migrate to github and publish demo..
-        //  (7) write backlog: stuff like 'support several grids', 'get rid of flicker at startup', 'enable to set elements static'.... package into a module
+        //  (7) write backlog: stuff like 'support several grids', 'encapsulate mobx syntax in framework (see @observer in invoker)', 'get rid of flicker at startup', 'get rid of pubsub framework?','enable to set elements static', 'restrict MST scope (context)'.... 'package into a module'
 
         let newTask = SubscriberGridItem.create({
             name: nameValue,
@@ -46,14 +46,21 @@ const SubscriberGrid = types.model("SubscriberGrid", {
     }function changeSubscriberGridItem(index, color, name){
         self.tasks[index].name = name;
         self.tasks[index].color = color;
-    }function updatelayoutMap(gb){
+    }function getGridItemLayout(itemIndex){
+        return _.cloneDeep(self.tasks[itemIndex].layout); // returns a deep copy that can be modified
+    }function setGridItemLayout(itemIndex, layoutMap){
+        [...layoutMap.keys()].forEach(key => {
+            self.tasks[itemIndex].setLayoutProp(key, layoutMap.get(key));    
+        });   
+    }
+    function updatelayoutMap(gb){
         self.tasks.forEach(function (task_){        
             if (task_.layoutMap.get('i') === gb['i']) {
                 task_.layoutMap = gb; 
             }
         });
     }
-    return {addSubscriberGridItem, removeSubscriberGridItem, changeSubscriberGridItem, updatelayoutMap}
+    return {getGridItemLayout, setGridItemLayout, addSubscriberGridItem, removeSubscriberGridItem, changeSubscriberGridItem, updatelayoutMap}
 });
 
 

@@ -27,6 +27,9 @@ export const SubscriberGridItem = types.model("SubscriberGridItem", {
     },
     get layoutIndex(){
         return self.layoutMap.get('i');
+    },
+    get layout(){
+        return self.layoutMap;
     }
 }))
 .actions(self => {
@@ -34,6 +37,8 @@ export const SubscriberGridItem = types.model("SubscriberGridItem", {
         self.name = nameValue;
     }function setState(stateValue) {
         self.subscriptionMap = stateValue;
+    }function setLayoutProp(propName,propValue){
+        self.layoutMap.set(propName, propValue);
     }
     function start() {
        self.started = true;
@@ -43,7 +48,7 @@ export const SubscriberGridItem = types.model("SubscriberGridItem", {
     function finish() {
         self.finished = true;
     }
-    return { setName, setState, //setColor, 
+    return { setName, setState, setLayoutProp, //setColor, 
         start, finish };
 });
 

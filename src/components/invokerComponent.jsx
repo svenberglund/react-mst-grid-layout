@@ -19,6 +19,7 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
         this.state = {
           subscriptions: new Map(),
           running : false,
+          locked : false,
         }
     }
 
@@ -77,8 +78,37 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
 
     };
 
+    onLockAllClick = (event) => {
+       
+        for (var i = 0; i< subscriberGrid.count ; i++){
+            let layoutMap = subscriberGrid.getGridItemLayout(i);
+            this.state.locked ? layoutMap.set('static', false) : layoutMap.set('static', true);
+            subscriberGrid.setGridItemLayout(i,layoutMap); 
+        }
+        this.setState({
+            locked: !this.state.locked
+        })
+    }
+
     onChangeClick = (event) => {
-        subscriberGrid.changeSubscriberGridItem(randomInt(0,subscriberGrid.count-1), 'rgb(1, 140, 89)', randomString(8));
+           
+        let componentIndex = randomInt(0,subscriberGrid.count-1);
+        let layoutMap = subscriberGrid.getGridItemLayout(componentIndex);
+        let propToChange = "x";
+        switch(randomInt(1,3)){
+            case 1: 
+            propToChange = "h"
+            break;
+            case 2:
+            propToChange = "w"
+            break;
+            default: // do nothing
+        }
+        let coord = layoutMap.get(propToChange); 
+        let change = randomInt(1,3);
+        coord > 7 ? coord -= change  : coord += change;
+        layoutMap.set(propToChange, coord);  // a random change to a random coordinate
+        subscriberGrid.setGridItemLayout(componentIndex,layoutMap);
     }
 
     render() {
@@ -90,21 +120,29 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
                     compact
                     size="tiny"
                     onClick={this.onStartClick}>
-                    Start / Stop 
+                    { this.state.running ? 'Stop' : 'Start' } 
                 </Button>
                 <Button
                     icon
                     compact
                     size="tiny"
+                    disabled = {subscriberGrid.count > 7}
                     onClick={this.onAddClick}>
-                    Add task!
+                    Add element!
                 </Button>
                 <Button
                     icon
                     compact
                     size="tiny"
                     onClick={this.onChangeClick}>
-                    Change task!
+                    Change element!
+                </Button>
+                <Button
+                    icon
+                    compact
+                    size="tiny"
+                    onClick={this.onLockAllClick}>
+                    { this.state.locked ? 'Unlock all!' : 'Lock all!' } 
                 </Button>
             </React.Fragment>
         )
