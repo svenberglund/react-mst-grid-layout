@@ -27,10 +27,10 @@ const SubscriberGrid = types.model("SubscriberGrid", {
 
         //  (1) We need to hand value of subscriptionMap as a parameter from the enclosing function..  -done!
         //  (2) Check how the subscriptions are added - are we content with this solution? - done!
-        //  (3) Improve how the servce is started and stopped (or at least change speed)
+        //  (3) Improve how the servce is started and stopped (or at least change speed) - ok for now, no prio to this
         //  (4) Write some test and clean up all code
         //  (5) Improve invoker gui and enclosing app gui (dont forget app name and stuff)
-        //  (6) Migrate to github and publish demo..
+        //  (6) Migrate to github and publish demo.. - done!
         //  (7) write backlog: stuff like 'support several grids', 'encapsulate mobx syntax in framework (see @observer in invoker)', 'get rid of flicker at startup', 'get rid of pubsub framework?','enable to set elements static', 'restrict MST scope (context)'.... 'package into a module'
 
         let newTask = SubscriberGridItem.create({

@@ -27,7 +27,7 @@ border-style: solid;
 
 
 /*
-Look into this:
+TODO: Look into this warning:
 
 Over 200 classes were generated for component gridElementColor__Wrapper. 
 Consider using the attrs method, together with a style object for frequently changed styles.
@@ -37,8 +37,6 @@ Example:
       background,
     }),
   })`width: 100%;`
-
-  <Component />
 */
 
 
@@ -56,10 +54,7 @@ export default class GridElementColor extends GridElementSuper{
 
     <div>
     <span className="text"> 
-    {/*{l.name} <br /> */} 
     Data: {l.subscriptionMap.get('series')}</span>
-    <br />
-    {l.running ? (<span className="text"> Running  </span>) : (<span className="text"> Idle </span>)} <br />
     </div>
     
   </Wrapper>;

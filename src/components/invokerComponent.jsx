@@ -106,8 +106,12 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
         }
         let coord = layoutMap.get(propToChange); 
         let change = randomInt(1,3);
-        coord > 7 ? coord -= change  : coord += change;
-        layoutMap.set(propToChange, coord);  // a random change to a random coordinate
+        if(propToChange === "h") // we never set height less than 8
+            coord > 10 ? coord -= change  : coord += change;
+        else
+            coord > 7 ? coord -= change  : coord += change;
+        
+        layoutMap.set(propToChange, coord);  // impose a random change to a random coordinate
         subscriberGrid.setGridItemLayout(componentIndex,layoutMap);
     }
 

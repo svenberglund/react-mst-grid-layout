@@ -10,11 +10,11 @@ class ConsumerComponent extends React.Component {
 
         return (
             <React.Fragment>
-                <div>Elements:</div>
+                <div>Element layouts:</div>
                 <div>                
                     <ul>
                         {subscriberGrid.tasks.map(function (task, index) {
-                            return <li key={index}>{task.name} : {JSON.stringify(task.layoutMap)}</li>;
+                            return <li key={index}>{task.layoutIndex} : {JSON.stringify(task.layoutMap)}</li>;
                         })
                         }
                     </ul>
