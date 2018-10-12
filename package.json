@@ -10,6 +10,8 @@
     "mobx": "^4.3.1",
     "mobx-react": "^5.2.5",
     "mobx-state-tree": "^3.1.1",
+    "primeicons": "^1.0.0-beta.10",
+    "primereact": "^2.0.0-beta.9",
     "pubsub.js": "^1.5.2",
     "react": "^16.4.2",
     "react-app-rewire-mobx": "^1.0.8",

@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { subscriberGrid } from "../framework/models/subscriberGrid";
-
+import {Accordion,AccordionTab} from 'primereact/accordion';
 
 @observer 
 class ConsumerComponent extends React.Component {
@@ -10,7 +10,10 @@ class ConsumerComponent extends React.Component {
 
         return (
             <React.Fragment>
-                <div>Element layouts:</div>
+
+            <Accordion>
+            <AccordionTab header="Show element layouts">
+
                 <div>                
                     <ul>
                         {subscriberGrid.tasks.map(function (task, index) {
@@ -19,7 +22,11 @@ class ConsumerComponent extends React.Component {
                         }
                     </ul>
                 </div>
+
+                </AccordionTab>
+                </Accordion>
             </React.Fragment>
+
         );
     }
 }

@@ -11,6 +11,11 @@ import GridElementChart from './components/gridElementChart';
 import echarts from 'echarts';
 import {subscriberGrid} from './framework/models/subscriberGrid';
 
+// prime react css
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
 GridElementColor.register("colorRender", GridElementColor);
 GridElementGauge.register("gaugeRender", GridElementGauge);
 GridElementChart.register("chartRender", GridElementChart);
