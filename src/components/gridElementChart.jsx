@@ -5,11 +5,9 @@ import ReactEcharts from 'echarts-for-react';
 
 export default class GridElementChart extends GridElementSuper {
 
-
     static renderElement(i, l) {
 
         function getOption(l) {
-
             return {
     
                 xAxis: {

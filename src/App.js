@@ -35,7 +35,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
         <p>
-         This is a <code>SubscriberGrid.js</code> demo!
+         This is a <a href="https://github.com/svenberglund/SubscriberGrid"><code>SubscriberGrid.js</code></a> demo!
         </p>
         <InvokerComponent/>
         </header>

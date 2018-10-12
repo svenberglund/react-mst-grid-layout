@@ -6,6 +6,7 @@ import { subscriberGrid } from "../framework/models/subscriberGrid";
 import { randomString, randomInt } from "../common/utils";
 import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSubscriber";
 import { Sidebar } from 'primereact/sidebar';
+import { InfoComponent } from './infoComponent';
 
 @observer class InvokerComponent extends React.Component {
 
@@ -46,7 +47,7 @@ import { Sidebar } from 'primereact/sidebar';
     };
 
     onAddClick = (event) => {
-        /* Adding a randomply styled task */
+        /* Adding a 'randomly' styled task */
 
         let index = (subscriberGrid.count).toString();
 
@@ -78,7 +79,6 @@ import { Sidebar } from 'primereact/sidebar';
         subscriberGrid.addSubscriberGridItem(`${index} - ${randomString(6)}`, renderClass, layoutMap, subscriptionMap);
         // check if subscription shall be added
         if (this.state.running) this.addSubscription(index);
-
     };
 
     onLockAllClick = (event) => {
@@ -105,7 +105,7 @@ import { Sidebar } from 'primereact/sidebar';
             case 2:
                 propToChange = "w"
                 break;
-            default: // do nothing
+            default: // do nothing, use default prop value
         }
         let coord = layoutMap.get(propToChange);
         let change = randomInt(1, 3);
@@ -135,7 +135,7 @@ import { Sidebar } from 'primereact/sidebar';
 
         return (
             <React.Fragment>
-                <Toolbar style={{ backgroundColor: 'gray' }}>
+                <Toolbar style={{ backgroundColor: 'whitesmoke' }}>
                     <div className="p-toolbar-group-left">
                         <Button
                             icon={this.state.running ? "pi pi-minus" : "pi pi-check"}
@@ -179,8 +179,8 @@ import { Sidebar } from 'primereact/sidebar';
                     </div>
                 </Toolbar>
 
-                <Sidebar visible={this.state.showInfoSidebar} position="right" onHide={(e) => this.setState({ showInfoSidebar: false })}>
-                    Content
+                <Sidebar visible={this.state.showInfoSidebar} position="right" style={{width:'50em'}} onHide={(e) => this.setState({ showInfoSidebar: false })}>
+                    <InfoComponent/>
                 </Sidebar>
 
             </React.Fragment>
