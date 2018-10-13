@@ -16,7 +16,7 @@ static  generateDOM(elements) {
       var elmClass = renderElmClasses.get(l.elementRenderClass);
 
       return (
-        elmClass.renderElement(i, l)
+        elmClass.renderElement(i, l.subscriptionMap)
       );
     });
   }

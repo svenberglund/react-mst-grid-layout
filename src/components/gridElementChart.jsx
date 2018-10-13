@@ -5,9 +5,9 @@ import ReactEcharts from 'echarts-for-react';
 
 export default class GridElementChart extends GridElementSuper {
 
-    static renderElement(i, l) {
+    static renderElement(i, sm) {
 
-        function getOption(l) {
+        function getOption(seriesValue) {
             return {
     
                 xAxis: {
@@ -18,13 +18,13 @@ export default class GridElementChart extends GridElementSuper {
                     type: 'value'
                 },
                 series: [{
-                    data: JSON.parse(l.subscriptionMap.get('series')),
+                    data: JSON.parse(seriesValue),
                     type: 'line'
                 }]
             };
         }
 
-        let rgbMap = JSON.parse(l.subscriptionMap.get('rgb'));
+        let rgbMap = JSON.parse(sm.get('rgb'));
 
         return <div key={i} style={{
             backgroundColor: `rgb(${rgbMap['rgbH']},75,${rgbMap['rgbL']})`,
@@ -35,7 +35,7 @@ export default class GridElementChart extends GridElementSuper {
         }}>
 
             <ReactEcharts
-                option={getOption(l)}
+                option={getOption(sm.get('series'))}
                 notMerge={true}
                 lazyUpdate={true}
                 theme={"theme_name"}

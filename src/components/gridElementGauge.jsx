@@ -7,9 +7,9 @@ import ReactEcharts from 'echarts-for-react';
 
 export default class GridElementGauge extends GridElementSuper{
   
-    static renderElement(i, l){
+    static renderElement(i, sm){
 
-        function getOption(l){
+        function getOption(percentValue){
 
             return {
                 tooltip : {
@@ -26,7 +26,7 @@ export default class GridElementGauge extends GridElementSuper{
                         name: '业务指标',
                         type: 'gauge',
                         detail: {formatter:'{value}%'},
-                        data: [{value: l.subscriptionMap.get('percent'), name:  '完成率'}]
+                        data: [{value: percentValue, name:  '完成率'}]
                     }
                 ]
             };
@@ -39,7 +39,7 @@ export default class GridElementGauge extends GridElementSuper{
     }}> 
 
     <ReactEcharts 
-    option={getOption(l)}
+    option={getOption(sm.get('percent'))}
     notMerge={true}
     lazyUpdate={true}
     //showLoading={true}

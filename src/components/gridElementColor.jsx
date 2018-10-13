@@ -43,8 +43,8 @@ Example:
 
 export default class GridElementColor extends GridElementSuper{
   
-  static renderElement(i, l){
-    let rgbMap = JSON.parse(l.subscriptionMap.get('rgb'));
+  static renderElement(i, sm){
+    let rgbMap = JSON.parse(sm.get('rgb'));
 
     return <Wrapper key={i}>
 
@@ -54,7 +54,7 @@ export default class GridElementColor extends GridElementSuper{
 
     <div>
     <span className="text"> 
-    Data: {l.subscriptionMap.get('series')}</span>
+    Data: {sm.get('series')}</span>
     </div>
     
   </Wrapper>;

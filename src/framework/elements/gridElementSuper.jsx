@@ -6,11 +6,10 @@ export default class GridElementSuper{
 
         //static name = 'super';
 
-        static renderElement(i, l){
-            return <div key={i} bgColor={l.subscriptionMap.get('rgb')}>
+        static renderElement(i, sm){
+            return <div key={i} bgColor={sm.get('rgb')}>
                 <p>
-                <span className="text"> {l.name} - Color: {l.subscriptionMap.get('rgb')}</span><br />
-                {l.running ? (<span className="text"> Running  </span>) : (<span className="text"> Idle </span>)}
+                <span className="text"> Color: {sm.get('rgb')}</span><br />
                 </p>
                 </div>;
         };
