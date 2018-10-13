@@ -51,16 +51,21 @@ import { InfoComponent } from './infoComponent';
 
         let index = (subscriberGrid.count).toString();
 
-        let renderClass = "colorRender";
+        let renderClass = "super";
         let renderWidth = 4;
-        let renderHeight = 3;
-        switch (randomInt(0, 2)) {
+        let renderHeight = 7;
+        switch (randomInt(0, 3)) {
             case 1:
+                renderClass = "colorRender";
+                renderWidth = 4;
+                renderHeight = 3;
+                break;
+            case 2:
                 renderClass = "gaugeRender";
                 renderWidth = 3;
                 renderHeight = 7;
                 break;
-            case 2:
+            case 3:
                 renderClass = "chartRender";
                 renderWidth = 4;
                 renderHeight = 8;
