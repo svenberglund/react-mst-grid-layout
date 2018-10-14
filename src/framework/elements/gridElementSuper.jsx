@@ -19,8 +19,9 @@ export default class GridElementSuper{
                         
                 return <div key={i} style={{backgroundColor : 'BlanchedAlmond'}} >
 
-                <p>This is the grid element superclass, it is intended to be overridden.</p>
-                <span>Published data:</span>
+                <p>This is the grid element superclass. It can be used for debug and grid design
+                        purposes and shall be overridden in your application.</p>
+                <span>Received data:</span>
                 <ul>{listItems}</ul>                        
                 </div>;
         };

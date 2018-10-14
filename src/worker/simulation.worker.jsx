@@ -54,7 +54,7 @@ class MockPublisher {
 
                 // preparing the message mapped to channel index to send to 'frontend' (UI thread)
                 message={channel: channel_ , msg:{
-                    int : newState, 
+                    //int : newState, 
                     rgb :  JSON.stringify(integerToHeatMap(newState)), 
                     percent : Math.round(newState/10),
                     series : seriesString

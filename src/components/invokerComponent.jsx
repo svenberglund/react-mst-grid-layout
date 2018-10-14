@@ -47,30 +47,32 @@ import { InfoComponent } from './infoComponent';
     };
 
     onAddClick = (event) => {
-        /* Adding a 'randomly' styled task */
 
         let index = (subscriberGrid.count).toString();
 
+        // First time add a super class element and then do random class selection
         let renderClass = "super";
         let renderWidth = 4;
-        let renderHeight = 7;
-        switch (randomInt(0, 3)) {
-            case 1:
-                renderClass = "colorRender";
-                renderWidth = 4;
-                renderHeight = 3;
-                break;
-            case 2:
-                renderClass = "gaugeRender";
-                renderWidth = 3;
-                renderHeight = 7;
-                break;
-            case 3:
-                renderClass = "chartRender";
-                renderWidth = 4;
-                renderHeight = 8;
-                break;
-            default:
+        let renderHeight = 5;
+        if (subscriberGrid.count > 4) { 
+            switch (randomInt(1, 3)) {
+                case 1:
+                    renderClass = "colorRender";
+                    renderWidth = 4;
+                    renderHeight = 3;
+                    break;
+                case 2:
+                    renderClass = "gaugeRender";
+                    renderWidth = 3;
+                    renderHeight = 7;
+                    break;
+                case 3:
+                    renderClass = "chartRender";
+                    renderWidth = 4;
+                    renderHeight = 8;
+                    break;
+                default: // won't happen
+            }
         }
 
         let subscriptionMap = {
