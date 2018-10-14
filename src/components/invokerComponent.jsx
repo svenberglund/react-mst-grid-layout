@@ -147,7 +147,7 @@ import { InfoComponent } from './infoComponent';
                         <Button
                             icon={this.state.running ? "pi pi-minus" : "pi pi-check"}
                             size="tiny"
-                            label={this.state.running ? 'Stop' : 'Start'}
+                            label={this.state.running ? 'Mute listeners' : 'Apply listeners'}
                             className="p-button-rounded p-button-primary"
                             style={{ marginRight: '0.5em' }}
                             onClick={this.onStartClick} />
@@ -186,7 +186,7 @@ import { InfoComponent } from './infoComponent';
                     </div>
                 </Toolbar>
 
-                <Sidebar visible={this.state.showInfoSidebar} position="right" style={{width:'50em'}} onHide={(e) => this.setState({ showInfoSidebar: false })}>
+                <Sidebar visible={this.state.showInfoSidebar} position="right" style={{width:'58em'}} onHide={(e) => this.setState({ showInfoSidebar: false })}>
                     <InfoComponent/>
                 </Sidebar>
 

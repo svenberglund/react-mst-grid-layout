@@ -8,7 +8,7 @@ export class InfoComponent extends React.Component {
           <Panel header="About this demo" style={{ marginTop : '3em'}}>
           <ul>
           <li>
-              The 'Start' button ties listeners ('subscriptions') to all the components in the grid view.
+              The 'Apply listeners' button ties listeners ('subscriptions') to all the components in the grid view.
               The components can be moved and rearranged in the grid while consuming and displaying data.
           </li>    
           <li>
@@ -17,7 +17,7 @@ export class InfoComponent extends React.Component {
           </li>
           <li>
               The 'Add element' and 'Change element' buttons are there to test modifying the grid by invoking actions from the GUI.
-              They impose 'random' changes to the grid. In this demo they can only be run 4 times each without reloading the page (not to totally screw up the demo). <br/>
+              They impose pseudo random changes to the grid. In this demo they can only be run 4 times each without reloading the page (not to totally screw up the demo). <br/>
               The first time you use 'Add element' it will showcase the 'grid element superclass' which is ment to be overridden but has a instructive purpose.
           </li>
           <li>
