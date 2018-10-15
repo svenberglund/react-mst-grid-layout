@@ -1,15 +1,15 @@
 import { types } from "mobx-state-tree";
 
-// https://github.com/mobxjs/mobx-state-tree
-// Good practice: We're giving it a name in the model constructor for debugging purpose
-
 /*
-The 'block' model, representing a single component in the grid.
-It holds the subscription info (subscriptionMap) as well as layout info (layoutMap)
+    The 'grid item' model, representing a single component in the grid.
+    It holds the subscription info (subscriptionMap) as well as layout info (layoutMap)
+
+    https://github.com/mobxjs/mobx-state-tree
+    Good practice: We're giving it a name in the model constructor for debugging purpose
 */
 export const SubscriberGridItem = types.model("SubscriberGridItem", {
     subscriptionMap: types.map(types.union(types.string, types.number, types.integer, types.boolean)),
-    elementRenderClass: types.string, // a class that is registered for rendering element
+    elementRenderClass: types.string, // a class that needs to be registered in the 'class store' for rendering element
     show: true,
     layoutMap:  types.map(types.union(types.string, types.number, types.boolean ,types.undefined))
 })

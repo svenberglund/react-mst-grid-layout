@@ -8,17 +8,19 @@ import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSu
 import { Sidebar } from 'primereact/sidebar';
 import { InfoComponent } from './infoComponent';
 
+/* 
+    Component for all user invoked actions in this demo, like adding listeners and so on...
+*/
 @observer class InvokerComponent extends React.Component {
 
-
-    /*
-    To handle subscriptions: 
-    subscribeToChannel() is part of the framework just like unsubscribe(), these are the only methods needed.
-    What has to be implemented here on the implementing side is the map to keep track of the subscriptions (if we wan to be able to unsubscribe).
-    */
     constructor(props) {
         super(props);
         this.state = {
+            /*
+                To handle subscriptions in a implementation: 
+                subscribeToChannel() is part of the framework just like unsubscribe(), these are the only methods needed.
+                What has to be implemented here on the implementing side is the map to keep track of the subscriptions (if we wan to be able to unsubscribe).
+            */
             subscriptions: new Map(),
             running: false,
             locked: false,
@@ -28,7 +30,7 @@ import { InfoComponent } from './infoComponent';
     }
 
     addSubscription(index) {
-        // we only publish on 4 channels thus we reduce the component index mod 4 to get channel index
+        // we only publish on 4 channels in this demo thus we reduce the component index mod 4 to get channel index
         this.state.subscriptions.set(index, subscribeToChannel(index, (index % 4)));
     }
 
@@ -38,7 +40,7 @@ import { InfoComponent } from './infoComponent';
     }
 
     onStartClick = (event) => {
-        subscriberGrid.tasks.forEach(element => {
+        subscriberGrid.items.forEach(element => {
             this.state.running ? this.removeSubscription(element.layoutIndex) : this.addSubscription(element.layoutIndex);
         });
         this.setState(
@@ -50,7 +52,7 @@ import { InfoComponent } from './infoComponent';
 
         let index = (subscriberGrid.count).toString();
 
-        // First time add a super class element and then do random class selection
+        // First time add a super class element and the following times do random class selection
         let renderClass = "super";
         let renderWidth = 4;
         let renderHeight = 5;
@@ -76,7 +78,6 @@ import { InfoComponent } from './infoComponent';
         }
 
         let subscriptionMap = {
-            int: 0,
             rgb: '{"rgbH": 20,"rgbL":120}',
             percent: 50,
             series: '[0,0,0,0,0,0,0,0,0,0]'
@@ -100,6 +101,9 @@ import { InfoComponent } from './infoComponent';
         })
     }
 
+    /* 
+        Will do a random chagne to some coordinate (x,h or w) to a randomly selected component.
+    */
     onChangeClick = (event) => {
 
         let componentIndex = randomInt(0, subscriberGrid.count - 1);
@@ -123,8 +127,8 @@ import { InfoComponent } from './infoComponent';
 
         layoutMap.set(propToChange, coord);  // impose a random change to a random coordinate
         subscriberGrid.setGridItemLayout(componentIndex, layoutMap);
-        
-        // count how many times such user invoked change has been done
+
+        // count how many times such user invoked change has been done)
         this.setState({
             changedByUser: this.state.changedByUser + 1
         })
@@ -186,8 +190,8 @@ import { InfoComponent } from './infoComponent';
                     </div>
                 </Toolbar>
 
-                <Sidebar visible={this.state.showInfoSidebar} position="right" style={{width:'58em'}} onHide={(e) => this.setState({ showInfoSidebar: false })}>
-                    <InfoComponent/>
+                <Sidebar visible={this.state.showInfoSidebar} position="right" style={{ width: '58em' }} onHide={(e) => this.setState({ showInfoSidebar: false })}>
+                    <InfoComponent />
                 </Sidebar>
 
             </React.Fragment>

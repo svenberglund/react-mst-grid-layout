@@ -3,8 +3,11 @@ import React from "react";
 import ReactEcharts from 'echarts-for-react';
 
 
-// implement it with e-charts https://ecomfe.github.io/echarts-examples/public/editor.html?c=gauge
-
+/*
+    Implementation of grid element built on eCharts (Gauge)
+    https://ecomfe.github.io/echarts-examples/public/index.html
+    https://www.npmjs.com/package/echarts-for-react
+*/
 export default class GridElementGauge extends GridElementSuper{
   
     static renderElement(i, sm){
@@ -27,7 +30,7 @@ export default class GridElementGauge extends GridElementSuper{
                         type: 'gauge',
                         detail: {formatter:'{value}%'},
                         data: [{value: percentValue, name:  '完成率'}]
-                    }
+                    } 
                 ]
             };
         }
@@ -42,11 +45,7 @@ export default class GridElementGauge extends GridElementSuper{
     option={getOption(sm.get('percent'))}
     notMerge={true}
     lazyUpdate={true}
-    //showLoading={true}
     theme={"gauge_theme"}
-    //onChartReady={this.onChartReadyCallback}
-    //onEvents={EventsDict}
-    //opts={} 
     />
     </div>;
   }

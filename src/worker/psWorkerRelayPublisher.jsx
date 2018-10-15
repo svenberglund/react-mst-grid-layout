@@ -2,10 +2,10 @@ import simulWorker from './simulation.worker';
 import {publish} from '../framework/message-relay/publish'
 
 /* 
-The publisher is a onmessage action on a web worker, 
-it relays background task messages to frontend pubsub framework 
-This is the first step in the 'message bus' towards the MST objects. 
-The second step is the subscriptions initiated by the psSubscriber methods.
+    The publisher is a onmessage action on a web worker, 
+    it relays background messages computed in the background to frontend pubsub framework 
+    This can be seen as the first step in the 'message bus' towards the MST objects. 
+    See also the subscriptions initiated by the psSubscriber methods.
 */
 if (typeof(w) === "undefined") {
     console.log("Instantiating the worker...");

@@ -2,8 +2,7 @@ import GridElementSuper from "../framework/elements/gridElementSuper"
 import React from "react";
 import styled from 'styled-components';
 
-// https://www.styled-components.com/docs/basics    
-// Text component
+
 const ColoredWrapper = styled.div`
 background: ${props => props.txtColor};
 border-radius: 8px;
@@ -12,10 +11,6 @@ font-size: 1.2em;
 text-align: center;
 `;
 
-
-
-
-// Create a Wrapper component as a div
 const Wrapper = styled.div`
 background: WhiteSmoke;
 border-radius: 8px;
@@ -27,20 +22,9 @@ border-style: solid;
 
 
 /*
-TODO: Look into this warning:
-
-Over 200 classes were generated for component gridElementColor__Wrapper. 
-Consider using the attrs method, together with a style object for frequently changed styles.
-Example:
-  const Component = styled.div.attrs({
-    style: ({ background }) => ({
-      background,
-    }),
-  })`width: 100%;`
+  A simple implementation of a grid element built on Styled components
+  https://www.styled-components.com/docs/basics    
 */
-
-
-
 export default class GridElementColor extends GridElementSuper{
   
   static renderElement(i, sm){
@@ -60,3 +44,16 @@ export default class GridElementColor extends GridElementSuper{
   </Wrapper>;
   }
 }
+
+/*
+TODO: Look into this warning, no big deal since it is a demo but would be nice to get rid of:
+
+Over 200 classes were generated for component gridElementColor__Wrapper. 
+Consider using the attrs method, together with a style object for frequently changed styles.
+Example:
+  const Component = styled.div.attrs({
+    style: ({ background }) => ({
+      background,
+    }),
+  })`width: 100%;`
+*/

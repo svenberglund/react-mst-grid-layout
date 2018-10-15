@@ -1,29 +1,33 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { subscriberGrid } from "../framework/models/subscriberGrid";
-import {Accordion,AccordionTab} from 'primereact/accordion';
+import { Accordion, AccordionTab } from 'primereact/accordion';
 
-@observer 
+
+
+/*
+    A component consuming data from the subscribergrid framework.
+    This is where the grid is rendered.
+    TODO: we shall incapsulate mobx-react in the subscirbergrid framework, hence use our own API rather than @observer.
+*/
+@observer
 class ConsumerComponent extends React.Component {
-    
+
     render() {
 
         return (
             <React.Fragment>
-
-            <Accordion>
-            <AccordionTab header="Show element layouts">
-
-                <div>                
-                    <ul>
-                        {subscriberGrid.tasks.map(function (task, index) {
-                            return <li key={index}>{task.layoutIndex} : {JSON.stringify(task.layoutMap)}</li>;
-                        })
-                        }
-                    </ul>
-                </div>
-
-                </AccordionTab>
+                <Accordion>
+                    <AccordionTab header="Show element layouts">
+                        <div>
+                            <ul>
+                                {subscriberGrid.items.map(function (item, index) {
+                                    return <li key={index}>{item.layoutIndex} : {JSON.stringify(item.layoutMap)}</li>;
+                                })
+                                }
+                            </ul>
+                        </div>
+                    </AccordionTab>
                 </Accordion>
             </React.Fragment>
 

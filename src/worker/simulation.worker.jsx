@@ -1,12 +1,24 @@
 import { randomInt, integerToHeatMap } from "../common/utils";
 
 
+/*
+    Generating and publishing 'mock data' simulating data to a dashboard.
+    Publishes data in a unified format independently on several different channels.
+    {
+        rgb: "{rgbL : int [0,255], rgbH : int [0,255]}"
+        percent : int [0,100],
+        series : [int [0,1000] ... int [0,1000]] (10 values in a series) 
+    }
+    The data is 'continuous' in the sense that there is not a to big differnce between two consecutive
+    data points published on any channel. 
+    Moreover the data points will be continuously descending for a while and then switching direction to ascending, and so on... if that makes sense...
+*/
 class MockPublisher {
 
     constructor() {
         this.publishing = false;
         this.channels = null;
-        this.channelState = new Map();
+        this.channelState = new Map(); // All the published values are derived from a curent state int [0,1000] of the channel
         this.channelDirection = new Map();
         this.message=new Map();
     }
@@ -44,8 +56,7 @@ class MockPublisher {
                     newState = 1000 - offset;
                 };
 
-
-                // now set the series aswell - channelState aswell ass the series need to be saved to the next iteration
+                // now set the series also - channelState as well as the series need to be saved to the next iteration
                 channelState.set(channel_, newState);let series = JSON.parse(channelStateSeries.get(channel_));
                 series.shift();
                 series.push(newState);
@@ -54,7 +65,7 @@ class MockPublisher {
 
                 // preparing the message mapped to channel index to send to 'frontend' (UI thread)
                 message={channel: channel_ , msg:{
-                    //int : newState, 
+                    // int : newState, 
                     rgb :  JSON.stringify(integerToHeatMap(newState)), 
                     percent : Math.round(newState/10),
                     series : seriesString
@@ -81,13 +92,10 @@ class MockPublisher {
     }
 }
 
-
+/* Will return a instance of our singleton MockPublisher class */
 var SingletonPubliser = (function () {
-
     var instance;
     function createInstance() {
-
-
         var object = new MockPublisher();
         return object;
     }
@@ -101,8 +109,6 @@ var SingletonPubliser = (function () {
     };
 })();
 
-
 let mockPublisher = SingletonPubliser.getInstance();
-// this invokation can be done from gui instead - we only publish to 4 channels
-mockPublisher.startPublishing([0, 1, 2, 3]);
+mockPublisher.startPublishing([0, 1, 2, 3]);  // We publish to 4 channels
 

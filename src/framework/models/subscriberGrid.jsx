@@ -4,34 +4,25 @@ import _ from "lodash";
 
 
 /* 
-The MST model that keeps the state for the entire grid.
-Holds the gridBlocks in a array.
-One instance of this model is normally instantiated in a view.
+    The MST model that keeps the state for the entire grid.
+    Holds the grid items in a array.
+    One instance of this model is normally instantiated in a view (..so far, we shall build support for serveral.)
 */
 const SubscriberGrid = types.model("SubscriberGrid", {
     show: true,
-    tasks: types.array(SubscriberGridItem),
-    layout: true // MST has only three types of nodes; model, array, and map
+    items: types.array(SubscriberGridItem), // MST has only three types of nodes; model, array, and map
+    layout: true 
 })
 .views(self => ({
     get count() {
         return (
-            self.tasks.length
+            self.items.length
         );
     }
 }))
 .actions(self => {
+    /* Adds a item in the grid */
     function addSubscriberGridItem(nameValue, elmRenderClass, layoutMap, subscriptionMap){
-
-        // TODO: 
-
-        //  (1) We need to hand value of subscriptionMap as a parameter from the enclosing function..  -done!
-        //  (2) Check how the subscriptions are added - are we content with this solution? - done!
-        //  (3) Improve how the servce is started and stopped (or at least change speed) - ok for now, no prio to this
-        //  (4) Write some test and clean up all code
-        //  (5) Improve invoker gui and enclosing app gui (dont forget app name and stuff)
-        //  (6) Migrate to github and publish demo.. - done!
-        //  (7) write backlog: stuff like 'support several grids', 'encapsulate mobx syntax in framework (see @observer in invoker)', 'get rid of flicker at startup', 'get rid of pubsub framework?','enable to set elements static', 'restrict MST scope (context)'.... 'package into a module'
 
         let newTask = SubscriberGridItem.create({
             name: nameValue,
@@ -39,37 +30,39 @@ const SubscriberGrid = types.model("SubscriberGrid", {
             subscriptionMap: subscriptionMap,
             layoutMap: layoutMap 
         });
-        return self.tasks.push(newTask);
+        return self.items.push(newTask);
     }
+    /* Removes a item from the grid */
     function removeSubscriberGridItem(index){
-        return self.tasks.remove(index);
-    }function changeSubscriberGridItem(index, color, name){
-        self.tasks[index].name = name;
-        self.tasks[index].color = color;
-    }function getGridItemLayout(itemIndex){
-        return _.cloneDeep(self.tasks[itemIndex].layout); // returns a deep copy that can be modified
-    }function setGridItemLayout(itemIndex, layoutMap){
+        return self.items.remove(index);
+    }
+    /* Retruns the layout from a item in the grid */
+    function getGridItemLayout(itemIndex){
+        return _.cloneDeep(self.items[itemIndex].layout); // returns a deep copy that can be modified
+    }
+    /* Sets the layout for a item in the grid */
+    function setGridItemLayout(itemIndex, layoutMap){
         [...layoutMap.keys()].forEach(key => {
-            self.tasks[itemIndex].setLayoutProp(key, layoutMap.get(key));    
+            self.items[itemIndex].setLayoutProp(key, layoutMap.get(key));    
         });   
     }
-    function updatelayoutMap(gb){
-        self.tasks.forEach(function (task_){        
-            if (task_.layoutMap.get('i') === gb['i']) {
-                task_.layoutMap = gb; 
+    /* Sets the layout for a item in the grid without need for supplying the itemIndex (using the 'i' key in the map) */
+    function updatelayoutMap(layoutMap){
+        self.items.forEach(function (task_){        
+            if (task_.layoutMap.get('i') === layoutMap['i']) {
+                task_.layoutMap = layoutMap; 
             }
         });
     }
-    return {getGridItemLayout, setGridItemLayout, addSubscriberGridItem, removeSubscriberGridItem, changeSubscriberGridItem, updatelayoutMap}
+    return {getGridItemLayout, setGridItemLayout, addSubscriberGridItem, removeSubscriberGridItem, updatelayoutMap}
 });
 
 
 /* 
-Instantiate a state tree.
-TODO: Should we do this somewhere else in the application?  
+    Instantiate the state tree.
 */
 export const subscriberGrid = SubscriberGrid.create(
     {
-        tasks: []
+        items: []
     }
 )
