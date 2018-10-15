@@ -22,10 +22,9 @@ const SubscriberGrid = types.model("SubscriberGrid", {
 }))
 .actions(self => {
     /* Adds a item in the grid */
-    function addSubscriberGridItem(nameValue, elmRenderClass, layoutMap, subscriptionMap){
+    function addSubscriberGridItem(elmRenderClass, layoutMap, subscriptionMap){
 
         let newTask = SubscriberGridItem.create({
-            name: nameValue,
             elementRenderClass: elmRenderClass,
             subscriptionMap: subscriptionMap,
             layoutMap: layoutMap 

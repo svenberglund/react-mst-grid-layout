@@ -84,7 +84,7 @@ import { InfoComponent } from './infoComponent';
         };
         let layoutMap = { i: index, x: randomInt(5, 15), y: randomInt(5, 10), w: renderWidth, h: renderHeight };
 
-        subscriberGrid.addSubscriberGridItem(`${index} - ${randomString(6)}`, renderClass, layoutMap, subscriptionMap);
+        subscriberGrid.addSubscriberGridItem(renderClass, layoutMap, subscriptionMap);
         // check if subscription shall be added
         if (this.state.running) this.addSubscription(index);
     };
