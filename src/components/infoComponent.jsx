@@ -38,12 +38,15 @@ export class InfoComponent extends React.Component {
                     <p>
                         The aim of the project is to create a easy-to-use, responsive and performant framework for a flexible React.js grid view where the components
                         are immediately ready to recieve data.
-                        <br />
+                    </p>
+                    <p>
                         Typical use case: Dashboard or other such view that has to receive and respond to lots of data at real time and on different channels.
                         It is also a good case if the users shall be able to unlock the grid, rearrange the components and then save their favourite grid layout arrangements (perhaps in local storage).
-                        <br />
+                    </p>
+                    <p>
                         The elements in the grid are constucted and rendered by overriding a special es6 base class (the 'grid element superclass').
-                        Any element that is added to the grid can immediately be wired to a channel and it is thereby ready to recieve data provided via a publish API.
+                        Any element that is added to the grid can immediately be wired to a channel and it is thereby ready to recieve data provided via a publish 
+                        API. <a href="https://github.com/svenberglund/SubscriberGrid/wiki">Explained more in detail @ https://github.com/svenberglund/SubscriberGrid/wiki</a> 
                     </p>
                     <p>
                         This 'framework' is built upon react-grid-view and MST (mobx-state-tree). It is eventually intended to be packaged into a node module.

@@ -3,7 +3,7 @@ import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { observer } from "mobx-react";
 import { subscriberGrid } from "../framework/models/subscriberGrid";
-import { randomString, randomInt } from "../common/utils";
+import { randomInt } from "../common/utils";
 import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSubscriber";
 import { Sidebar } from 'primereact/sidebar';
 import { InfoComponent } from './infoComponent';
@@ -190,7 +190,7 @@ import { InfoComponent } from './infoComponent';
                     </div>
                 </Toolbar>
 
-                <Sidebar visible={this.state.showInfoSidebar} position="right" style={{ width: '58em' }} onHide={(e) => this.setState({ showInfoSidebar: false })}>
+                <Sidebar visible={this.state.showInfoSidebar} position="right" style={{ width: '68em' }} onHide={(e) => this.setState({ showInfoSidebar: false })}>
                     <InfoComponent />
                 </Sidebar>
 
