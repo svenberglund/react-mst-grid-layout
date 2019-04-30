@@ -9,10 +9,10 @@ import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 
-// Importing he 'framework' that we are demoing (this will eventually become a node module)
-import SubscriberGridLayout from './framework/components/grid';
+// Importing the 'framework' that we are demoing (this will eventually become a node module)
+import MstGridLayout from './framework/components/grid';
 import './framework/message-relay/psSubscriber';
-import {subscriberGrid} from './framework/models/subscriberGrid';
+import {mstGrid} from './framework/models/mstGrid';
 
 // The actual demo or 'implementation'
 import ConsumerComponent from './components/consumerComponent';
@@ -45,7 +45,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <p>
-            This is a <a href="https://github.com/svenberglund/SubscriberGrid"><code>SubscriberGrid.js</code></a> demo!
+            This is a <a href="https://github.com/svenberglund/react-mst-grid-layout"><code>react-mst-grid-layout.js</code></a> demo!
         </p>
           <InvokerComponent />
         </header>
@@ -63,20 +63,20 @@ class MainComponent extends Component{
       series: '[0,0,0,0,0,0,0,0,0,0]'
     };
     let layoutMap = { i: '0', x: 0, y: 0, w: 4, h: 3};
-    subscriberGrid.addSubscriberGridItem( "colorRender", layoutMap, subscriptionMap);
+    mstGrid.addMstGridItem( "colorRender", layoutMap, subscriptionMap);
     layoutMap = { i: '1', x: 4, y: 0, w: 3, h: 9};
-    subscriberGrid.addSubscriberGridItem( "chartRender", layoutMap, subscriptionMap );
+    mstGrid.addMstGridItem( "chartRender", layoutMap, subscriptionMap );
     layoutMap = { i: '2', x: 0, y: 3, w: 2, h: 6};
-    subscriberGrid.addSubscriberGridItem( "gaugeRender", layoutMap, subscriptionMap );
+    mstGrid.addMstGridItem( "gaugeRender", layoutMap, subscriptionMap );
     layoutMap = { i: '3', x: 7, y: 0, w: 3, h: 7};
-    subscriberGrid.addSubscriberGridItem( "gaugeRender", layoutMap, subscriptionMap );
+    mstGrid.addMstGridItem( "gaugeRender", layoutMap, subscriptionMap );
   }
 
   render() {
     return (
       <div>
         <ConsumerComponent />
-        <SubscriberGridLayout
+        <MstGridLayout
           compactType="vertical" // default : none
           breakpoint="lg" // default : 'lg' = 12 columns
           rowHeight={30} // default : 30

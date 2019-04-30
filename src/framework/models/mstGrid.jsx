@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree";
-import { SubscriberGridItem } from "./subscriberGridItem";
+import { MstGridItem } from "./mstGridItem";
 import _ from "lodash";
 
 
@@ -8,9 +8,9 @@ import _ from "lodash";
     Holds the grid items in a array.
     One instance of this model is normally instantiated in a view (..so far, we shall build support for serveral.)
 */
-const SubscriberGrid = types.model("SubscriberGrid", {
+const MstGrid = types.model("MstGrid", {
     show: true,
-    items: types.array(SubscriberGridItem), // MST has only three types of nodes; model, array, and map
+    items: types.array(MstGridItem), // MST has only three types of nodes; model, array, and map
     layout: true 
 })
 .views(self => ({
@@ -22,17 +22,17 @@ const SubscriberGrid = types.model("SubscriberGrid", {
 }))
 .actions(self => {
     /* Adds a item in the grid */
-    function addSubscriberGridItem(elmRenderClass, layoutMap, subscriptionMap){
+    function addMstGridItem(renderClass, layoutMap, subscriptionMap){
 
-        let newTask = SubscriberGridItem.create({
-            elementRenderClass: elmRenderClass,
+        let newItem = MstGridItem.create({
+            elementRenderClass: renderClass,
             subscriptionMap: subscriptionMap,
             layoutMap: layoutMap 
         });
-        return self.items.push(newTask);
+        return self.items.push(newItem);
     }
     /* Removes a item from the grid */
-    function removeSubscriberGridItem(index){
+    function removeMstGridItem(index){
         return self.items.remove(index);
     }
     /* Retruns the layout from a item in the grid */
@@ -53,14 +53,14 @@ const SubscriberGrid = types.model("SubscriberGrid", {
             }
         });
     }
-    return {getGridItemLayout, setGridItemLayout, addSubscriberGridItem, removeSubscriberGridItem, updatelayoutMap}
+    return {getGridItemLayout, setGridItemLayout, addMstGridItem, removeMstGridItem: removeMstGridItem, updatelayoutMap}
 });
 
 
 /* 
     Instantiate the state tree.
 */
-export const subscriberGrid = SubscriberGrid.create(
+export const mstGrid = MstGrid.create(
     {
         items: []
     }

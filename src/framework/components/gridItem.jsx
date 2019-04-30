@@ -5,14 +5,14 @@ class GridItem {
   static generateDOM(elements) {
     /* 
       Returns a map of the items to be rendered and a function to be applied 
-      Parameter l is the entire subscriberGridItem object
+      Parameter ga is the entire mstGridItem object
       Parameter i is the index
     */
-    return _.map(elements, function(l, i) {
-      var elmClass = renderElmClasses.get(l.elementRenderClass);
+    return _.map(elements, function(ga, i) {
+      var elmClass = renderElmClasses.get(ga.elementRenderClass);
       if (elmClass === null) elmClass = renderElmClasses.get("super"); // fallback on super class
 
-      return elmClass.renderElement(i, l.subscriptionMap);
+      return elmClass.renderElement(i, ga.subscriptionMap);
     });
   }
 }

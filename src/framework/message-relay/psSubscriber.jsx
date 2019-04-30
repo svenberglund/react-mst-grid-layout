@@ -1,4 +1,4 @@
-import {subscriberGrid} from "../models/subscriberGrid";
+import {mstGrid} from "../models/mstGrid";
 var pubsub = require('pubsub.js');
 
 
@@ -10,8 +10,8 @@ var pubsub = require('pubsub.js');
     ..but we might get rid of it since pubsub.js and MST each add a layer of the publish-subscribe pattern.
 */
 export function subscribeToChannel(componentIndex, channelIndex){
-    return pubsub.subscribe(`subscriberGrid/${channelIndex}/state`, function(data) {
-        subscriberGrid.items[componentIndex].setState(data);
+    return pubsub.subscribe(`mstGrid/${channelIndex}/state`, function(data) {
+        mstGrid.items[componentIndex].setState(data);
     });
 }
 

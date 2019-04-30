@@ -2,7 +2,7 @@ import React from "react";
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { observer } from "mobx-react";
-import { subscriberGrid } from "../framework/models/subscriberGrid";
+import { mstGrid } from "../framework/models/mstGrid";
 import { randomInt } from "../common/utils";
 import { subscribeToChannel, unSubscribe } from "../framework/message-relay/psSubscriber";
 import { Sidebar } from 'primereact/sidebar';
@@ -40,7 +40,7 @@ import { InfoComponent } from './infoComponent';
     }
 
     onStartClick = (event) => {
-        subscriberGrid.items.forEach(element => {
+        mstGrid.items.forEach(element => {
             this.state.running ? this.removeSubscription(element.layoutIndex) : this.addSubscription(element.layoutIndex);
         });
         this.setState(
@@ -50,13 +50,13 @@ import { InfoComponent } from './infoComponent';
 
     onAddClick = (event) => {
 
-        let index = (subscriberGrid.count).toString();
+        let index = (mstGrid.count).toString();
 
         // First time add a super class element and the following times do random class selection
         let renderClass = "super";
         let renderWidth = 4;
         let renderHeight = 5;
-        if (subscriberGrid.count > 4) { 
+        if (mstGrid.count > 4) { 
             switch (randomInt(1, 3)) {
                 case 1:
                     renderClass = "colorRender";
@@ -84,17 +84,17 @@ import { InfoComponent } from './infoComponent';
         };
         let layoutMap = { i: index, x: randomInt(5, 15), y: randomInt(5, 10), w: renderWidth, h: renderHeight };
 
-        subscriberGrid.addSubscriberGridItem(renderClass, layoutMap, subscriptionMap);
+        mstGrid.addMstGridItem(renderClass, layoutMap, subscriptionMap);
         // check if subscription shall be added
         if (this.state.running) this.addSubscription(index);
     };
 
     onLockAllClick = (event) => {
 
-        for (var i = 0; i < subscriberGrid.count; i++) {
-            let layoutMap = subscriberGrid.getGridItemLayout(i);
+        for (var i = 0; i < mstGrid.count; i++) {
+            let layoutMap = mstGrid.getGridItemLayout(i);
             this.state.locked ? layoutMap.set('static', false) : layoutMap.set('static', true);
-            subscriberGrid.setGridItemLayout(i, layoutMap);
+            mstGrid.setGridItemLayout(i, layoutMap);
         }
         this.setState({
             locked: !this.state.locked
@@ -106,8 +106,8 @@ import { InfoComponent } from './infoComponent';
     */
     onChangeClick = (event) => {
 
-        let componentIndex = randomInt(0, subscriberGrid.count - 1);
-        let layoutMap = subscriberGrid.getGridItemLayout(componentIndex);
+        let componentIndex = randomInt(0, mstGrid.count - 1);
+        let layoutMap = mstGrid.getGridItemLayout(componentIndex);
         let propToChange = "x";
         switch (randomInt(1, 3)) {
             case 1:
@@ -126,7 +126,7 @@ import { InfoComponent } from './infoComponent';
             coord > 7 ? coord -= change : coord += change;
 
         layoutMap.set(propToChange, coord);  // impose a random change to a random coordinate
-        subscriberGrid.setGridItemLayout(componentIndex, layoutMap);
+        mstGrid.setGridItemLayout(componentIndex, layoutMap);
 
         // count how many times such user invoked change has been done)
         this.setState({
@@ -158,7 +158,7 @@ import { InfoComponent } from './infoComponent';
                         <Button
                             icon="pi pi-clone"
                             size="tiny"
-                            disabled={subscriberGrid.count > 7}
+                            disabled={mstGrid.count > 7}
                             label="Add element!"
                             className="p-button-rounded p-button-secondary"
                             style={{ marginRight: '0.5em' }}

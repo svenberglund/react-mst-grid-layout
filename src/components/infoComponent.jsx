@@ -34,7 +34,7 @@ export class InfoComponent extends React.Component {
                          </li>
                     </ul>
                 </Panel>
-                <Panel header="About the SubscriberGrid.js project" style={{ marginTop: '1em' }}>
+                <Panel header="About the react-mst-grid-layout.js project" style={{ marginTop: '1em' }}>
                     <p>
                         The aim of the project is to create a easy-to-use, responsive and performant framework for a flexible React.js grid view where the components
                         are immediately ready to recieve data.
@@ -46,15 +46,15 @@ export class InfoComponent extends React.Component {
                     <p>
                         The elements in the grid are constucted and rendered by overriding a special es6 base class (the 'grid element superclass').
                         Any element that is added to the grid can immediately be wired to a channel and it is thereby ready to recieve data provided via a publish 
-                        API. <a href="https://github.com/svenberglund/SubscriberGrid/wiki">Explained more in detail @ https://github.com/svenberglund/SubscriberGrid/wiki</a> 
+                        API. <a href="https://github.com/svenberglund/react-mst-grid-layout/wiki">Explained more in detail @ https://github.com/svenberglund/react-mst-grid-layout/wiki</a> 
                     </p>
                     <p>
-                        This 'framework' is built upon react-grid-view and MST (mobx-state-tree). It is eventually intended to be packaged into a node module.
+                        This framework is built upon react-grid-view and MST (mobx-state-tree). It is eventually intended to be packaged into a node module.
                     </p>
                     <p>
                         Source code and more info.
                         <br />
-                        <a href="https://github.com/svenberglund/SubscriberGrid"> https://github.com/svenberglund/SubscriberGrid </a>
+                        <a href="https://github.com/svenberglund/react-mst-grid-layout"> https://github.com/svenberglund/react-mst-grid-layout </a>
                     </p>
 
                 </Panel>

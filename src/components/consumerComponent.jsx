@@ -1,6 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react";
-import { subscriberGrid } from "../framework/models/subscriberGrid";
+import { mstGrid } from "../framework/models/mstGrid";
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
 
@@ -21,7 +21,7 @@ class ConsumerComponent extends React.Component {
                     <AccordionTab header="Show element layouts">
                         <div>
                             <ul>
-                                {subscriberGrid.items.map(function (item, index) {
+                                {mstGrid.items.map(function (item, index) {
                                     return <li key={index}>{item.layoutIndex} : {JSON.stringify(item.layoutMap)}</li>;
                                 })
                                 }

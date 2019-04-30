@@ -14,6 +14,6 @@ var pubsub = require('pubsub.js');
     and JSON.parse on the receiving side (in your element rendering).
 */
 export function publish(channelIndex, msg){
-    pubsub.publish(`subscriberGrid/${channelIndex}/state`, [msg]);
+    pubsub.publish(`mstGrid/${channelIndex}/state`, [msg]);
 }
 

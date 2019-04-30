@@ -4,7 +4,7 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 import { observer } from "mobx-react";
-import { subscriberGrid } from "../models/subscriberGrid";
+import { mstGrid } from "../models/mstGrid";
 import { toJS } from 'mobx';
 import GridItem from './gridItem';
 
@@ -13,10 +13,10 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 /*
   The grid view where the components (gridItems) are mounted. 
-  This Component class is the gui representation of the subscriberGrid (MST) model
+  This Component class is the gui representation of the mstGrid (MST) model
 */
 @observer
-class SubscriberGridLayout extends React.Component {
+class MstGridLayout extends React.Component {
   static defaultProps = {
     className: "layout",
     rowHeight: 30,
@@ -86,7 +86,7 @@ class SubscriberGridLayout extends React.Component {
   */
   onLayoutChange = (layout, layouts) => {
     for (var i = 0; i < layout.length; i++) {
-      subscriberGrid.updatelayoutMap(layout[i]);
+      mstGrid.updatelayoutMap(layout[i]);
     }
     this.props.onLayoutChange(layout, layouts); // can run implementation specific method as well...
   };
@@ -97,7 +97,7 @@ class SubscriberGridLayout extends React.Component {
         className="layout"
         style={this.props.gridStyle}
         {...this.props}
-        layouts={{ lg: subscriberGrid.items.map(at => toJS(at).layoutMap) }}
+        layouts={{ lg: mstGrid.items.map(at => toJS(at).layoutMap) }}
         onBreakpointChange={this.onBreakpointChange}
         onLayoutChange={this.onLayoutChange}
         measureBeforeMount={false}
@@ -105,10 +105,10 @@ class SubscriberGridLayout extends React.Component {
         compactType={this.state.compactType}
         preventCollision={!this.state.compactType}
       >
-        {GridItem.generateDOM(subscriberGrid.items)}
+        {GridItem.generateDOM(mstGrid.items)}
       </ResponsiveReactGridLayout>
     );
   }
 }
 
-export default SubscriberGridLayout;
+export default MstGridLayout;
