@@ -4,14 +4,13 @@ import _ from "lodash";
 
 
 /* 
-    The MST model that keeps the state for the entire grid.
+    The MST model that keeps the state for a grid.
     Holds the grid items in a array.
-    One instance of this model is normally instantiated in a view (..so far, we shall build support for serveral.)
 */
-const MstGrid = types.model("MstGrid", {
+export const MstGrid = types.model("MstGrid", {
     show: true,
     items: types.array(MstGridItem), // MST has only three types of nodes; model, array, and map
-    layout: true 
+    layout: true // TODO: check if we can remove these props (show and true)
 })
 .views(self => ({
     get count() {
@@ -21,7 +20,7 @@ const MstGrid = types.model("MstGrid", {
     }
 }))
 .actions(self => {
-    /* Adds a item in the grid */
+    /* Adds an item in the grid */
     function addMstGridItem(renderClass, layoutMap, subscriptionMap){
 
         let newItem = MstGridItem.create({
@@ -55,13 +54,3 @@ const MstGrid = types.model("MstGrid", {
     }
     return {getGridItemLayout, setGridItemLayout, addMstGridItem, removeMstGridItem: removeMstGridItem, updatelayoutMap}
 });
-
-
-/* 
-    Instantiate the state tree.
-*/
-export const mstGrid = MstGrid.create(
-    {
-        items: []
-    }
-)

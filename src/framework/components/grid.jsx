@@ -4,7 +4,7 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 import { observer } from "mobx-react";
-import { mstGrid } from "../models/mstGrid";
+import { mstGrids } from "../models/mstGrids";
 import { toJS } from 'mobx';
 import GridItem from './gridItem';
 
@@ -18,6 +18,7 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 @observer
 class MstGridLayout extends React.Component {
   static defaultProps = {
+    gridName: "defaultGrid",
     className: "layout",
     rowHeight: 30,
     onLayoutChange: function() {},
@@ -85,19 +86,21 @@ class MstGridLayout extends React.Component {
     Why cant we use the 'changed' property, it seems to never be true...? Look into that.
   */
   onLayoutChange = (layout, layouts) => {
+    let grid = mstGrids.getGrid(this.props.gridName);
     for (var i = 0; i < layout.length; i++) {
-      mstGrid.updatelayoutMap(layout[i]);
+      grid.updatelayoutMap(layout[i]);
     }
     this.props.onLayoutChange(layout, layouts); // can run implementation specific method as well...
   };
 
   render() {
+    let grid = mstGrids.getGrid(this.props.gridName);
     return (
       <ResponsiveReactGridLayout
         className="layout"
         style={this.props.gridStyle}
         {...this.props}
-        layouts={{ lg: mstGrid.items.map(at => toJS(at).layoutMap) }}
+        layouts={{ lg: grid.items.map(at => toJS(at).layoutMap) }}
         onBreakpointChange={this.onBreakpointChange}
         onLayoutChange={this.onLayoutChange}
         measureBeforeMount={false}
@@ -105,7 +108,7 @@ class MstGridLayout extends React.Component {
         compactType={this.state.compactType}
         preventCollision={!this.state.compactType}
       >
-        {GridItem.generateDOM(mstGrid.items)}
+        {GridItem.generateDOM(grid.items)}
       </ResponsiveReactGridLayout>
     );
   }

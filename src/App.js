@@ -12,7 +12,7 @@ import 'primeicons/primeicons.css';
 // Importing the 'framework' that we are demoing (this will eventually become a node module)
 import MstGridLayout from './framework/components/grid';
 import './framework/message-relay/psSubscriber';
-import {mstGrid} from './framework/models/mstGrid';
+import {mstGrids} from './framework/models/mstGrids';
 
 // The actual demo or 'implementation'
 import ConsumerComponent from './components/consumerComponent';
@@ -38,7 +38,6 @@ echarts.registerTheme('gauge_theme', {
     //color: 'red'
 });
 
-
 class App extends Component {
   render() {
     return (
@@ -56,6 +55,9 @@ class App extends Component {
 }
 
 class MainComponent extends Component{
+
+  grid = mstGrids.getGrid("defaultGrid");
+
   componentWillMount(){
     let subscriptionMap = { // Initial values of the subscription map. All renderClasses uses the same format. 
       rgb:'{"rgbH": 20,"rgbL":200}', 
@@ -63,13 +65,14 @@ class MainComponent extends Component{
       series: '[0,0,0,0,0,0,0,0,0,0]'
     };
     let layoutMap = { i: '0', x: 0, y: 0, w: 4, h: 3};
-    mstGrid.addMstGridItem( "colorRender", layoutMap, subscriptionMap);
+    
+    this.grid.addMstGridItem( "colorRender", layoutMap, subscriptionMap);
     layoutMap = { i: '1', x: 4, y: 0, w: 3, h: 9};
-    mstGrid.addMstGridItem( "chartRender", layoutMap, subscriptionMap );
+    this.grid.addMstGridItem( "chartRender", layoutMap, subscriptionMap );
     layoutMap = { i: '2', x: 0, y: 3, w: 2, h: 6};
-    mstGrid.addMstGridItem( "gaugeRender", layoutMap, subscriptionMap );
+    this.grid.addMstGridItem( "gaugeRender", layoutMap, subscriptionMap );
     layoutMap = { i: '3', x: 7, y: 0, w: 3, h: 7};
-    mstGrid.addMstGridItem( "gaugeRender", layoutMap, subscriptionMap );
+    this.grid.addMstGridItem( "gaugeRender", layoutMap, subscriptionMap );
   }
 
   render() {
