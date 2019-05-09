@@ -11,7 +11,6 @@ import 'primeicons/primeicons.css';
 
 // Importing the 'framework' that we are demoing (this will eventually become a node module)
 import MstGridLayout from './framework/components/grid';
-import './framework/message-relay/psSubscriber';
 import {mstGrids} from './framework/models/mstGrids';
 
 // The actual demo or 'implementation'

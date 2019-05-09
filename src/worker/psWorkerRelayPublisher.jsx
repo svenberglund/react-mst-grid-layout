@@ -1,5 +1,5 @@
 import simulWorker from './simulation.worker';
-import {publish} from '../framework/message-relay/publish'
+import {PubSubAPI} from '../framework/message-relay/pubSubAPI'
 
 /* 
     The publisher is a onmessage action on a web worker, 
@@ -12,6 +12,6 @@ if (typeof(w) === "undefined") {
     let  w = new simulWorker(); //  new Worker("../worker/simulation.worker.jsx"); 
     
     w.onmessage = function(event){ 
-        publish(event.data['channel'], event.data['msg']);
+        PubSubAPI.publish(event.data['channel'], event.data['msg']);
     };
 }
