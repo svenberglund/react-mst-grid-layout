@@ -1,6 +1,7 @@
-import GridElementSuper from "../framework/elements/gridElementSuper"
+import MGL from 'react-mst-grid-layout';
 import React from "react";
 import ReactEcharts from 'echarts-for-react';
+
 
 
 /*
@@ -9,7 +10,7 @@ import ReactEcharts from 'echarts-for-react';
     https://www.npmjs.com/package/echarts-for-react
 
 */
-export default class GridElementChart extends GridElementSuper {
+export default class GridElementChart extends MGL.GridElementSuper {
 
     static renderElement(i, sm) {
 

@@ -9,9 +9,8 @@ import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 
-// Importing the 'framework' that we are demoing (this will eventually become a node module)
-import MstGridLayout from './framework/components/grid';
-import {mstGrids} from './framework/models/mstGrids';
+// Importing the MGL framework
+import MGL from 'react-mst-grid-layout';
 
 // The actual demo or 'implementation'
 import ConsumerComponent from './components/consumerComponent';
@@ -55,7 +54,7 @@ class App extends Component {
 
 class MainComponent extends Component{
 
-  grid = mstGrids.getGrid("defaultGrid");
+  grid = MGL.mstGrids.getGrid("defaultGrid");
 
   componentWillMount(){
     let subscriptionMap = { // Initial values of the subscription map. All renderClasses uses the same format. 
@@ -78,7 +77,7 @@ class MainComponent extends Component{
     return (
       <div>
         <ConsumerComponent />
-        <MstGridLayout
+        <MGL.MstGridLayout
           compactType="vertical" // default : none
           breakpoint="lg" // default : 'lg' = 12 columns
           rowHeight={30} // default : 30

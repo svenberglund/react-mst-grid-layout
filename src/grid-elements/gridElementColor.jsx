@@ -1,4 +1,4 @@
-import GridElementSuper from "../framework/elements/gridElementSuper"
+import MGL from 'react-mst-grid-layout'
 import React from "react";
 import styled from 'styled-components';
 
@@ -25,7 +25,7 @@ border-style: solid;
   A simple implementation of a grid element built on Styled components
   https://www.styled-components.com/docs/basics    
 */
-export default class GridElementColor extends GridElementSuper{
+export default class GridElementColor extends MGL.GridElementSuper{
   
   static renderElement(i, sm){
     let rgbMap = JSON.parse(sm.get('rgb'));

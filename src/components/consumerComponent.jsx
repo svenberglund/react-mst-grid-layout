@@ -1,6 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react";
-import { mstGrids } from "../framework/models/mstGrids";
+import MGL from 'react-mst-grid-layout'
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
 
@@ -20,7 +20,7 @@ class ConsumerComponent extends React.Component {
                     <AccordionTab header="Show element layouts">
                         <div>
                             <ul>
-                                {mstGrids.getGrid("defaultGrid").items.map(function (item, index) {
+                                {MGL.mstGrids.getGrid("defaultGrid").items.map(function (item, index) {
                                     return <li key={index}>{item.layoutIndex} : {JSON.stringify(item.layoutMap)}</li>;
                                 })
                                 }
