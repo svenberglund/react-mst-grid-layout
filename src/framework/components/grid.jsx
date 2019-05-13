@@ -15,7 +15,7 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
   The grid view where the components (gridItems) are mounted. 
   This Component class is the gui representation of the mstGrid (MST) model
 */
-
+@observer
 class MstGridLayout extends React.Component {
   static defaultProps = {
     gridName: "defaultGrid",
@@ -114,4 +114,4 @@ class MstGridLayout extends React.Component {
   }
 }
 
-export default observer(MstGridLayout);
+export default MstGridLayout;
