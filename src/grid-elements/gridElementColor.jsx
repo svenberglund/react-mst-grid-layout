@@ -25,8 +25,12 @@ border-style: solid;
   A simple implementation of a grid element built on Styled components
   https://www.styled-components.com/docs/basics    
 */
-export default class GridElementColor extends MGL.GridElementSuper{
+export default class GridElementColor {
+  //extends MGL.GridElementSuper{
   
+  // default/ base class implementation:
+  // static renderElement = MGL.GridElementSuper.prototype.renderElement();
+
   static renderElement(i, sm){
     let rgbMap = JSON.parse(sm.get('rgb'));
 
@@ -43,6 +47,11 @@ export default class GridElementColor extends MGL.GridElementSuper{
     
   </Wrapper>;
   }
+
+  static register(name_, class_) { 
+    return MGL.GridElementSuper.register(name_,class_);
+  }
+
 }
 
 /*

@@ -10,7 +10,8 @@ import ReactEcharts from 'echarts-for-react';
     https://www.npmjs.com/package/echarts-for-react
 
 */
-export default class GridElementChart extends MGL.GridElementSuper {
+export default class GridElementChart{ 
+    // extends MGL.GridElementSuper {
 
     static renderElement(i, sm) {
 
@@ -46,5 +47,9 @@ export default class GridElementChart extends MGL.GridElementSuper {
                 lazyUpdate={true}
                 theme={"theme_name"}
             /></div>;
+    }
+
+    static register(name_, class_) { 
+        return MGL.GridElementSuper.register(name_,class_);
     }
 }
