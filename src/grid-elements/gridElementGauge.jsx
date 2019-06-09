@@ -1,4 +1,4 @@
-import MGL from 'react-mst-grid-layout';
+import RMGL from 'react-mst-grid-layout';
 import React from "react";
 import ReactEcharts from 'echarts-for-react';
 
@@ -9,8 +9,10 @@ import ReactEcharts from 'echarts-for-react';
     https://www.npmjs.com/package/echarts-for-react
 */
 export default class GridElementGauge{
-    // extends MGL.GridElementSuper{
+    // can we do this in es6 syntax? : extends RMGL.GridElementSuper {
   
+
+    // "Override"
     static renderElement(i, sm){
 
         function getOption(percentValue){
@@ -51,7 +53,8 @@ export default class GridElementGauge{
     </div>;
   }
 
+  // "Inherit"
   static register(name_, class_) { 
-    return MGL.GridElementSuper.register(name_,class_);
+    return RMGL.GridElementSuper.register(name_,class_);
   }
 }

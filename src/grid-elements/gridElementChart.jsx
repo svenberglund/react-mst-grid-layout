@@ -1,4 +1,4 @@
-import MGL from 'react-mst-grid-layout';
+import RMGL from 'react-mst-grid-layout';
 import React from "react";
 import ReactEcharts from 'echarts-for-react';
 
@@ -11,8 +11,9 @@ import ReactEcharts from 'echarts-for-react';
 
 */
 export default class GridElementChart{ 
-    // extends MGL.GridElementSuper {
+    // can we do this in es6 syntax? : extends RMGL.GridElementSuper {
 
+    // "Override"
     static renderElement(i, sm) {
 
         function getOption(seriesValue) {
@@ -49,7 +50,8 @@ export default class GridElementChart{
             /></div>;
     }
 
-    static register(name_, class_) { 
-        return MGL.GridElementSuper.register(name_,class_);
+    // "Inherit"
+    static register(name_, class_) {
+        return RMGL.GridElementSuper.register(name_,class_);
     }
 }
