@@ -1,5 +1,6 @@
 {
   "name": "es6-react-mst-grid-layout",
+  "homepage": "https://svenberglund.github.io/react-mst-grid-layout/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,6 +8,7 @@
     "babel-plugin-styled-components": "^1.5.1",
     "echarts": "^4.0.0",
     "echarts-for-react": "^2.0.15-beta.0",
+    "gh-pages": "^2.0.1",
     "mobx": "^4.3.1",
     "mobx-react": "^5.2.5",
     "mobx-state-tree": "^3.1.1",
@@ -28,9 +30,10 @@
     "worker-loader": "^2.0.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "react-app-rewired test --env=jsdom"
   }
 }
