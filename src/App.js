@@ -43,6 +43,9 @@ class App extends Component {
         <header className="App-header">
           <p>
             This is a <a href="https://github.com/svenberglund/react-mst-grid-layout"><code>react-mst-grid-layout.js</code></a> demo!
+            <br></br>
+            The elements in the grid can be dragged and resized while consuming data. <br></br>
+            This particular demo may not be very mobile friendly. <br></br> 
         </p>
           <InvokerComponent />
         </header>
