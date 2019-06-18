@@ -10,3 +10,6 @@ Use cases: Real time system monitoring, real time business activity monitoring, 
 ## Installation
 Run the following command:
 `npm install react-mst-grid-layout --save-dev`
+
+## Iplementation instructions
+See [https://github.com/svenberglund/react-mst-grid-layout/wiki]
