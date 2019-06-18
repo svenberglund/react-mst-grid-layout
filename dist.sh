@@ -1,3 +1,4 @@
+echo "cleaning up..."
 rm -rf dist;
 mkdir dist;
 echo "transpiling..."
