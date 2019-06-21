@@ -1,6 +1,6 @@
 {
   "name": "react-mst-grid-layout",
-  "version": "0.1.7-beta",
+  "version": "0.1.8-beta",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "babel-preset-mobx": "^2.0.0",
     "babel-preset-react-app": "^9.0.0",
     "react": "^16.4.2",
