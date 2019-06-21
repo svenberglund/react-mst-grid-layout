@@ -24,7 +24,7 @@
   "devDependencies": {
     "mobx": "4.x",
     "react-app-rewired": "^1.6.2",
-    "react-mst-grid-layout": "^0.1.7-beta",
+    "react-mst-grid-layout": "^0.1.8-beta",
     "react-scripts": "1.1.4",
     "worker-loader": "^2.0.0"
   },
