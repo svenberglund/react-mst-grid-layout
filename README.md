@@ -1,3 +1,5 @@
+Note: The published npm versions are still at an experimental beta stage.
+
 # react-mst-grid-layout
 
 > A library of React components that form a wrapper around react-grid-layout using mst (MobX-state-tree) for state management.
