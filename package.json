@@ -1,6 +1,6 @@
 {
   "name": "react-mst-grid-layout",
-  "version": "0.1.8-beta",
+  "version": "0.1.9-beta",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
@@ -12,34 +12,24 @@
     "url": "https://github.com/svenberglund/react-mst-grid-layout.git"
   },
   "dependencies": {
-    "ajv": "^6.0.0",
-    "mobx": "^4.3.1",
-    "mobx-react": "^5.2.5",
-    "mobx-state-tree": "^3.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "babel-preset-mobx": "^2.0.0",
-    "babel-preset-react-app": "^9.0.0",
-    "react": "^16.4.2",
-    "react-dev-utils": "^5.0.3",
-    "react-dom": "^16.4.2",
-    "react-grid-layout": "^0.16.6",
-    "react-scripts": "1.1.4",
-    "worker-loader": "^2.0.0"
+    "ajv": ">5.x",
+    "@babel/cli": ">7.3.x",
+    "@babel/core": ">7.3.x",
+    "@babel/preset-env": ">7.3.x",
+    "babel-preset-mobx": ">1.x",
+    "babel-preset-react-app": ">8.x"
   },
   "peerDependencies": {
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "mobx": "^4.3.1",
-    "mobx-react": "^5.2.5",
-    "mobx-state-tree": "^3.1.1",
-    "react-grid-layout": "^0.16.6"
+    "react": "^0.14.0 || ^15.0.0 || ^16.0.0",
+    "react-dom": "^0.14.0 || ^15.0.0 || ^16.0.0",
+    "mobx": ">4.2.0",
+    "mobx-react": ">5.1.0",
+    "mobx-state-tree": ">2.x",
+    "react-grid-layout": ">0.15.x"
   },
   "scripts": {
-    "dist": "./dist.sh",
-    "eject": "react-scripts eject"
+    "dist": "./dist.sh"
   }
 }
