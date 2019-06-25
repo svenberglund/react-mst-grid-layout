@@ -11,8 +11,7 @@
     "type": "git",
     "url": "https://github.com/svenberglund/react-mst-grid-layout.git"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "ajv": ">5.x",
     "@babel/cli": ">7.3.x",
