@@ -1,4 +1,5 @@
-Note: The published npm versions are still at an experimental beta stage.
+Note: The published npm versions are still at an experimental beta stage.\
+The issues marked as MS1 at [https://github.com/svenberglund/react-mst-grid-layout/projects/1] will be resolved to the first non beta release.
 
 # react-mst-grid-layout
 
