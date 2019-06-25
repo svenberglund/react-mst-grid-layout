@@ -16,4 +16,4 @@ Run the following command:
 
 ## Iplementation instructions
 See [https://github.com/svenberglund/react-mst-grid-layout/wiki]\
-Or just check out the implementation of [the minimal demo](https://github.com/svenberglund/rmgl-minimal-demo).
+Or just check out the implementation, mostly [App.js](https://github.com/svenberglund/rmgl-minimal-demo/blob/master/minimal-demo/src/App.js) of [the minimal demo](https://github.com/svenberglund/rmgl-minimal-demo).
