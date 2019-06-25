@@ -14,4 +14,5 @@ Run the following command:
 `npm install react-mst-grid-layout --save-dev`
 
 ## Iplementation instructions
-See [https://github.com/svenberglund/react-mst-grid-layout/wiki]
+See [https://github.com/svenberglund/react-mst-grid-layout/wiki]\
+Or just check out the implementation of [the minimal demo](https://github.com/svenberglund/rmgl-minimal-demo).
