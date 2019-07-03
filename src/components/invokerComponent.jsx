@@ -3,14 +3,14 @@ import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { observer } from "mobx-react";
 import RMGL from '../api'
-//import { mstGrids } from "../framework/models/mstGrids";
 import { randomInt } from "../common/utils";
-//import { PubSubAPI } from "../framework/message-relay/pubSubAPI";
 import { Sidebar } from 'primereact/sidebar';
 import { InfoComponent } from './infoComponent';
 
 /* 
     Component for all user invoked actions in this demo, like adding listeners and so on...
+    Needs to be an @observer, either by annotating the class or by wrapping the export in an observer expression:
+    export default observer(InvokerComponent)
 */
 @observer class InvokerComponent extends React.Component {
 
