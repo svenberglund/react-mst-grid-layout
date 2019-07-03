@@ -1,4 +1,4 @@
-import GridElementSuper from "../framework/elements/gridElementSuper"
+import RMGL from "../api"
 import React from "react";
 import ReactEcharts from 'echarts-for-react';
 
@@ -8,7 +8,7 @@ import ReactEcharts from 'echarts-for-react';
     https://ecomfe.github.io/echarts-examples/public/index.html
     https://www.npmjs.com/package/echarts-for-react
 */
-export default class GridElementGauge extends GridElementSuper{
+export default class GridElementGauge extends RMGL.GridElementSuper{
   
     static renderElement(i, sm){
 

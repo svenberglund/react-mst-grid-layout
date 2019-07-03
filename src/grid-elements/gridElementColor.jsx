@@ -1,4 +1,4 @@
-import GridElementSuper from "../framework/elements/gridElementSuper"
+import RMGL from "../api"
 import React from "react";
 import styled from 'styled-components';
 
@@ -25,7 +25,7 @@ border-style: solid;
   A simple implementation of a grid element built on Styled components
   https://www.styled-components.com/docs/basics    
 */
-export default class GridElementColor extends GridElementSuper{
+export default class GridElementColor extends RMGL.GridElementSuper{
   
   static renderElement(i, sm){
     let rgbMap = JSON.parse(sm.get('rgb'));
@@ -46,7 +46,7 @@ export default class GridElementColor extends GridElementSuper{
 }
 
 /*
-TODO: Look into this warning, no big deal since it is a demo but would be nice to get rid of:
+TODO: Look into this warning, no big deal in this demo but would be nice to get rid of:
 
 Over 200 classes were generated for component gridElementColor__Wrapper. 
 Consider using the attrs method, together with a style object for frequently changed styles.

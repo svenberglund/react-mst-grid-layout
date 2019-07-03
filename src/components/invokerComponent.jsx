@@ -2,9 +2,10 @@ import React from "react";
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { observer } from "mobx-react";
-import { mstGrids } from "../framework/models/mstGrids";
+import RMGL from '../api'
+//import { mstGrids } from "../framework/models/mstGrids";
 import { randomInt } from "../common/utils";
-import { PubSubAPI } from "../framework/message-relay/pubSubAPI";
+//import { PubSubAPI } from "../framework/message-relay/pubSubAPI";
 import { Sidebar } from 'primereact/sidebar';
 import { InfoComponent } from './infoComponent';
 
@@ -29,15 +30,15 @@ import { InfoComponent } from './infoComponent';
         }
     }
 
-    grid = mstGrids.getGrid("defaultGrid");
+    grid = RMGL.mstGrids.getGrid("defaultGrid");
 
     addSubscription(index) {
         // we only publish on 4 channels in this demo thus we reduce the component index mod 4 to get channel index
-        this.state.subscriptions.set(index, PubSubAPI.subscribe("defaultGrid",index, (index % 4)));
+        this.state.subscriptions.set(index, RMGL.PubSubAPI.subscribe("defaultGrid",index, (index % 4)));
     }
 
     removeSubscription(index) {
-        PubSubAPI.unSubscribe(this.state.subscriptions.get(index));
+        RMGL.PubSubAPI.unSubscribe(this.state.subscriptions.get(index));
         this.state.subscriptions.delete(index);
     }
 
