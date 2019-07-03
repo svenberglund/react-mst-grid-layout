@@ -1,6 +1,6 @@
 {
   "name": "react-mst-grid-layout",
-  "version": "0.1.9-beta",
+  "version": "0.1.10-beta",
   "main": "dist/api.js",
   "module": "dist/api.js",
   "files": [
