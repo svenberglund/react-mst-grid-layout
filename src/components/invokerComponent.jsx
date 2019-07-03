@@ -6,7 +6,7 @@ import RMGL from '../api'
 import { randomInt } from "../common/utils";
 import { Sidebar } from 'primereact/sidebar';
 import { InfoComponent } from './infoComponent';
-
+import { BrowserView, MobileView } from "react-device-detect";
 /* 
     Component for all user invoked actions in this demo, like adding listeners and so on...
     Needs to be an @observer, either by annotating the class or by wrapping the export in an observer expression:
@@ -151,6 +151,23 @@ import { InfoComponent } from './infoComponent';
             <React.Fragment>
                 <Toolbar style={{ backgroundColor: 'whitesmoke' }}>
                     <div className="p-toolbar-group-left">
+                        <MobileView>
+                        <Button
+                            icon={this.state.running ? "pi pi-minus" : "pi pi-check"}
+                            size="small"
+                            label={this.state.running ? 'Mute listeners' : 'Apply listeners'}
+                            className="p-button-rounded p-button-primary"
+                            style={{ marginRight: '0.5em' }}
+                            onClick={this.onStartClick} />
+                        <Button
+                            icon={this.state.locked ? "pi pi-unlock" : "pi pi-lock"}
+                            size="small"
+                            label={this.state.locked ? 'Unlock all!' : 'Lock all!'}
+                            className="p-button-rounded p-button-secondary"
+                            style={{ marginRight: '0.5em' }}
+                            onClick={this.onLockAllClick} />
+                        </MobileView>
+                        <BrowserView>
                         <Button
                             icon={this.state.running ? "pi pi-minus" : "pi pi-check"}
                             size="tiny"
@@ -181,7 +198,9 @@ import { InfoComponent } from './infoComponent';
                             className="p-button-rounded p-button-secondary"
                             style={{ marginRight: '0.5em' }}
                             onClick={this.onLockAllClick} />
+                        </BrowserView>
                     </div>
+                    <BrowserView>
                     <div className="p-toolbar-group-right">
                         <Button
                             icon="pi pi-question"
@@ -191,11 +210,14 @@ import { InfoComponent } from './infoComponent';
                             style={{ marginRight: '0.5em' }}
                             onClick={this.onShowInfoClick} />
                     </div>
+                    </BrowserView>
                 </Toolbar>
 
+                <BrowserView>
                 <Sidebar visible={this.state.showInfoSidebar} position="right" style={{ width: '68em' }} onHide={(e) => this.setState({ showInfoSidebar: false })}>
                     <InfoComponent />
                 </Sidebar>
+                </BrowserView>
 
             </React.Fragment>
         )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { BrowserView, isBrowser } from "react-device-detect"; // device adaption
 
 // some grid element implementations use echarts, we import it application wide
 import echarts from 'echarts';
@@ -44,8 +45,7 @@ class App extends Component {
           <p>
             This is a <a href="https://github.com/svenberglund/react-mst-grid-layout"><code>react-mst-grid-layout.js</code></a> demo!
             <br></br>
-            The elements in the grid can be dragged and resized while consuming data. <br></br>
-            This particular demo may not be very mobile friendly. <br></br> 
+            The elements in the grid can be dragged and resized while consuming data.
         </p>
           <InvokerComponent />
         </header>
@@ -60,26 +60,28 @@ class MainComponent extends Component{
   grid = RMGL.mstGrids.getGrid("defaultGrid");
 
   componentWillMount(){
-    let subscriptionMap = { // Initial values of the subscription map. All renderClasses uses the same format. 
+    let subscriptionMap = { // Initial values of the subscription map. All renderClasses use the same format. 
       rgb:'{"rgbH": 20,"rgbL":200}', 
       percent: 50,
       series: '[0,0,0,0,0,0,0,0,0,0]'
     };
-    let layoutMap = { i: '0', x: 0, y: 0, w: 4, h: 3};
-    
+
+    let layoutMap = isBrowser ? { i: '0', x: 0, y: 0, w: 4, h: 3}: {i:'0', x:0, y:0, w:12, h:3}; // we adapt the layouts for tablets/mobiles
     this.grid.addMstGridItem( "colorRender", layoutMap, subscriptionMap);
-    layoutMap = { i: '1', x: 4, y: 0, w: 3, h: 9};
+    layoutMap = isBrowser ? { i: '1', x: 4, y: 0, w: 3, h: 9} : {i:'1', x:7, y:3, w:5, h:8,};
     this.grid.addMstGridItem( "chartRender", layoutMap, subscriptionMap );
-    layoutMap = { i: '2', x: 0, y: 3, w: 2, h: 6};
+    layoutMap = isBrowser ? { i: '2', x: 0, y: 3, w: 2, h: 6}: {i:'2', x:0, y:3, w:7, h:6};
     this.grid.addMstGridItem( "gaugeRender", layoutMap, subscriptionMap );
-    layoutMap = { i: '3', x: 7, y: 0, w: 3, h: 7};
+    layoutMap = isBrowser ? { i: '3', x: 7, y: 0, w: 3, h: 7}: {i:'3', x:0, y:9, w:7, h:7};
     this.grid.addMstGridItem( "gaugeRender", layoutMap, subscriptionMap );
   }
 
   render() {
     return (
       <div>
-        <ConsumerComponent />
+        <BrowserView>
+          <ConsumerComponent />
+        </BrowserView> 
         <RMGL.MstGridLayout
           compactType="vertical" // default : none
           breakpoint="lg" // default : 'lg' = 12 columns
