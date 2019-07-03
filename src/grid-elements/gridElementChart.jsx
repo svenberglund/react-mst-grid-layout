@@ -3,7 +3,6 @@ import React from "react";
 import ReactEcharts from 'echarts-for-react';
 
 
-
 /*
     Implementation of grid element built on eCharts (Line Chart)
     https://ecomfe.github.io/echarts-examples/public/index.html
