@@ -6,7 +6,7 @@ import RMGL from '../api'
 import { randomInt } from "../common/utils";
 import { Sidebar } from 'primereact/sidebar';
 import { InfoComponent } from './infoComponent';
-import { BrowserView, MobileView } from "react-device-detect";
+import { BrowserView, MobileView, isBrowser } from "react-device-detect";
 /* 
     Component for all user invoked actions in this demo, like adding listeners and so on...
     Needs to be an @observer, either by annotating the class or by wrapping the export in an observer expression:
@@ -24,7 +24,7 @@ import { BrowserView, MobileView } from "react-device-detect";
             */
             subscriptions: new Map(),
             running: false,
-            locked: false,
+            locked: isBrowser ? false : true,
             changedByUser: 0,
             showInfoSidebar: false,
         }
