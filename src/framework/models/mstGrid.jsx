@@ -1,6 +1,6 @@
 import { types } from "mobx-state-tree";
 import { MstGridItem } from "./mstGridItem";
-import _ from "lodash";
+//import _ from "lodash";
 
 
 /* 
@@ -36,12 +36,18 @@ export const MstGrid = types.model("MstGrid", {
     }
     /* Retruns the layout from a item in the grid */
     function getGridItemLayout(itemIndex){
-        return _.cloneDeep(self.items[itemIndex].layout); // returns a deep copy that can be modified
+        // lets deepCopy to a simple object literal, we clone all the properties from the mst map object
+        let olDeepCopy = {};  
+        [...((self.items[itemIndex].layout).keys())].forEach(key =>
+            {olDeepCopy[key]=self.items[itemIndex].layout.get(key)}
+        );
+        return olDeepCopy;
     }
     /* Sets the layout for a item in the grid */
     function setGridItemLayout(itemIndex, layoutMap){
-        [...layoutMap.keys()].forEach(key => {
-            self.items[itemIndex].setLayoutProp(key, layoutMap.get(key));    
+        // We receive a simple es object and set every prop to the mst map
+        [...Object.keys(layoutMap)].forEach(key => {
+            self.items[itemIndex].setLayoutProp(key, layoutMap[key]);    
         });   
     }
     /* Sets the layout for a item in the grid without need for supplying the itemIndex (using the 'i' key in the map) */
