@@ -12,7 +12,9 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
     Needs to be an @observer, either by annotating the class or by wrapping the export in an observer expression:
     export default observer(InvokerComponent)
 */
-@observer class InvokerComponent extends React.Component {
+
+@observer
+class InvokerComponent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -93,10 +95,10 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
     };
 
     onLockAllClick = (event) => {
-
+        // TODO: extract unlockAll and lockAll utility functions in the API for this
         for (var i = 0; i < this.grid.count; i++) {
-            let layoutMap = this.grid.getGridItemLayout(i);
-            this.state.locked ? layoutMap.set('static', false) : layoutMap.set('static', true);
+            let layoutMap = this.grid.getGridItemLayout(i); 
+            this.state.locked ? layoutMap['static']= false : layoutMap['static']=true;
             this.grid.setGridItemLayout(i, layoutMap);
         }
         this.setState({
@@ -121,14 +123,14 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
                 break;
             default: // do nothing, use default prop value
         }
-        let coord = layoutMap.get(propToChange);
+        let coord = layoutMap[propToChange];
         let change = randomInt(1, 3);
         if (propToChange === "h") // we never set height less than 8
             coord > 10 ? coord -= change : coord += change;
         else
             coord > 7 ? coord -= change : coord += change;
 
-        layoutMap.set(propToChange, coord);  // impose a random change to a random coordinate
+        layoutMap[propToChange] = coord;  // impose a random change to a random coordinate
         this.grid.setGridItemLayout(componentIndex, layoutMap);
 
         // count how many times such user invoked change has been done)
@@ -224,4 +226,5 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
     }
 }
 
+//export default observer(InvokerComponent);
 export default InvokerComponent;
