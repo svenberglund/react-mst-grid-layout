@@ -15,14 +15,14 @@ export const MstGridItem = types.model("MstGridItem", {
 })
 .views(self => ({
     get layoutIndex(){
-        return self.layoutMap.get('i');
+        return self.layoutMap.get('rmgl:i');
     },
     get layout(){
         return self.layoutMap;
     }
 }))
 .actions(self => {
-    function setState(stateValue) {
+    function setState(stateValue) { // TODO: remove/rename
         self.subscriptionMap = stateValue;
     }function setLayoutProp(propName,propValue){
         self.layoutMap.set(propName, propValue);

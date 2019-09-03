@@ -11,7 +11,6 @@ class GridItem {
     return _.map(elements, function(ga, i) {
       var elmClass = renderElmClasses.get(ga.elementRenderClass);
       if (elmClass === null) elmClass = renderElmClasses.get("super"); // fallback on super class
-
       return elmClass.renderElement(i, ga.subscriptionMap);
     });
   }

@@ -25,7 +25,6 @@ PubSubAPI.subscribe = function(gridName, componentIndex, channelIndex, test=fals
 
     //Associate subscripton ID with channel 
     subscriptionMap.getChannels().set(subscriptionID,channelIndex);
-    
     return subscriptionID;
 };
 

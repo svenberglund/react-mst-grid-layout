@@ -1,6 +1,5 @@
 import { types } from "mobx-state-tree";
 import { MstGridItem } from "./mstGridItem";
-//import _ from "lodash";
 
 
 /* 
@@ -20,7 +19,9 @@ export const MstGrid = types.model("MstGrid", {
     }
 }))
 .actions(self => {
-    /* Adds an item in the grid */
+    /* Adds an item in the grid, return the index for the item
+        Save the return if you want to be able to remove
+     */
     function addMstGridItem(renderClass, layoutMap, subscriptionMap){
 
         let newItem = MstGridItem.create({
@@ -34,6 +35,9 @@ export const MstGrid = types.model("MstGrid", {
     function removeMstGridItem(index){
         return self.items.remove(index);
     }
+
+    /* TODO: make a function for removal by rmgl:i */
+
     /* Retruns the layout from a item in the grid */
     function getGridItemLayout(itemIndex){
         // lets deepCopy to a simple object literal, we clone all the properties from the mst map object
@@ -53,16 +57,16 @@ export const MstGrid = types.model("MstGrid", {
     /* Sets the layout for a item in the grid without need for supplying the itemIndex (using the 'i' key in the map) */
     function updatelayoutMap(layoutMap){
         self.items.forEach(function (task_){        
-            if (task_.layoutMap.get('i') === layoutMap['i']) {
-                task_.layoutMap = layoutMap; 
+            if (task_.layoutMap.get('rmgl:i') === layoutMap['rmgl:i']) {
+                task_.layoutMap = layoutMap;
             }
         });
     }
-    /* Locks all the items in the grid or unlocks accordign to supplied boolean parameter (static=setLocked) */
+    /* Locks all the items in the grid or unlocks according to supplied boolean parameter (static=setLocked) */
     function lockAll(setLocked){
         [...self.items].forEach(gridItem => 
             gridItem.setLayoutProp('static', setLocked)
         )        
     }
-    return {getGridItemLayout, setGridItemLayout, addMstGridItem, removeMstGridItem: removeMstGridItem, updatelayoutMap, lockAll}
+    return {getGridItemLayout, setGridItemLayout, addMstGridItem, removeMstGridItem, updatelayoutMap, lockAll}
 });

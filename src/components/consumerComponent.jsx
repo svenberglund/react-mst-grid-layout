@@ -22,7 +22,7 @@ class ConsumerComponent extends React.Component {
                         <div>
                             <ul>
                                 {RMGL.mstGrids.getGrid("defaultGrid").items.map(function (item, index) {
-                                    return <li key={index}>{item.layoutIndex} : {JSON.stringify(item.layoutMap)}</li>;
+                                    return <li key={index}>{index} : {item.layoutIndex} : {JSON.stringify(item.layoutMap)}</li>;
                                 })
                                 }
                             </ul>
