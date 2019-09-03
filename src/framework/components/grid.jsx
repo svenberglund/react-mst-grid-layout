@@ -85,12 +85,12 @@ class MstGridLayout extends React.Component {
     TODO: This can be optimized, we should not need to loop through all items
     Why cant we use the 'changed' property, it seems to never be true...? Look into that.
   */
-  onLayoutChange = (layout, layouts) => {
+  onLayoutChange = (layouts, layouts_) => {
     let grid = mstGrids.getGrid(this.props.gridName);
-    for (var i = 0; i < layout.length; i++) {
-      grid.updatelayoutMap(layout[i]);
+    for (var i = 0; i < layouts.length; i++) {
+      grid.updatelayoutMap(layouts[i]);
     }
-    this.props.onLayoutChange(layout, layouts); // can run implementation specific method as well...
+    this.props.onLayoutChange(layouts, layouts_); // can run implementation specific method as well...
   };
 
   render() {

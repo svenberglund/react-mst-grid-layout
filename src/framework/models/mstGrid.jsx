@@ -20,20 +20,22 @@ export const MstGrid = types.model("MstGrid", {
     }
 }))
 .actions(self => {
-    /* Adds an item in the grid */
+    /* Adds an item in the grid, returns the index of the item added */
     function addMstGridItem(renderClass, layoutMap, subscriptionMap){
-
         let newItem = MstGridItem.create({
             elementRenderClass: renderClass,
             subscriptionMap: subscriptionMap,
-            layoutMap: layoutMap 
+            layoutMap: {'i':self.items.length.toString(), ...layoutMap} 
         });
-        return self.items.push(newItem);
+        return self.items.push(newItem)-1;
     }
     /* Removes a item from the grid */
     function removeMstGridItem(index){
+        // TODO: we will probably need to iterate here and update the layout indexes
+        // iterate all the items after the removed item and decrease the index with one
         return self.items.remove(index);
     }
+
     /* Retruns the layout from a item in the grid */
     function getGridItemLayout(itemIndex){
         // lets deepCopy to a simple object literal, we clone all the properties from the mst map object
@@ -52,9 +54,9 @@ export const MstGrid = types.model("MstGrid", {
     }
     /* Sets the layout for a item in the grid without need for supplying the itemIndex (using the 'i' key in the map) */
     function updatelayoutMap(layoutMap){
-        self.items.forEach(function (task_){        
-            if (task_.layoutMap.get('i') === layoutMap['i']) {
-                task_.layoutMap = layoutMap; 
+        self.items.forEach(function (item){        
+            if (item.layoutMap.get('i') === layoutMap['i']) {
+                item.layoutMap = layoutMap; 
             }
         });
     }
@@ -64,5 +66,5 @@ export const MstGrid = types.model("MstGrid", {
             gridItem.setLayoutProp('static', setLocked)
         )        
     }
-    return {getGridItemLayout, setGridItemLayout, addMstGridItem, removeMstGridItem: removeMstGridItem, updatelayoutMap, lockAll}
+    return {getGridItemLayout, setGridItemLayout, addMstGridItem, removeMstGridItem, updatelayoutMap, lockAll}
 });
