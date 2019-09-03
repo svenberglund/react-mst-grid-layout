@@ -93,14 +93,9 @@ class InvokerComponent extends React.Component {
         // check if subscription shall be added
         if (this.state.running) this.addSubscription(index);
     };
-
+    
     onLockAllClick = (event) => {
-        // TODO: extract unlockAll and lockAll utility functions in the API for this
-        for (var i = 0; i < this.grid.count; i++) {
-            let layoutMap = this.grid.getGridItemLayout(i); 
-            this.state.locked ? layoutMap['static']= false : layoutMap['static']=true;
-            this.grid.setGridItemLayout(i, layoutMap);
-        }
+        this.grid.lockAll(!this.state.locked);
         this.setState({
             locked: !this.state.locked
         })
