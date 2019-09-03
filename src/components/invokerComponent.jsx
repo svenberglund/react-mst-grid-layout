@@ -87,13 +87,13 @@ class InvokerComponent extends React.Component {
             percent: 50,
             series: '[0,0,0,0,0,0,0,0,0,0]'
         };
-        let layoutMap = { i: index, x: randomInt(5, 15), y: randomInt(5, 10), w: renderWidth, h: renderHeight };
+        let layoutMap = { x: randomInt(5, 15), y: randomInt(5, 10), w: renderWidth, h: renderHeight };
 
-        this.grid.addMstGridItem(renderClass, layoutMap, subscriptionMap);
+        console.log(this.grid.addMstGridItem(renderClass, layoutMap, subscriptionMap));
         // check if subscription shall be added
         if (this.state.running) this.addSubscription(index);
     };
-    
+
     onLockAllClick = (event) => {
         this.grid.lockAll(!this.state.locked);
         this.setState({

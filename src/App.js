@@ -66,14 +66,15 @@ class MainComponent extends Component{
       series: '[0,0,0,0,0,0,0,0,0,0]'
     };
 
-    let layoutMap = isBrowser ? { i: '0', x: 0, y: 0, w: 4, h: 3}: {i:'0', x:0, y:0, w:12, h:3, 'static': true }; // we adapt the layouts for tablets/mobiles
-    this.grid.addMstGridItem( "colorRender", layoutMap, subscriptionMap);
-    layoutMap = isBrowser ? { i: '1', x: 4, y: 0, w: 3, h: 9} : {i:'1', x:7, y:3, w:5, h:8, 'static': true };
-    this.grid.addMstGridItem( "chartRender", layoutMap, subscriptionMap );
-    layoutMap = isBrowser ? { i: '2', x: 0, y: 3, w: 2, h: 6}: {i:'2', x:0, y:3, w:7, h:6, 'static': true };
-    this.grid.addMstGridItem( "gaugeRender", layoutMap, subscriptionMap );
-    layoutMap = isBrowser ? { i: '3', x: 7, y: 0, w: 3, h: 7}: {i:'3', x:0, y:9, w:7, h:7, 'static': true };
-    this.grid.addMstGridItem( "gaugeRender", layoutMap, subscriptionMap );
+    // task_.layoutMap = layoutMap;
+    let layoutMap = isBrowser ? { x: 0, y: 0, w: 4, h: 3}: { x:0, y:0, w:12, h:3, 'static': true }; // we adapt the layouts for tablets/mobiles
+    console.log(this.grid.addMstGridItem( "colorRender", layoutMap, subscriptionMap));
+    layoutMap = isBrowser ? { x: 4, y: 0, w: 3, h: 9} : { x:7, y:3, w:5, h:8, 'static': true };
+    console.log(this.grid.addMstGridItem( "chartRender", layoutMap, subscriptionMap ));
+    layoutMap = isBrowser ? { x: 0, y: 3, w: 2, h: 6}: { x:0, y:3, w:7, h:6, 'static': true };
+    console.log(this.grid.addMstGridItem( "gaugeRender", layoutMap, subscriptionMap ));
+    layoutMap = isBrowser ? { x: 7, y: 0, w: 3, h: 7}: { x:0, y:9, w:7, h:7, 'static': true };
+    console.log(this.grid.addMstGridItem( "gaugeRender", layoutMap, subscriptionMap ));
   }
 
   render() {
