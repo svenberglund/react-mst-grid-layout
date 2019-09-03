@@ -58,5 +58,11 @@ export const MstGrid = types.model("MstGrid", {
             }
         });
     }
-    return {getGridItemLayout, setGridItemLayout, addMstGridItem, removeMstGridItem: removeMstGridItem, updatelayoutMap}
+    /* Locks all the items in the grid or unlocks accordign to supplied boolean parameter (static=setLocked) */
+    function lockAll(setLocked){
+        [...self.items].forEach(gridItem => 
+            gridItem.setLayoutProp('static', setLocked)
+        )        
+    }
+    return {getGridItemLayout, setGridItemLayout, addMstGridItem, removeMstGridItem: removeMstGridItem, updatelayoutMap, lockAll}
 });
