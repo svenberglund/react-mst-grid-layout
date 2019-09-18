@@ -1,4 +1,4 @@
-import RMGL from "../api"
+import RMGL from "react-mst-grid-layout";
 import React from "react";
 import ReactEcharts from 'echarts-for-react';
 
