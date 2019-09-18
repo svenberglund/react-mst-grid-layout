@@ -2,7 +2,7 @@ import React from "react";
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { observer } from "mobx-react";
-import RMGL from '../api'
+import RMGL from "react-mst-grid-layout";
 import { randomInt } from "../common/utils";
 import { Sidebar } from 'primereact/sidebar';
 import { InfoComponent } from './infoComponent';

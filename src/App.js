@@ -11,7 +11,7 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 
 // Importing the RMGL framework
-import RMGL from "./api"
+import RMGL from "react-mst-grid-layout";
 
 // The actual demo or 'implementation'
 import ConsumerComponent from './components/consumerComponent';

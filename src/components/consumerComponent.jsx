@@ -1,6 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react";
-import RMGL from "../api";
+import RMGL from "react-mst-grid-layout";
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
 
