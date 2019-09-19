@@ -59,7 +59,9 @@ class MainComponent extends Component{
 
   grid = RMGL.mstGrids.getGrid("defaultGrid");
 
-  componentWillMount(){  // TODO: Deprecated, we should use other life cycle function...ComponentDidMount breaks in Chrome...
+  constructor(props){
+    super(props);
+
     let subscriptionMap = { // Initial values of the subscription map. All renderClasses use the same format. 
       rgb:'{"rgbH": 20,"rgbL":200}', 
       percent: 50,
