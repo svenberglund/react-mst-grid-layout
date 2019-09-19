@@ -1,4 +1,5 @@
 import _ from "lodash";
+import React from "react";
 import renderElmClasses from "../classStore";
 
 class GridItem {
@@ -12,7 +13,10 @@ class GridItem {
       var elmClass = renderElmClasses.get(ga.elementRenderClass);
       if (elmClass === null) elmClass = renderElmClasses.get("super"); // fallback on super class
 
-      return elmClass.renderElement(i, ga.subscriptionMap);
+      if (ga.show)
+        return elmClass.renderElement(i, ga.subscriptionMap);
+      else
+        return <span key={i} style={{ display: 'none' }} />
     });
   }
 }
