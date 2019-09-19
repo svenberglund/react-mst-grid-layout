@@ -26,7 +26,9 @@ export const MstGridItem = types.model("MstGridItem", {
         self.subscriptionMap = stateValue;
     }function setLayoutProp(propName,propValue){
         self.layoutMap.set(propName, propValue);
+    }function deleteLayoutProp(propName){
+        self.layoutMap.delete(propName);
     }
-    return { setState, setLayoutProp};
+    return { setState, setLayoutProp, deleteLayoutProp};
 });
 
