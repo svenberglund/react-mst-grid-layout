@@ -19,6 +19,7 @@
     "react-device-detect": "^1.6.2",
     "react-dom": "^16.4.2",
     "react-grid-layout": "^0.16.6",
+    "react-mst-grid-layout":"0.1.14-beta",
     "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.82.2",
     "styled-components": "^3.4.5",
@@ -27,7 +28,7 @@
   "devDependencies": {
     "mobx": "4.x",
     "react-app-rewired": "^1.6.2",
-    "react-mst-grid-layout": "^0.1.10-beta",
+    "react-mst-grid-layout": "^0.1.14-beta",
     "react-scripts": "1.1.4",
     "worker-loader": "^2.0.0"
   },

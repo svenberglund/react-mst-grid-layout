@@ -1,5 +1,5 @@
 import simulWorker from './simulation.worker';
-import RMGL from 'react-mst-grid-layout';
+import RMGL from "react-mst-grid-layout";
 
 /* 
     The publisher is a onmessage action on a web worker, 

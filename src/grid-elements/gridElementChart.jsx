@@ -1,4 +1,4 @@
-import RMGL from 'react-mst-grid-layout';
+import RMGL from "react-mst-grid-layout";
 import React from "react";
 import ReactEcharts from 'echarts-for-react';
 
@@ -9,10 +9,8 @@ import ReactEcharts from 'echarts-for-react';
     https://www.npmjs.com/package/echarts-for-react
 
 */
-export default class GridElementChart{ 
-    // can we do this in es6 syntax? : extends RMGL.GridElementSuper {
+export default class GridElementChart extends RMGL.GridElementSuper {
 
-    // "Override"
     static renderElement(i, sm) {
 
         function getOption(seriesValue) {
@@ -47,10 +45,5 @@ export default class GridElementChart{
                 lazyUpdate={true}
                 theme={"theme_name"}
             /></div>;
-    }
-
-    // "Inherit"
-    static register(name_, class_) {
-        return RMGL.GridElementSuper.register(name_,class_);
     }
 }

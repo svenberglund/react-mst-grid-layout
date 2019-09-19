@@ -2,7 +2,7 @@ import React from "react";
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { observer } from "mobx-react";
-import RMGL from 'react-mst-grid-layout';
+import RMGL from "react-mst-grid-layout";
 import { randomInt } from "../common/utils";
 import { Sidebar } from 'primereact/sidebar';
 import { InfoComponent } from './infoComponent';
@@ -12,7 +12,9 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
     Needs to be an @observer, either by annotating the class or by wrapping the export in an observer expression:
     export default observer(InvokerComponent)
 */
-@observer class InvokerComponent extends React.Component {
+
+@observer
+class InvokerComponent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -24,6 +26,7 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
             */
             subscriptions: new Map(),
             running: false,
+            removeRestoreSequenceRunning: false,
             locked: isBrowser ? false : true,
             changedByUser: 0,
             showInfoSidebar: false,
@@ -51,6 +54,42 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
         )
     };
 
+    onRemoveClick = (event) => {
+        // We could also remove and restore subscriptions, for now we just collapse.
+        
+        const getPromise = (i) => new Promise((resolve, reject) => {
+                setTimeout(resolve,i%2===0 ? 50 : 600)
+            }
+        )
+        let startElmIndex = randomInt(0,this.grid.count-1);
+        let layoutQueue = [];
+        let maxIterations = 28;
+        let myPromise = getPromise();
+        this.setState({removeRestoreSequenceRunning:true});
+
+        for(let i=0; i<maxIterations; i++){
+            console.log(i);
+            myPromise = myPromise.then(
+                () => {
+                if (i%2===0 && i<= maxIterations -3 ){
+                    let currentElemIndex = (startElmIndex+(i/2))%this.grid.count;
+                    // collapse an item and push its layout into queue
+                    layoutQueue.push(this.grid.getGridItemLayout(currentElemIndex));
+                    this.grid.collapseMstGridItem(currentElemIndex);
+                } else if(i>1 && i<maxIterations-1){
+                    // restore an item by shifting its layout from queue
+                    let layoutToRestore=layoutQueue.shift();
+                    let elmIndexToRestore = parseInt(layoutToRestore['i'],10);
+                    this.grid.showMstGridItem(elmIndexToRestore);
+                    this.grid.setGridItemLayout(elmIndexToRestore,layoutToRestore);
+                }
+                if (i === maxIterations-1) this.setState({removeRestoreSequenceRunning: false});
+                return getPromise(i) // for chaining. 
+            }
+            )
+        }
+    }
+
     onAddClick = (event) => {
 
         let index = (this.grid.count).toString();
@@ -58,7 +97,7 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
         // First time add a super class element and the following times do random class selection
         let renderClass = "super";
         let renderWidth = 4;
-        let renderHeight = 5;
+        let renderHeight = 6;
         if (this.grid.count > 4) { 
             switch (randomInt(1, 3)) {
                 case 1:
@@ -85,58 +124,21 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
             percent: 50,
             series: '[0,0,0,0,0,0,0,0,0,0]'
         };
-        let layoutMap = { i: index, x: randomInt(5, 15), y: randomInt(5, 10), w: renderWidth, h: renderHeight };
+        let layoutMap = { x: randomInt(5, 15), y: randomInt(5, 10), w: renderWidth, h: renderHeight };
 
-        this.grid.addMstGridItem(renderClass, layoutMap, subscriptionMap);
+        console.log(this.grid.addMstGridItem(renderClass, layoutMap, subscriptionMap));
         // check if subscription shall be added
         if (this.state.running) this.addSubscription(index);
     };
 
     onLockAllClick = (event) => {
-
-        for (var i = 0; i < this.grid.count; i++) {
-            let layoutMap = this.grid.getGridItemLayout(i);
-            this.state.locked ? layoutMap.set('static', false) : layoutMap.set('static', true);
-            this.grid.setGridItemLayout(i, layoutMap);
-        }
+        this.grid.lockAll(!this.state.locked);
         this.setState({
             locked: !this.state.locked
         })
     }
 
-    /* 
-        Will do a random chagne to some coordinate (x,h or w) to a randomly selected component.
-    */
-    onChangeClick = (event) => {
-
-        let componentIndex = randomInt(0, this.grid.count - 1);
-        let layoutMap = this.grid.getGridItemLayout(componentIndex);
-        let propToChange = "x";
-        switch (randomInt(1, 3)) {
-            case 1:
-                propToChange = "h"
-                break;
-            case 2:
-                propToChange = "w"
-                break;
-            default: // do nothing, use default prop value
-        }
-        let coord = layoutMap.get(propToChange);
-        let change = randomInt(1, 3);
-        if (propToChange === "h") // we never set height less than 8
-            coord > 10 ? coord -= change : coord += change;
-        else
-            coord > 7 ? coord -= change : coord += change;
-
-        layoutMap.set(propToChange, coord);  // impose a random change to a random coordinate
-        this.grid.setGridItemLayout(componentIndex, layoutMap);
-
-        // count how many times such user invoked change has been done)
-        this.setState({
-            changedByUser: this.state.changedByUser + 1
-        })
-    }
-
+ 
     onShowInfoClick = (event) => {
         this.setState({
             showInfoSidebar: true,
@@ -153,7 +155,7 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
                     <div className="p-toolbar-group-left">
                         <MobileView>
                         <Button
-                            icon={this.state.running ? "pi pi-minus" : "pi pi-check"}
+                            icon={this.state.running ? "pi pi-power-off" : "pi pi-check"}
                             size="small"
                             label={this.state.running ? 'Mute listeners' : 'Apply listeners'}
                             className="p-button-rounded p-button-primary"
@@ -169,7 +171,7 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
                         </MobileView>
                         <BrowserView>
                         <Button
-                            icon={this.state.running ? "pi pi-minus" : "pi pi-check"}
+                            icon={this.state.running ? "pi pi-power-off" : "pi pi-check"}
                             size="tiny"
                             label={this.state.running ? 'Mute listeners' : 'Apply listeners'}
                             className="p-button-rounded p-button-primary"
@@ -178,19 +180,19 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
                         <Button
                             icon="pi pi-clone"
                             size="tiny"
-                            disabled={this.grid.count > 7}
+                            disabled={this.grid.count > 7 || this.state.removeRestoreSequenceRunning}
                             label="Add element!"
                             className="p-button-rounded p-button-secondary"
                             style={{ marginRight: '0.5em' }}
-                            onClick={this.onAddClick} />
+                            onClick={this.onAddClick} />     
                         <Button
-                            icon="pi pi-refresh"
+                            icon="pi pi-replay"
                             size="tiny"
-                            disabled={this.state.changedByUser > 3} // we only allow a this four times since it makes the components really ugly after a while...
-                            label="Change element!"
+                            disabled={this.state.removeRestoreSequenceRunning}
+                            label="Remove/Restore!"
                             className="p-button-rounded p-button-secondary"
                             style={{ marginRight: '0.5em' }}
-                            onClick={this.onChangeClick} />
+                            onClick={this.onRemoveClick} />                   
                         <Button
                             icon={this.state.locked ? "pi pi-unlock" : "pi pi-lock"}
                             size="tiny"
@@ -224,4 +226,5 @@ import { BrowserView, MobileView, isBrowser } from "react-device-detect";
     }
 }
 
+//export default observer(InvokerComponent);
 export default InvokerComponent;

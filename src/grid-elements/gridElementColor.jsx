@@ -1,4 +1,4 @@
-import RMGL from 'react-mst-grid-layout';
+import RMGL from "react-mst-grid-layout"
 import React from "react";
 import styled from 'styled-components';
 
@@ -25,10 +25,8 @@ border-style: solid;
   A simple implementation of a grid element built on Styled components
   https://www.styled-components.com/docs/basics    
 */
-export default class GridElementColor {
-  // can we do this in es6 syntax? : extends RMGL.GridElementSuper {
+export default class GridElementColor extends RMGL.GridElementSuper{
   
-  // "Override" 
   static renderElement(i, sm){
     let rgbMap = JSON.parse(sm.get('rgb'));
 
@@ -45,12 +43,6 @@ export default class GridElementColor {
     
   </Wrapper>;
   }
-
-  // "Inherit"
-  static register(name_, class_) { 
-    return RMGL.GridElementSuper.register(name_,class_);
-  }
-
 }
 
 /*
