@@ -56,28 +56,27 @@ class InvokerComponent extends React.Component {
 
     onRemoveClick = (event) => {
         // We could also remove and restore subscriptions, for now we just collapse.
-        const getPromise = () => new Promise((resolve, reject) => {
-                setTimeout(resolve,800)
+        
+        const getPromise = (i) => new Promise((resolve, reject) => {
+                setTimeout(resolve,i%2===0 ? 50 : 600)
             }
         )
         let startElmIndex = randomInt(0,this.grid.count-1);
         let layoutQueue = [];
-        let maxIterations = 16;
+        let maxIterations = 28;
         let myPromise = getPromise();
         this.setState({removeRestoreSequenceRunning:true});
 
         for(let i=0; i<maxIterations; i++){
-            let currentElemIndex = (startElmIndex+i)%this.grid.count;
-
+            console.log(i);
             myPromise = myPromise.then(
                 () => {
-                
-                if (i<maxIterations-2){
-                    // collapse a item and push its layout into queue
+                if (i%2===0 && i<= maxIterations -3 ){
+                    let currentElemIndex = (startElmIndex+(i/2))%this.grid.count;
+                    // collapse an item and push its layout into queue
                     layoutQueue.push(this.grid.getGridItemLayout(currentElemIndex));
                     this.grid.collapseMstGridItem(currentElemIndex);
-                }
-                if (i>=2){
+                } else if(i>1 && i<maxIterations-1){
                     // restore an item by shifting its layout from queue
                     let layoutToRestore=layoutQueue.shift();
                     let elmIndexToRestore = parseInt(layoutToRestore['i'],10);
@@ -85,7 +84,7 @@ class InvokerComponent extends React.Component {
                     this.grid.setGridItemLayout(elmIndexToRestore,layoutToRestore);
                 }
                 if (i === maxIterations-1) this.setState({removeRestoreSequenceRunning: false});
-                return getPromise() // a neat little trick for chaining. 
+                return getPromise(i) // for chaining. 
             }
             )
         }
