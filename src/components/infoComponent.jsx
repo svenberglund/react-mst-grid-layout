@@ -21,8 +21,8 @@ export class InfoComponent extends React.Component {
                             This is why the page has some cpu footprint even when the grid elements are idle and this will not be a factor in real world usage of the framework.
                         </li>
                         <li>
-                            The 'Add element' and 'Change element' buttons are there to test modifying the grid by invoking actions from the GUI.
-                            They impose pseudo random changes to the grid. In this demo they can only be run 4 times each without reloading the page (not to totally screw up the demo). <br />
+                            The 'Add element' and 'Remove/Restore' buttons are there to test modifying the grid by invoking actions from the GUI.
+                            They impose pseudo random changes to the grid. <br />
                             The first time you use 'Add element' it will showcase the 'grid element superclass' which is ment to be overridden but has a instructive purpose.
                          </li>
                         <li>

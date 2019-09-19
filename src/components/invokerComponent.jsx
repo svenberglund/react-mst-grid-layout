@@ -26,6 +26,7 @@ class InvokerComponent extends React.Component {
             */
             subscriptions: new Map(),
             running: false,
+            removeRestoreSequenceRunning: false,
             locked: isBrowser ? false : true,
             changedByUser: 0,
             showInfoSidebar: false,
@@ -53,6 +54,43 @@ class InvokerComponent extends React.Component {
         )
     };
 
+    onRemoveClick = (event) => {
+        // We could also remove and restore subscriptions, for now we just collapse.
+        const getPromise = () => new Promise((resolve, reject) => {
+                setTimeout(resolve,800)
+            }
+        )
+        let startElmIndex = randomInt(0,this.grid.count-1);
+        let layoutQueue = [];
+        let maxIterations = 16;
+        let myPromise = getPromise();
+        this.setState({removeRestoreSequenceRunning:true});
+
+        for(let i=0; i<maxIterations; i++){
+            let currentElemIndex = (startElmIndex+i)%this.grid.count;
+
+            myPromise = myPromise.then(
+                () => {
+                
+                if (i<maxIterations-2){
+                    // collapse a item and push its layout into queue
+                    layoutQueue.push(this.grid.getGridItemLayout(currentElemIndex));
+                    this.grid.collapseMstGridItem(currentElemIndex);
+                }
+                if (i>=2){
+                    // restore an item by shifting its layout from queue
+                    let layoutToRestore=layoutQueue.shift();
+                    let elmIndexToRestore = parseInt(layoutToRestore['i'],10);
+                    this.grid.showMstGridItem(elmIndexToRestore);
+                    this.grid.setGridItemLayout(elmIndexToRestore,layoutToRestore);
+                }
+                if (i === maxIterations-1) this.setState({removeRestoreSequenceRunning: false});
+                return getPromise() // a neat little trick for chaining. 
+            }
+            )
+        }
+    }
+
     onAddClick = (event) => {
 
         let index = (this.grid.count).toString();
@@ -60,7 +98,7 @@ class InvokerComponent extends React.Component {
         // First time add a super class element and the following times do random class selection
         let renderClass = "super";
         let renderWidth = 4;
-        let renderHeight = 5;
+        let renderHeight = 6;
         if (this.grid.count > 4) { 
             switch (randomInt(1, 3)) {
                 case 1:
@@ -101,39 +139,7 @@ class InvokerComponent extends React.Component {
         })
     }
 
-    /* 
-        Will do a random chagne to some coordinate (x,h or w) to a randomly selected component.
-    */
-    onChangeClick = (event) => {
-
-        let componentIndex = randomInt(0, this.grid.count - 1);
-        let layoutMap = this.grid.getGridItemLayout(componentIndex);
-        let propToChange = "x";
-        switch (randomInt(1, 3)) {
-            case 1:
-                propToChange = "h"
-                break;
-            case 2:
-                propToChange = "w"
-                break;
-            default: // do nothing, use default prop value
-        }
-        let coord = layoutMap[propToChange];
-        let change = randomInt(1, 3);
-        if (propToChange === "h") // we never set height less than 8
-            coord > 10 ? coord -= change : coord += change;
-        else
-            coord > 7 ? coord -= change : coord += change;
-
-        layoutMap[propToChange] = coord;  // impose a random change to a random coordinate
-        this.grid.setGridItemLayout(componentIndex, layoutMap);
-
-        // count how many times such user invoked change has been done)
-        this.setState({
-            changedByUser: this.state.changedByUser + 1
-        })
-    }
-
+ 
     onShowInfoClick = (event) => {
         this.setState({
             showInfoSidebar: true,
@@ -150,7 +156,7 @@ class InvokerComponent extends React.Component {
                     <div className="p-toolbar-group-left">
                         <MobileView>
                         <Button
-                            icon={this.state.running ? "pi pi-minus" : "pi pi-check"}
+                            icon={this.state.running ? "pi pi-power-off" : "pi pi-check"}
                             size="small"
                             label={this.state.running ? 'Mute listeners' : 'Apply listeners'}
                             className="p-button-rounded p-button-primary"
@@ -166,7 +172,7 @@ class InvokerComponent extends React.Component {
                         </MobileView>
                         <BrowserView>
                         <Button
-                            icon={this.state.running ? "pi pi-minus" : "pi pi-check"}
+                            icon={this.state.running ? "pi pi-power-off" : "pi pi-check"}
                             size="tiny"
                             label={this.state.running ? 'Mute listeners' : 'Apply listeners'}
                             className="p-button-rounded p-button-primary"
@@ -175,19 +181,19 @@ class InvokerComponent extends React.Component {
                         <Button
                             icon="pi pi-clone"
                             size="tiny"
-                            disabled={this.grid.count > 7}
+                            disabled={this.grid.count > 7 || this.state.removeRestoreSequenceRunning}
                             label="Add element!"
                             className="p-button-rounded p-button-secondary"
                             style={{ marginRight: '0.5em' }}
-                            onClick={this.onAddClick} />
+                            onClick={this.onAddClick} />     
                         <Button
-                            icon="pi pi-refresh"
+                            icon="pi pi-replay"
                             size="tiny"
-                            disabled={this.state.changedByUser > 3} // we only allow a this four times since it makes the components really ugly after a while...
-                            label="Change element!"
+                            disabled={this.state.removeRestoreSequenceRunning}
+                            label="Remove/Restore!"
                             className="p-button-rounded p-button-secondary"
                             style={{ marginRight: '0.5em' }}
-                            onClick={this.onChangeClick} />
+                            onClick={this.onRemoveClick} />                   
                         <Button
                             icon={this.state.locked ? "pi pi-unlock" : "pi pi-lock"}
                             size="tiny"
