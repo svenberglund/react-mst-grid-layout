@@ -28,6 +28,11 @@ module.exports = function override(config, env) {
     resolveApp("node_modules/<some_aswome_module>")
   );
   */
+  
+  if (env === 'production') {
+    console.log("ES6 production build without UglifyJsPlugin. Config: ");
+    console.log(JSON.stringify( config.plugins.splice(3, 1)));
+  }
 
   return config;
 };
