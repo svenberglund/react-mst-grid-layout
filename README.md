@@ -14,6 +14,10 @@ Use cases: Real time system monitoring, real time business activity monitoring, 
 Run the following command:
 `npm install react-mst-grid-layout --save-dev`
 
+## ES6
+
+This is a es6 module, which will affect how one can make production builds. I'm gatering some info about that [here](https://github.com/svenberglund/react-mst-grid-layout/wiki/es6-module).
+
 ## Iplementation instructions
 See [https://github.com/svenberglund/react-mst-grid-layout/wiki]\
 Or just check out the implementation, mostly [App.js](https://github.com/svenberglund/rmgl-minimal-demo/blob/master/minimal-demo/src/App.js) of [the minimal demo](https://github.com/svenberglund/rmgl-minimal-demo).
