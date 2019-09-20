@@ -16,7 +16,7 @@ Run the following command:
 
 ## ES6
 
-This is a es6 module, which will affect how one can make production builds. I'm gatering some info about that [here](https://github.com/svenberglund/react-mst-grid-layout/wiki/es6-module).
+This is a es6 module, which will affect how one can make production builds. I'm gathering some info about that [here](https://github.com/svenberglund/react-mst-grid-layout/wiki/es6-module).
 
 ## Iplementation instructions
 See [https://github.com/svenberglund/react-mst-grid-layout/wiki]\
