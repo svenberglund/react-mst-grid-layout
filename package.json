@@ -13,7 +13,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "ajv": ">5.x",
+    "ajv": ">6.x",
     "@babel/cli": ">7.3.x",
     "@babel/core": ">7.3.x",
     "@babel/preset-env": ">7.3.x",
