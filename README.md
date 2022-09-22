@@ -1,5 +1,7 @@
+**As you can see by the history this project has been shelved for a long time. I don't anticipate to be able to pick up the development of this in any near future, don't really craft frontend web things anymore. Not cause I wouldn't like to but.. priorities... Feel free to get inspired by this project however and get in touch if it is something you think we should continue somehow.**
+
 Note: The published npm versions are still at an experimental beta stage.\
-The issues marked as MS1 at [https://github.com/svenberglund/react-mst-grid-layout/projects/1] will be resolved to the first non beta release.
+The issues marked as MS1 at [https://github.com/svenberglund/react-mst-grid-layout/projects/1] has been intended to be resolved to the first non beta release.
 
 # react-mst-grid-layout
 
